@@ -86,9 +86,9 @@
 ### 2.5 执行流程
 
 ```
-通道一：合规检测
+通道一：合规检测（独立运行）
 1. Supervisor: 解析 rules.md → 提取规则元数据
-2. Supervisor: 调用 Python 读取 Excel → 获取全量对话清单
+2. Supervisor: 调用 Python 读取 Excel → 获取全量对话清单 → 预处理对话格式
 3. Supervisor: 拆分批次 → 每批 100 条
 4. Supervisor: 并发 5 个 Worker Agent → 每批次合规检测
 5. Worker: 逐条对话 × 逐条合规规则 → 输出打标结果
@@ -96,13 +96,27 @@
 7. Supervisor: 如有遗漏/异常 → 重新分发
 8. Supervisor: 调用 Python 写入合规检测结果
 
-通道二：归因分析（同一框架，注入归因规则）
+通道二：归因分析（独立运行，同一框架，注入归因规则）
 9.  Supervisor: 过滤非"有意向"对话 → 拆分批次
 10. Supervisor: 注入归因规则 → 并发 Worker Agent
 11. Worker: 逐条对话 × 逐条归因规则 → 输出归因结果
 12. Supervisor: 收集结果 → 完整性校验
 13. Supervisor: 调用 Python 追加归因分析 sheet
 ```
+
+### 2.6 运行模式
+
+用户通过命令行参数控制运行模式：
+
+| 命令 | 行为 |
+|------|------|
+| `/auto-qc --data <路径> --rules <路径>` | 默认全量运行：合规检测 + 归因分析 |
+| `/auto-qc --data <路径> --rules <路径> --no-attribution` | 仅合规检测 |
+| `/auto-qc --data <路径> --attribution-only` | 仅归因分析（使用内置归因规则） |
+
+**归因分析是内置能力**：默认开启，无需指定规则文件，使用 `attribution-rules.md` 内置归因规则。用户可通过 `--no-attribution` 关闭。
+
+合规检测规则必须由用户提供（`--rules`），框架不做假设。
 
 ---
 
@@ -276,6 +290,21 @@ Supervisor 维护 `progress.json`：
 
 ### 6.3 归因规则
 
+系统内置一套默认归因规则模板，同时支持外部规则文件覆盖。
+
+**内置归因规则示例**：
+- AI 未介绍岗位关键信息（薪资、地点、公司）
+- 对话未识别用户兴趣点，未做针对性引导
+- 回复过于模板化/机械，缺乏人情味
+- 未正面回答用户追问，导致信任流失
+- 节奏把控不当（推进过快/过慢）
+- 结束话术过于敷衍，未约定下次联系
+
+归因分析采用 5 Why 形式（逐步追问到根因，但不强制到第 5 层）：
+- "为什么没谈成？" → "用户提出追问时 AI 未正面回答"
+- "为什么 AI 未正面回答？" → "对话状态机跳转到错误的话术模板"
+- "为什么跳转到错误话术？" → "用户回答不在预期分支内，系统 fallback 到兜底话术"
+
 归因规则与合规规则格式相同（Markdown 结构化），但内容不同：
 - 合规规则：判断是否违规（如"无视用户拒绝"）
 - 归因规则：判断对话中什么因素导致没谈成（如"未介绍岗位亮点"、"语气过于机械"）
@@ -284,9 +313,10 @@ Supervisor 维护 `progress.json`：
 
 ### 6.4 输入
 
-- 非"有意向"对话的对话文本
-- 通道一的质检结果（这些对话被标记了哪些问题）
+- 非"有意向"对话的对话文本（直接从 Excel 原始数据获取，不依赖通道一结果）
 - 意向结果标签（B/C/E/F/I 等）
+
+归因分析是独立运行的，Worker 只需要对话文本和意向标签，不需要通道一的质检结果。
 
 ### 6.5 分析内容
 
@@ -297,10 +327,17 @@ Supervisor 维护 `progress.json`：
 
 ### 6.6 输出
 
-独立 sheet 的归因报告，包含：
-- 归因统计（各因素占比）
-- 典型案例（每类归因 3-5 个典型案例）
-- 改进建议
+独立 sheet 的归因报告，按意向结果类别分组统计：
+
+**格式**：
+| 意向结果 | 归因类别 | 占比 | 典型案例 | 改进建议 |
+|----------|----------|------|----------|----------|
+
+**示例**：
+- B(不确定): 原因 a(未介绍岗位亮点) 占比 20%, 原因 b(未正面回答追问) 占比 15%...
+- F(无意向): 原因 a(无视用户拒绝) 占比 25%, 原因 c(语气过于机械) 占比 18%...
+
+每个意向结果类别下，列出导致该结果的原因类别及其占比，附带 3-5 个典型案例和改进建议。
 
 ---
 
@@ -334,24 +371,31 @@ Supervisor 维护 `progress.json`：
 
 ```
 ~/.agents/skills/auto-qc/
-├── SKILL.md                    # Skill 主文件（prompt + 流程定义）
+├── SKILL.md                        # Skill 主文件（流程定义 + Sub-agent 调度）
 ├── templates/
-│   ├── worker-prompt.md        # Worker Agent 质检模板
-│   └── attribution-prompt.md   # 归因分析模板
-└── scripts/
-    ├── data_loader.py          # Excel 读取 + 批次拆分 + 进度管理
-    └── report_writer.py        # 报告 Excel 输出 + 临时文件清理
+│   ├── worker-prompt.md            # Worker 打标模板（质检规则包注入）
+│   ├── attribution-prompt.md       # 归因分析模板
+│   └── attribution-rules.md        # 内置归因规则（5 Why 根因分析）
+├── scripts/
+│   ├── data_loader.py              # Excel 读取 + 对话预处理 + 列匹配 + 批次拆分 + 进度管理
+│   └── report_writer.py            # 报告 Excel 输出 + 临时文件清理
+└── requirements.txt                # Python 依赖（uv install 用）
 ```
 
 ### 8.1 用户交互
 
 ```
-/auto-qc --data <excel路径> --rules <rules.md路径> [--attribution]
+/auto-qc --data <excel路径> --rules <规则路径> [--no-attribution]
 ```
 
 - `--data`: 源数据 Excel 路径（必需）
-- `--rules`: 规则文件路径（必需）
-- `--attribution`: 启用归因分析（可选，默认启用）
+- `--rules`: 合规规则文件路径（必需，用户提供）
+- `--no-attribution`: 关闭归因分析（默认开启）
+
+**示例**：
+- `/auto-qc --data data.xlsx --rules rules.md` → 合规检测 + 归因分析（默认全开）
+- `/auto-qc --data data.xlsx --rules rules.md --no-attribution` → 仅合规检测
+- `/auto-qc --data data.xlsx --attribution-only` → 仅归因分析（内置归因规则，不需要合规规则）
 
 ---
 
@@ -385,7 +429,15 @@ Supervisor 维护 `progress.json`：
 }
 ```
 
-### 10.2 关键节点汇报
+### 10.2 断点续跑
+
+Supervisor 每次启动时自动检测 `progress.json`：
+- 存在且有未完成批次 → 提示用户："检测到上次中断的进度（已完成 X/Y 批），是否继续？"
+- 用户确认后 → 从未完成的下一批继续，不重跑已完成批次
+- 用户否认 → 从头开始，清空旧进度
+- 用户不回复 → 默认继续（10 秒超时后自动恢复）
+
+### 10.3 关键节点汇报
 
 Supervisor 在以下节点输出简短汇报：
 - "已加载 X 条对话，拆分为 Y 批"
@@ -441,7 +493,125 @@ Supervisor 在以下节点输出简短汇报：
 
 ---
 
-## 16. 测试数据
+## 16. 对话预处理
+
+### 16.1 原始数据格式
+
+Excel 中对话文本为 JSON 格式，包含 TTS（AI）和 ASR（用户）轮次：
+```json
+[
+  {"ttsResult": "你好，请问是张三吗？", "asrResult": "用户无应答"},
+  {"ttsResult": "您好，我是猎聘这边的...", "asrResult": "是的哪位？"},
+  ...
+]
+```
+
+### 16.2 预处理流程
+
+Python 负责将原始 JSON 转换为 LLM 易读的对话文本格式：
+```
+AI: 你好，请问是张三吗？
+用户: 用户无应答
+
+AI: 您好，我是猎聘这边的...
+用户: 是的哪位？
+
+AI: ...
+用户: ...
+```
+
+预处理由 `data_loader.py` 中的 `preprocess_conversations()` 函数完成，输出为对话文本字符串，随批次数据一起分发给 Worker。
+
+### 16.3 附加信息
+
+预处理后的每条对话附带：
+- `id`: 通话 ID
+- `意向结果`: A/B/C/E/F/I 等
+- `通话时长`: 从时间戳计算
+- `轮次数`: TTS/ASR 对数
+
+---
+
+## 17. Excel 列识别
+
+### 17.1 列名映射
+
+系统按列名关键字匹配，不依赖固定列序：
+- **ID 列**：匹配 `id`、`通话ID`、`call_id`
+- **时间列**：匹配 `时间`、`通话时间`、`call_time`
+- **对话列**：匹配 `对话`、`对话文本`、`conversation`
+- **意向列**：匹配 `意向`、`意向结果`、`intent_result`
+
+### 17.2 匹配逻辑
+
+Python 读取 Excel 表头后，按上述关键词逐一匹配。匹配失败时提示用户："未找到 xxx 列，当前表头为：xxx"
+
+---
+
+## 18. 容错机制
+
+### 18.1 LLM JSON 输出容错
+
+Worker 输出 JSON 时可能出现格式问题（多余逗号、缺引号、换行异常）。Python 层增加 `json_repair` 库做预处理：
+1. 先用 `json_repair` 尝试修复不规范 JSON
+2. 修复后尝试 `json.loads`
+3. 仍失败则要求 Worker 重试（最多 3 次）
+
+### 18.2 批次重试策略
+
+- Worker Agent 失败/超时/输出格式异常 → 自动重试，最多 3 次
+- 3 次都失败的批次 → 记录到 `failed_batches.json`
+- 不阻塞整体流程，最后汇总报告时提醒用户
+
+---
+
+## 19. Skill 可移植性
+
+### 19.1 打包结构
+
+Skill 自包含，无需额外项目文件夹：
+```
+~/.agents/skills/auto-qc/
+├── SKILL.md                    # Skill 主文件
+├── templates/
+│   ├── worker-prompt.md        # Worker 打标模板
+│   ├── attribution-prompt.md   # 归因分析模板
+│   └── attribution-rules.md    # 内置归因规则
+├── scripts/
+│   ├── data_loader.py          # Excel 读取 + 预处理 + 批次拆分
+│   └── report_writer.py        # 报告输出 + 临时文件清理
+└── requirements.txt            # Python 依赖（uv install 用）
+```
+
+### 19.2 分发方式
+
+打包为 `.zip` 后，接收方只需：
+1. 解压到 `~/.agents/skills/auto-qc/`
+2. 打开 Claude Code，`/auto-qc` 即可使用
+3. 首次使用时自动安装 Python 依赖（uv install）
+
+### 19.3 SKILL.md 设计
+
+SKILL.md 是 skill 的核心入口，包含：
+- **触发方式**：用户输入 `/auto-qc --data <路径> --rules <路径>`
+- **执行流程**：引导 Claude 作为 Supervisor，逐步完成规则解析→数据加载→批次拆分→Worker 分发→结果收集→报告输出
+- **Sub-agent 调度**：明确指示 Claude 使用 `Agent` 工具启动多个 Worker，每次 5 个并发
+- **Python 调用边界**：明确 Python 只负责 I/O（读 Excel、写 Excel、拆分数据），质检判断必须由 sub-agent 完成
+- **错误处理**：遇到异常时的重试策略和用户提示
+
+---
+
+## 20. Python 依赖
+
+- `openpyxl==3.1.5` — Excel 读写
+- `pandas==2.2.3` — 数据处理
+- `json-repair==0.42.0` — 不规范 JSON 修复
+
+依赖通过 `requirements.txt` 声明，首次使用时由 SKILL.md 引导 Claude 自动执行 `uv pip install -r requirements.txt`（如果未安装）。
+
+---
+
+## 21. 测试数据
 
 已有测试文件：`C:\Users\dongyi\Desktop\pi-500-data.xlsx`
 - 500 条对话数据

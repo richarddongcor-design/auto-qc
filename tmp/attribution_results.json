@@ -1,0 +1,3145 @@
+{
+  "overall_summary": {
+    "total_non_positive": 370,
+    "intent_distribution": [
+      {
+        "intent": "I(开场白挂断)",
+        "count": 153,
+        "proportion": 41.4
+      },
+      {
+        "intent": "F(无意向)",
+        "count": 129,
+        "proportion": 34.9
+      },
+      {
+        "intent": "B(不确定)",
+        "count": 77,
+        "proportion": 20.8
+      },
+      {
+        "intent": "E(不确定用户忙)",
+        "count": 9,
+        "proportion": 2.4
+      },
+      {
+        "intent": "C(不确定他人接听)",
+        "count": 2,
+        "proportion": 0.5
+      }
+    ],
+    "top_attribution_reasons": [
+      {
+        "reason": "AI质量缺陷",
+        "count": 273,
+        "percentage": 73.8
+      },
+      {
+        "reason": "用户明确拒绝",
+        "count": 150,
+        "percentage": 40.5
+      },
+      {
+        "reason": "用户询问细节但意向不明",
+        "count": 103,
+        "percentage": 27.8
+      },
+      {
+        "reason": "用户无实质性回应",
+        "count": 90,
+        "percentage": 24.3
+      },
+      {
+        "reason": "对话过短即结束",
+        "count": 59,
+        "percentage": 15.9
+      },
+      {
+        "reason": "用户不便接听",
+        "count": 17,
+        "percentage": 4.6
+      },
+      {
+        "reason": "非本人接听",
+        "count": 9,
+        "percentage": 2.4
+      }
+    ]
+  },
+  "summary_by_intent": {
+    "I(开场白挂断)": {
+      "count": 153,
+      "proportion_of_total": 41.4,
+      "attribution_breakdown": [
+        {
+          "reason": "用户无实质性回应",
+          "count": 77,
+          "percentage_in_group": 50.3
+        },
+        {
+          "reason": "AI质量缺陷",
+          "count": 76,
+          "percentage_in_group": 49.7
+        },
+        {
+          "reason": "对话过短即结束",
+          "count": 58,
+          "percentage_in_group": 37.9
+        },
+        {
+          "reason": "用户询问细节但意向不明",
+          "count": 8,
+          "percentage_in_group": 5.2
+        },
+        {
+          "reason": "用户明确拒绝",
+          "count": 4,
+          "percentage_in_group": 2.6
+        },
+        {
+          "reason": "用户不便接听",
+          "count": 1,
+          "percentage_in_group": 0.7
+        }
+      ]
+    },
+    "F(无意向)": {
+      "count": 129,
+      "proportion_of_total": 34.9,
+      "attribution_breakdown": [
+        {
+          "reason": "AI质量缺陷",
+          "count": 126,
+          "percentage_in_group": 97.7
+        },
+        {
+          "reason": "用户明确拒绝",
+          "count": 118,
+          "percentage_in_group": 91.5
+        },
+        {
+          "reason": "用户询问细节但意向不明",
+          "count": 56,
+          "percentage_in_group": 43.4
+        },
+        {
+          "reason": "非本人接听",
+          "count": 7,
+          "percentage_in_group": 5.4
+        },
+        {
+          "reason": "用户不便接听",
+          "count": 3,
+          "percentage_in_group": 2.3
+        },
+        {
+          "reason": "对话过短即结束",
+          "count": 1,
+          "percentage_in_group": 0.8
+        }
+      ]
+    },
+    "B(不确定)": {
+      "count": 77,
+      "proportion_of_total": 20.8,
+      "attribution_breakdown": [
+        {
+          "reason": "AI质量缺陷",
+          "count": 61,
+          "percentage_in_group": 79.2
+        },
+        {
+          "reason": "用户询问细节但意向不明",
+          "count": 35,
+          "percentage_in_group": 45.5
+        },
+        {
+          "reason": "用户明确拒绝",
+          "count": 20,
+          "percentage_in_group": 26.0
+        },
+        {
+          "reason": "用户无实质性回应",
+          "count": 13,
+          "percentage_in_group": 16.9
+        },
+        {
+          "reason": "用户不便接听",
+          "count": 5,
+          "percentage_in_group": 6.5
+        }
+      ]
+    },
+    "E(不确定用户忙)": {
+      "count": 9,
+      "proportion_of_total": 2.4,
+      "attribution_breakdown": [
+        {
+          "reason": "AI质量缺陷",
+          "count": 9,
+          "percentage_in_group": 100.0
+        },
+        {
+          "reason": "用户不便接听",
+          "count": 8,
+          "percentage_in_group": 88.9
+        },
+        {
+          "reason": "用户明确拒绝",
+          "count": 6,
+          "percentage_in_group": 66.7
+        },
+        {
+          "reason": "用户询问细节但意向不明",
+          "count": 3,
+          "percentage_in_group": 33.3
+        }
+      ]
+    },
+    "C(不确定他人接听)": {
+      "count": 2,
+      "proportion_of_total": 0.5,
+      "attribution_breakdown": [
+        {
+          "reason": "用户明确拒绝",
+          "count": 2,
+          "percentage_in_group": 100.0
+        },
+        {
+          "reason": "非本人接听",
+          "count": 2,
+          "percentage_in_group": 100.0
+        },
+        {
+          "reason": "AI质量缺陷",
+          "count": 1,
+          "percentage_in_group": 50.0
+        },
+        {
+          "reason": "用户询问细节但意向不明",
+          "count": 1,
+          "percentage_in_group": 50.0
+        }
+      ]
+    }
+  },
+  "detailed_results": [
+    {
+      "id": "11126472134",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11194402434",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11267466024",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11127791782",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11162250891",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束, 回避用户问题",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11147200301",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "非本人接听",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11223195661",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11225217839",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11192592993",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11115926696",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11113967325",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11277653207",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 回避用户问题, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11132650896",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 回避用户问题, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11189706525",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11237419617",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 无视用户拒绝, 对话未正常结束, 公司信息矛盾"
+      ]
+    },
+    {
+      "id": "11138840503",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11221401575",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11149202130",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束, 公司信息矛盾"
+      ]
+    },
+    {
+      "id": "11224689871",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11228706890",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "用户无实质性回应",
+        "AI质量缺陷: 公司信息矛盾"
+      ]
+    },
+    {
+      "id": "11267948527",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11237542423",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11224626921",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11122697848",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11184811884",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11230975402",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11277179403",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束, 公司信息矛盾"
+      ]
+    },
+    {
+      "id": "11158682427",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11156239436",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11223969066",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "用户不便接听",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11149319380",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 无视用户拒绝, 对话未正常结束, 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11254550052",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束, 公司信息矛盾"
+      ]
+    },
+    {
+      "id": "11158731845",
+      "intent": "E(不确定用户忙)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "用户不便接听",
+        "AI质量缺陷: 未妥善处理不便",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11240115561",
+      "intent": "E(不确定用户忙)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "用户不便接听",
+        "AI质量缺陷: 未妥善处理不便"
+      ]
+    },
+    {
+      "id": "11237249282",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11228645413",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "用户不便接听",
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11240371732",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11186770505",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11223109097",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11195963151",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 公司信息矛盾, 回避用户问题, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11271781154",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11189241700",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11195945762",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "非本人接听",
+        "AI质量缺陷: 回避用户问题",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11192464684",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11245039485",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11261831915",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11267965346",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11185979985",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11222489498",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11248796084",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11254555244",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11187758201",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11195365440",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束, AI内容重复, 回避用户问题",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11123283355",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11115874735",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11235078900",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11225313981",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11125754456",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束, 重复确认意向, 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11112671829",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 对话未正常结束, 回避用户问题",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11221691638",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11120432438",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11228809930",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11135273773",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11123288771",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11193018275",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 公司信息矛盾, 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11110049176",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 回避用户问题, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11118835750",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11277319329",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11183199690",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11112296091",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 回避用户问题, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11151540499",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11237096071",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11226959815",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11109546639",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "AI质量缺陷: 回避用户问题, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11194365995",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11255324527",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 对话未正常结束, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11267954429",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11223268509",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 无视用户拒绝, 回避用户问题, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11188048186",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 回避用户问题, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11164095118",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11275226648",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11139337641",
+      "intent": "B(不确定)",
+      "attribution_reasons": []
+    },
+    {
+      "id": "11115857329",
+      "intent": "E(不确定用户忙)",
+      "attribution_reasons": [
+        "用户不便接听",
+        "AI质量缺陷: 对话未正常结束, 未妥善处理不便"
+      ]
+    },
+    {
+      "id": "11252997170",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11137922458",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11275253593",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 公司信息矛盾, 回避用户问题, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11122426444",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11166624797",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11126358904",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11242429938",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11109884565",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11186162827",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11228476693",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "AI质量缺陷: 重复确认意向, 结束话术乱码, 用户同意后重复要简历",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11134026834",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11227742649",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11275212345",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 回避用户问题",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11271076761",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "用户不便接听",
+        "AI质量缺陷: 对话未正常结束, 公司信息矛盾, 未妥善处理不便",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11115877952",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 对话未正常结束, 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11191268330",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11237497388",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束, 重复确认意向, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11164340601",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束, 回避用户问题",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11152822940",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "AI质量缺陷: 公司信息矛盾, 回避用户问题, 重复确认意向, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11193014344",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11108412770",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11215419944",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11245066825",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 无视用户拒绝, 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11266836228",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11138986734",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11216871389",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11189326149",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11161892848",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "AI质量缺陷: 回避用户问题, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11276566517",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "AI质量缺陷: AI内容重复, 公司信息矛盾, 回避用户问题, 重复确认意向, 误判用户信号, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11237095913",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束, 回避用户问题, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11238906639",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 公司信息矛盾, 回避用户问题, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11114521873",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "用户无实质性回应",
+        "AI质量缺陷: 公司信息矛盾"
+      ]
+    },
+    {
+      "id": "11273573899",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11184236144",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "用户不便接听",
+        "AI质量缺陷: 未妥善处理不便, 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11115184967",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11265074209",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11240161872",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 回避用户问题, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11213929779",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户不便接听",
+        "AI质量缺陷: 未妥善处理不便, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11127625020",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11194598065",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11109922615",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11188372731",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11164516742",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11240113415",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11110410199",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11167487532",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11117373887",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 回避用户问题, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11155015988",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11114139008",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11194344442",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户不便接听",
+        "AI质量缺陷: 对话未正常结束, 未妥善处理不便"
+      ]
+    },
+    {
+      "id": "11135923178",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11110006344",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11235676212",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11156325026",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11231118763",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "非本人接听",
+        "AI质量缺陷: 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11192200878",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "AI质量缺陷: 重复确认意向, 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11236864233",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11226473421",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11237987461",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11159531526",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11225409690",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11231291673",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11221697613",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11186148357",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 对话未正常结束, 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11154969689",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11188369931",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "用户不便接听",
+        "AI质量缺陷: 对话未正常结束, 未妥善处理不便, 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11161501077",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11265286298",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11223682382",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 对话未正常结束, 回避用户问题, 重复确认意向, 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11226960836",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11130444663",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11116989395",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11116000081",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11216758809",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11228365618",
+      "intent": "E(不确定用户忙)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "用户不便接听",
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11135442263",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11268032546",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11148963463",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11115906306",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11136094737",
+      "intent": "C(不确定他人接听)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "非本人接听"
+      ]
+    },
+    {
+      "id": "11163865307",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11191322511",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11191566972",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11257777316",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11277083309",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "非本人接听",
+        "AI质量缺陷: 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11185680775",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11166804462",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11114047914",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11110036808",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11132079277",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11188382288",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11145612250",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11252600983",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11151629213",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11240152327",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11215411552",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11223439537",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11135266811",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 回避用户问题, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11148503416",
+      "intent": "B(不确定)",
+      "attribution_reasons": []
+    },
+    {
+      "id": "11192687841",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11265052346",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 无视用户拒绝, 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11115794608",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11138682166",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 对话未正常结束",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11192200463",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11152010083",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 公司信息矛盾, 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11267968319",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11124087344",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11143050168",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11120285245",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11237752158",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11274786223",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11245560399",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 回避用户问题, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11221703638",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11244977987",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11189970771",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 无视用户拒绝, 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11237531325",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11131084498",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11123229065",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11244819014",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码, 强推简历",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11179651419",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11110658761",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 无视用户拒绝, 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11265180028",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "AI质量缺陷: 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11267996463",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11216257376",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11277857318",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11228780432",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11225466278",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11225380104",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 重复确认意向, 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11132909798",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11109230778",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11240223726",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11274591916",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11118087178",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11110049419",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11149713588",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11157061864",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11138810858",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11131866962",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11269905343",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11271694470",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11126183632",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11215385085",
+      "intent": "E(不确定用户忙)",
+      "attribution_reasons": [
+        "用户不便接听",
+        "AI质量缺陷: 未妥善处理不便"
+      ]
+    },
+    {
+      "id": "11185925127",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11155104597",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11184587314",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11254664739",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11237882459",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11194404703",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 回避用户问题, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11147111794",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11159495762",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11115776233",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11109288690",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11117096554",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11224541377",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11268003123",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11242324723",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11120182712",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "非本人接听",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11255020579",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 无视用户拒绝, 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11267986283",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11237959035",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11111092005",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11275356194",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "AI质量缺陷: 回避用户问题, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11192368023",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11141760714",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11163829252",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11276447455",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11117808091",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11192191245",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11243972713",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11119564127",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 回避用户问题, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11230898977",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11127153610",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11216911628",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11272097215",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 回避用户问题, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11267922800",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束, 回避用户问题, 重复确认意向, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11117662518",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11128273232",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11189265895",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "用户不便接听",
+        "AI质量缺陷: 重复确认意向, 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11195959729",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11157070443",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11249545196",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11192613501",
+      "intent": "E(不确定用户忙)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "用户不便接听",
+        "AI质量缺陷: 未妥善处理不便"
+      ]
+    },
+    {
+      "id": "11221879077",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11215375842",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 回避用户问题, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11227553710",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11192025018",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 回避用户问题, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11226951406",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11108991900",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11224689427",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11119564047",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 回避用户问题, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11163734343",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11161755833",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11224694712",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11128057432",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11194327132",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11195799789",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 对话未正常结束, AI内容重复, 回避用户问题",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11277168033",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11214367774",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11223509303",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "AI质量缺陷: 回避用户问题, 结束话术乱码, 强推简历",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11111195337",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11255340155",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束, 重复确认意向, 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11192811800",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11216550495",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11189584103",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11193888615",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11180439520",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 回避用户问题, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11163416997",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11189515744",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11244127896",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "AI质量缺陷: 回避用户问题, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11145516499",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 对话未正常结束",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11167977060",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11111674949",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11193827435",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 回避用户问题, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11216966521",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 回避用户问题, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11227044952",
+      "intent": "E(不确定用户忙)",
+      "attribution_reasons": [
+        "用户不便接听",
+        "AI质量缺陷: 对话未正常结束, 重复确认意向, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11111919927",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11118579784",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 对话未正常结束, 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11192444074",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 回避用户问题, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11155869797",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 无视用户拒绝, 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11187517627",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束, 回避用户问题, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11270871847",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11111678538",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11156322730",
+      "intent": "E(不确定用户忙)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "用户不便接听",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11187401579",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11268159296",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "AI质量缺陷: 回避用户问题",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11180660985",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 回避用户问题, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11273320801",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11187293546",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11246870509",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11120157319",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11230859875",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11187758560",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11188698819",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: AI内容重复, 回避用户问题, 重复确认意向, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11139684337",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝"
+      ]
+    },
+    {
+      "id": "11244210410",
+      "intent": "C(不确定他人接听)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "非本人接听",
+        "AI质量缺陷: 回避用户问题, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11275337309",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11226951683",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11193964142",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11191229589",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11175088261",
+      "intent": "B(不确定)",
+      "attribution_reasons": []
+    },
+    {
+      "id": "11250052514",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11108184545",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "非本人接听"
+      ]
+    },
+    {
+      "id": "11116934203",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11186419796",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11193116591",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11154964562",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11166393308",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 回避用户问题, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11195289967",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11191072934",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "AI质量缺陷: 公司信息矛盾, 回避用户问题, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11148991651",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 对话未正常结束",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11240435489",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11188541306",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11230843336",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束, 回避用户问题",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11228673314",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11185207555",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11253662511",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11235634770",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11110165705",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11127969648",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11215782978",
+      "intent": "E(不确定用户忙)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 公司信息矛盾, 回避用户问题, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11191325282",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11237195919",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 回避用户问题, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11108334925",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11148141904",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 无视用户拒绝, 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11160906467",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11194362510",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11182991153",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 重复确认意向, 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11235741449",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 对话未正常结束, 回避用户问题",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11189001265",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "用户不便接听",
+        "AI质量缺陷: 回避用户问题, 未妥善处理不便, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11191185602",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11214798853",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11248760420",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11243265141",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 无视用户拒绝, 对话未正常结束"
+      ]
+    },
+    {
+      "id": "11149607386",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11243271752",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    },
+    {
+      "id": "11266501816",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "AI质量缺陷: 对话未正常结束",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11155594000",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11235407568",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "AI质量缺陷: AI内容重复, 回避用户问题, 重复确认意向, 误判用户信号, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11257611841",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 无视用户拒绝, 对话未正常结束, 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11193055713",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "非本人接听",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11216306585",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11243488775",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11228062006",
+      "intent": "B(不确定)",
+      "attribution_reasons": []
+    },
+    {
+      "id": "11277557406",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应",
+        "对话过短即结束"
+      ]
+    },
+    {
+      "id": "11242427612",
+      "intent": "F(无意向)",
+      "attribution_reasons": [
+        "用户明确拒绝",
+        "AI质量缺陷: 结束话术乱码"
+      ]
+    },
+    {
+      "id": "11271940133",
+      "intent": "B(不确定)",
+      "attribution_reasons": [
+        "AI质量缺陷: 回避用户问题, 重复确认意向, 结束话术乱码, 用户同意后重复要简历",
+        "用户询问细节但意向不明"
+      ]
+    },
+    {
+      "id": "11123303156",
+      "intent": "I(开场白挂断)",
+      "attribution_reasons": [
+        "用户无实质性回应"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,448 @@
+# 归因分析 Worker 任务
+
+你是一名归因分析员。你的任务是：分析对话中什么因素导致没有产出"有意向"的结果。
+
+## 归因规则
+
+以下是归因类别参考（用于识别高频模式）：
+
+# 归因分析规则
+
+生成时间: 2026-06-01
+用途: 分析非"有意向"对话中，什么因素导致对话没有走向"有意向"
+
+分析方式：对每条对话，逐步追问"为什么没谈成？"，找到根因层级即可（不强制追问到第 5 层）。
+
+---
+
+## A01: AI 未介绍岗位关键信息
+
+**描述**: AI 在对话中未提及或未清晰说明岗位的核心信息（薪资、工作地点、公司名称），导致用户无法判断机会吸引力。
+
+**检测信号**: 对话全程未出现具体薪资数字、未提及公司全称、工作地点模糊或未说明。
+
+**典型案例**:
+- 用户反复询问"具体做什么产品"，AI 始终未给出明确回答
+- 对话结束时用户仍不清楚薪资和工作地点
+
+---
+
+## A02: 未识别用户兴趣点，未做针对性引导
+
+**描述**: 用户表达了对某方面兴趣（如"这个岗位有晋升空间吗"），但 AI 未捕捉到该兴趣点，仍然用模板化话术推进。
+
+**检测信号**: 用户提出具体关注点后，AI 未在该方向上做进一步介绍，而是跳转到要简历话术。
+
+**典型案例**:
+- 用户问"这个岗位的技术栈是什么"，AI 回答"您可以晚点看下岗位细节"
+- 用户表示对某行业感兴趣，AI 未做延伸介绍
+
+---
+
+## A03: 回复过于模板化/机械
+
+**描述**: AI 回复缺乏人情味，大量使用固定话术模板，用户感受到"机器感"而非与真人顾问对话。
+
+**检测信号**: AI 多次输出几乎相同的长段落话术；缺乏对用户个性化问题的回应；语气僵硬。
+
+**典型案例**:
+- 用户提问后，AI 回复一段与问题无关的标准岗位介绍
+- 连续轮次 AI 输出内容高度重复
+
+---
+
+## A04: 未正面回答用户追问
+
+**描述**: 用户提出具体追问（产品、岗位性质、薪资、业务方向等）时，AI 用"您可以看下猎聘"、"让HR联系您"等话术搪塞，未给出任何实质性回答。
+
+**检测信号**: 用户发言包含疑问词（什么、怎么、哪里、具体），但 AI 未给出具体信息。
+
+**典型案例**:
+- 用户问"这个岗位做什么的"，AI 答"您可以晚点详细看下具体岗位细节"
+- 用户问"薪资是多少"，AI 答"企业HR会再联系您详细介绍"
+
+---
+
+## A05: 节奏把控不当
+
+**描述**: 对话节奏不合理。推进过快（用户还没了解岗位就要简历），或过慢（大量无效轮次浪费用户时间）。
+
+**检测信号**: 用户刚表态就立刻要简历（过快）；或同一信息反复确认超过 3 轮（过慢）。
+
+**典型案例**:
+- AI 介绍完公司名立刻要简历，用户还未表示任何兴趣
+- AI 连续 5 轮询问用户是否在听
+
+---
+
+## A06: 结束话术敷衍
+
+**描述**: 对话结束时 AI 未约定下次联系时间或未留下有效信息，敷衍结束。
+
+**检测信号**: AI 结束语仅为"再见""祝您生活愉快"，无后续行动承诺。
+
+**典型案例**:
+- 用户表示"我再想想"，AI 直接说"再见"
+- 用户说"稍后联系你"，AI 未约定具体时间就结束
+
+
+## 批次数据
+
+以下是你需要分析的 100 条对话（均为非"有意向"结果）：
+
+=== 对话 11267466024 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"喂\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":100,\"asrEndTime\":1200},{\"ttsResult\":\"哎，您好，请问您是杨先生吗。\",\"asrResult\":\"啊是\",\"ttsStartTime\":2559,\"ttsEndTime\":4559,\"asrStartTime\":4120,\"asrEndTime\":5400},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"没有了\",\"ttsStartTime\":9920,\"ttsEndTime\":15920,\"asrStartTime\":12020,\"asrEndTime\":13200},{\"ttsResult\":\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\",\"ttsStartTime\":16159,\"tt
+
+=== 对话 11147200301 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是张先生吗。\",\"asrResult\":\"哪里;不是\",\"ttsStartTime\":3828,\"ttsEndTime\":5828,\"asrStartTime\":2660,\"asrEndTime\":7480},{\"ttsResult\":\"哦，这样啊，那不好意思打扰了，再见\",\"ttsStartTime\":9268,\"ttsEndTime\":12268}]"
+
+=== 对话 11223195661 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是宋女士吗。\",\"asrResult\":\"对哪位呀\",\"ttsStartTime\":3641,\"ttsEndTime\":5641,\"asrStartTime\":6200,\"asrEndTime\":7450},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":12360,\"ttsEndTime\":18360},{\"ttsResult\":\"呃我先给您说下关于这个岗位的信息哈\",\"asrResult\":\"不考虑了，我已经上班了\",\"ttsStartTime\":16520,\"ttsEndTime\":19520,\"asrStartTime\":15400,\"asrEndTime\":1
+
+=== 对话 11115926696 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"哎，你好\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":1620,\"asrEndTime\":2860},{\"ttsResult\":\"哎，您好，请问您是胡女士吗。\",\"asrResult\":\"嗯，有什么事情\",\"ttsStartTime\":4560,\"ttsEndTime\":6560,\"asrStartTime\":5980,\"asrEndTime\":7720},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"考虑\",\"ttsStartTime\":12360,\"ttsEndTime\":18360,\"asrStartTime\":14660,\"asrEndTime\":15760},{\"ttsResult\":\"呃，是这样的，这家企业是东阳华懋新材料科技研究院有限公司。给到的岗位是,行政经理,./这个工作地
+
+=== 对话 11277653207 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"喂\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":240,\"asrEndTime\":1260},{\"ttsResult\":\"哎，您好，请问您是李女士吗。\",\"asrResult\":\"嗯\",\"ttsStartTime\":2721,\"ttsEndTime\":4721,\"asrStartTime\":4300,\"asrEndTime\":5340},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"我这一;那一看;什么岗位啊你干什\",\"ttsStartTime\":9840,\"ttsEndTime\":15840,\"asrStartTime\":6620,\"asrEndTime\":14800},{\"ttsResult\":\"呃，是这样的，这家企业是广东熠日科技股份有限公司。给到的岗位是,项目管理,./这个工作地点在
+
+=== 对话 11132650896 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是黄女士吗。\",\"asrResult\":\"哪位\",\"ttsStartTime\":2560,\"ttsEndTime\":4560,\"asrStartTime\":2520,\"asrEndTime\":3540},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"在哪里\",\"ttsStartTime\":8000,\"ttsEndTime\":14000,\"asrStartTime\":10140,\"asrEndTime\":11400},{\"ttsResult\":\"呃，是这样的，这家企业是杭州奥亦信息科技有限公司。给到的岗位是,服装采购或买手,./这个工作地点在杭州滨江区嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要接触一下呢？\",\"as
+
+=== 对话 11237419617 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"喂，你好\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":820,\"asrEndTime\":2000},{\"ttsResult\":\"哎，您好，请问您是熊壮壮熊先生吗。\",\"asrResult\":\"嗯;妈;嗯，对\",\"ttsStartTime\":3640,\"ttsEndTime\":6640,\"asrStartTime\":2800,\"asrEndTime\":6660},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"嗯，暂时不考虑了啊，谢谢\",\"ttsStartTime\":11160,\"ttsEndTime\":17160,\"asrStartTime\":12980,\"asrEndTime\":15380},{\"ttsResult\":\"呃，是这样的，这家企业是深圳麦克韦尔科技有限公司。给到的岗位是,系统测试
+
+=== 对话 11224689871 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"喂\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":320,\"asrEndTime\":1260},{\"ttsResult\":\"哎，您好，请问您是王佳伟王先生吗。\",\"asrResult\":\"哪位哪位\",\"ttsStartTime\":4320,\"ttsEndTime\":7320,\"asrStartTime\":5320,\"asrEndTime\":6760},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"不考虑\",\"ttsStartTime\":11320,\"ttsEndTime\":17320,\"asrStartTime\":14140,\"asrEndTime\":15120},{\"ttsResult\":\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\",\"ttsStartTime\":1735
+
+=== 对话 11224626921 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是黄汉梁黄女士吗。\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":4008,\"ttsEndTime\":7008},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":12624,\"ttsEndTime\":18624},{\"ttsResult\":\"呃我先给您说下关于这个岗位的信息哈;呃，是这样的，这家企业是三七互娱科技有限公司。给到的岗位是,HRBP,./这个工作地点在广州海珠区嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要接触一下呢？\",\"asrResult\":\"这个已经接触过了，不太合适啊，谢谢你啊\",\"ttsStartTime\":18784,\"ttsEn
+
+=== 对话 11184811884 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是代佳妮代女士吗。\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":4441,\"ttsEndTime\":7441},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":12920,\"ttsEndTime\":18920},{\"ttsResult\":\"呃我先给您说下关于这个岗位的信息哈;呃，是这样的，这家企业是瑞达期货股份有限公司。给到的岗位是,财富管理,./这个工作地点在成都武侯区嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要接触一下呢？\",\"asrResult\":\"不用了，谢谢\",\"ttsStartTime\":19080,\"ttsEndTime\":39080
+
+=== 对话 11230975402 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是林朵朵林女士吗。\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":4360,\"ttsEndTime\":7360},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"你好，你是哪位\",\"ttsStartTime\":9521,\"ttsEndTime\":15521,\"asrStartTime\":8480,\"asrEndTime\":10090},{\"ttsResult\":\"呃我是猎聘这边的猎头哈.现在呢是在帮国药集团冯了性中医药健康产业有限公司做招聘;呃，是这样的，这家企业是国药集团冯了性中医药健康产业有限公司。给到的岗位是,兼职主播,./这个工作地点在佛山禅城区嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要接触一
+
+=== 对话 11156239436 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是曾先生吗。\",\"asrResult\":\"呃，喂，你好，哪位\",\"ttsStartTime\":3740,\"ttsEndTime\":5740,\"asrStartTime\":3220,\"asrEndTime\":4880},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"呃，不用了，谢谢啊\",\"ttsStartTime\":9380,\"ttsEndTime\":15380,\"asrStartTime\":11820,\"asrEndTime\":13500},{\"ttsResult\":\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\",\"ttsStartTime\":15537,\"ttsEndTime\":20537}]"
+
+=== 对话 11223969066 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是毕先生吗。\",\"asrResult\":\"喂，你好;嗯，是的\",\"ttsStartTime\":3999,\"ttsEndTime\":5999,\"asrStartTime\":1940,\"asrEndTime\":6710},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"嗯，你这边可以直接在猎聘上面联系我，然后我现在不太方便去进行一些解答不好意思啊\",\"ttsStartTime\":11400,\"ttsEndTime\":17400,\"asrStartTime\":13760,\"asrEndTime\":22250},{\"ttsResult\":\"哦/明白，那就先不打扰您了，以后有合适的机会再联系您，再见。\",\"asrResult\":\"嗯
+
+=== 对话 11195963151 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是黄素绕黄女士吗。\",\"asrResult\":\"呃，请问哪里\",\"ttsStartTime\":2920,\"ttsEndTime\":5920,\"asrStartTime\":2500,\"asrEndTime\":3840},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"什么岗位\",\"ttsStartTime\":8384,\"ttsEndTime\":14384,\"asrStartTime\":10700,\"asrEndTime\":12080},{\"ttsResult\":\"呃，是这样的，这家企业是深圳市胜丰饰品有限公司。给到的岗位是,外贸经理,./这个工作地点在广州荔湾区嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要接触一下呢？\",
+
+=== 对话 11189241700 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"喂\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":640,\"asrEndTime\":1640},{\"ttsResult\":\"哎，您好，请问您是叽叽喳喳叽先生吗。\",\"asrResult\":\"你好;嗯，是的，你是\",\"ttsStartTime\":3442,\"ttsEndTime\":6442,\"asrStartTime\":2460,\"asrEndTime\":7800},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"嗯，是哪家呃公司在哪里啊\",\"ttsStartTime\":12520,\"ttsEndTime\":18520,\"asrStartTime\":14680,\"asrEndTime\":17460},{\"ttsResult\":\"呃，是这样的，这家企业是昆山康泰达智能科技有限公司。给到的岗位是,销售
+
+=== 对话 11195945762 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是赵女士吗。\",\"asrResult\":\"喂;有什么事\",\"ttsStartTime\":4018,\"ttsEndTime\":6018,\"asrStartTime\":3040,\"asrEndTime\":7200},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"什么岗啊\",\"ttsStartTime\":11759,\"ttsEndTime\":17759,\"asrStartTime\":14720,\"asrEndTime\":15820},{\"ttsResult\":\"呃，是这样的，这家企业是绿能起源科技有限公司。给到的岗位是,海外销售，需要韩语与英语作为工作语言,./这个工作地点在常州溧阳市嗯这边在猎聘上也给您发了职位信息,./您看呃就是要
+
+=== 对话 11192464684 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是袁蔚霖袁女士吗。\",\"asrResult\":\"你好;是\",\"ttsStartTime\":3582,\"ttsEndTime\":6582,\"asrStartTime\":2880,\"asrEndTime\":7080},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"不考虑了\",\"ttsStartTime\":11720,\"ttsEndTime\":17720,\"asrStartTime\":13360,\"asrEndTime\":14660},{\"ttsResult\":\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\",\"ttsStartTime\":17800,\"ttsEndTime\":22800}]"
+
+=== 对话 11261831915 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是周毅周女士吗。\",\"asrResult\":\"喂;怎么了\",\"ttsStartTime\":3920,\"ttsEndTime\":6920,\"asrStartTime\":1920,\"asrEndTime\":7040},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"嗯，暂时不需要了，谢谢你\",\"ttsStartTime\":11600,\"ttsEndTime\":17600,\"asrStartTime\":13540,\"asrEndTime\":15880},{\"ttsResult\":\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\",\"ttsStartTime\":18840,\"ttsEndTime\":23840}]"
+
+=== 对话 11228809930 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是李女士吗。\",\"asrResult\":\"喂;嗯，是的\",\"ttsStartTime\":3920,\"ttsEndTime\":5920,\"asrStartTime\":2380,\"asrEndTime\":6520},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"哦，我已经入职了，暂时不考虑，谢谢\",\"ttsStartTime\":11161,\"ttsEndTime\":17161,\"asrStartTime\":13080,\"asrEndTime\":15940},{\"ttsResult\":\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\",\"ttsStartTime\":18881,\"ttsEndTime\":23881}]
+
+=== 对话 11193018275 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是成先生吗。\",\"asrResult\":\"喂，你好;嗯，你是哪位\",\"ttsStartTime\":3640,\"ttsEndTime\":5640,\"asrStartTime\":2040,\"asrEndTime\":7460},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"希望可以;哦，还没到哦，你是做哪一个？是是哪一块的\",\"ttsStartTime\":12080,\"ttsEndTime\":18080,\"asrStartTime\":8320,\"asrEndTime\":19680},{\"ttsResult\":\"呃，是这样的，这家企业是西安诺瓦星云科技股份有限公司。给到的岗位是,c++开发组长,./这个工作地点在深圳光明区，您看就是呃要
+
+=== 对话 11110049176 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是金先生吗。\",\"asrResult\":\"哪位\",\"ttsStartTime\":2040,\"ttsEndTime\":4040,\"asrStartTime\":2100,\"asrEndTime\":3020},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"哪里\",\"ttsStartTime\":7479,\"ttsEndTime\":13479,\"asrStartTime\":9340,\"asrEndTime\":10300},{\"ttsResult\":\"呃，是这样的，这家企业是长安花粮油股份有限公司。给到的岗位是,华中大区经理,./这个工作地点在合肥瑶海区嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要接触一下呢？\",\"asrRes
+
+=== 对话 11183199690 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是王先生吗。\",\"asrResult\":\"啊，你说\",\"ttsStartTime\":3822,\"ttsEndTime\":5822,\"asrStartTime\":5460,\"asrEndTime\":6860},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"暂时没有\",\"ttsStartTime\":11503,\"ttsEndTime\":17503,\"asrStartTime\":14140,\"asrEndTime\":15280},{\"ttsResult\":\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\",\"ttsStartTime\":18343,\"ttsEndTime\":23343}]"
+
+=== 对话 11112296091 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"哪位\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":1620,\"asrEndTime\":2820},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"呃，是什么岗位啊\",\"ttsStartTime\":7360,\"ttsEndTime\":13360,\"asrStartTime\":9520,\"asrEndTime\":11220},{\"ttsResult\":\"呃，是这样的，这家企业是第一创业证券股份有限公司苏州分公司。给到的岗位是,证券理财顾问,./这个工作地点在苏州吴中区嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要接触一下呢？\",\"asrResult\":\"呃，易创就算了，我对这个平台不太感兴趣\",\"ttsStartTime\":25320,\"ttsEndTime\":43320,\"asrStartTime\
+
+=== 对话 11151540499 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"喂，你好\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":1480,\"asrEndTime\":2560},{\"ttsResult\":\"哎，您好，请问您是刘先生吗。\",\"asrResult\":\"是\",\"ttsStartTime\":3760,\"ttsEndTime\":5760,\"asrStartTime\":5320,\"asrEndTime\":6260},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"没有了，谢谢\",\"ttsStartTime\":10800,\"ttsEndTime\":16800,\"asrStartTime\":12420,\"asrEndTime\":13960},{\"ttsResult\":\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\",\"asrResult\":\"啊;好\
+
+=== 对话 11109546639 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"喂喂\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":480,\"asrEndTime\":2420},{\"ttsResult\":\"哎，您好，请问您是李先生吗。\",\"asrResult\":\"嗯，哪位\",\"ttsStartTime\":3161,\"ttsEndTime\":5161,\"asrStartTime\":4760,\"asrEndTime\":6140},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"嗯怎么搞\",\"ttsStartTime\":10560,\"ttsEndTime\":16560,\"asrStartTime\":13020,\"asrEndTime\":15120},{\"ttsResult\":\"呃，是这样的，这家企业是惠州亿纬锂能股份有限公司。给到的岗位是,锂电行业方向的EHS成熟度高级工程师,.
+
+=== 对话 11194365995 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"喂，你好\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":1420,\"asrEndTime\":2800},{\"ttsResult\":\"哎，您好，请问您是李旭飞李先生吗。\",\"asrResult\":\"对\",\"ttsStartTime\":4640,\"ttsEndTime\":7640,\"asrStartTime\":6300,\"asrEndTime\":7260},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"啊，哪块的\",\"ttsStartTime\":11920,\"ttsEndTime\":17920,\"asrStartTime\":14380,\"asrEndTime\":16400},{\"ttsResult\":\"呃，是这样的，这家企业是贝克曼沃玛金属技术有限公司。给到的岗位是,卧式加工中心操作工,./这个工
+
+=== 对话 11267954429 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"喂，你好，哪里\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":1120,\"asrEndTime\":2290},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"呃呃，目前没有，谢谢啊\",\"ttsStartTime\":7360,\"ttsEndTime\":13360,\"asrStartTime\":9440,\"asrEndTime\":11450},{\"ttsResult\":\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\",\"ttsStartTime\":11339,\"ttsEndTime\":16339}]"
+
+=== 对话 11188048186 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是杨云帆杨先生吗。\",\"asrResult\":\"喂;喂，哪里\",\"ttsStartTime\":4439,\"ttsEndTime\":7439,\"asrStartTime\":2020,\"asrEndTime\":7680},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"嗯嗯;哦什什么岗位的\",\"ttsStartTime\":12160,\"ttsEndTime\":18160,\"asrStartTime\":10300,\"asrEndTime\":16480},{\"ttsResult\":\"呃，是这样的，这家企业是晋江和铭资产管理有限公司。给到的岗位是,人事行政专员,./这个工作地点在上海静安区嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不
+
+=== 对话 11275253593 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"喂\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":580,\"asrEndTime\":1560},{\"ttsResult\":\"哎，您好，请问您是王力王先生吗。\",\"asrResult\":\"哪边\",\"ttsStartTime\":3440,\"ttsEndTime\":6440,\"asrStartTime\":5500,\"asrEndTime\":6600},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"什么岗位\",\"ttsStartTime\":11201,\"ttsEndTime\":17201,\"asrStartTime\":13100,\"asrEndTime\":14340},{\"ttsResult\":\"呃，是这样的，这家企业是北京三元食品股份有限公司。给到的岗位是,应用饮品师,./这个工作地点在上海徐汇区嗯
+
+=== 对话 11166624797 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是谭杰谭先生吗。\",\"asrResult\":\"听到;嗯，是\",\"ttsStartTime\":4440,\"ttsEndTime\":7440,\"asrStartTime\":2400,\"asrEndTime\":7460},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"嗯工作上里工作点\",\"ttsStartTime\":11960,\"ttsEndTime\":17960,\"asrStartTime\":14960,\"asrEndTime\":17440},{\"ttsResult\":\"呃，是这样的，这家企业是宁波高松电子有限公司。给到的岗位是,CQE工程师,./这个工作地点在宁波慈溪市嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要接触一下
+
+=== 对话 11242429938 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是徐先生吗。\",\"asrResult\":\"您好，请问\",\"ttsStartTime\":3560,\"ttsEndTime\":5560,\"asrStartTime\":3780,\"asrEndTime\":4520},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"嗯;没有，没有\",\"ttsStartTime\":9160,\"ttsEndTime\":15160,\"asrStartTime\":5320,\"asrEndTime\":12820},{\"ttsResult\":\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\",\"ttsStartTime\":15840,\"ttsEndTime\":20840}]"
+
+=== 对话 11275212345 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"喂，你好，嗯\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":840,\"asrEndTime\":2640},{\"ttsResult\":\"哎，您好，请问您是王杰王先生吗。\",\"asrResult\":\"你是哪里\",\"ttsStartTime\":4400,\"ttsEndTime\":7400,\"asrStartTime\":6360,\"asrEndTime\":7660},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"什么岗位呢\",\"ttsStartTime\":12200,\"ttsEndTime\":18200,\"asrStartTime\":15040,\"asrEndTime\":16400},{\"ttsResult\":\"呃，是这样的，这家企业是太原市万联易达物流科技有限公司。给到的岗位是,金融产品拓展经理,.
+
+=== 对话 11108412770 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是王然王女士吗。\",\"asrResult\":\"哪位\",\"ttsStartTime\":2881,\"ttsEndTime\":5881,\"asrStartTime\":2660,\"asrEndTime\":3880},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"嗯，暂时没有，谢谢\",\"ttsStartTime\":8320,\"ttsEndTime\":14320,\"asrStartTime\":10940,\"asrEndTime\":13520},{\"ttsResult\":\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\",\"ttsStartTime\":16561,\"ttsEndTime\":21561}]"
+
+=== 对话 11215419944 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"就这个，对喂，我只要经济经酒店去发有变的对，是\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":220,\"asrEndTime\":6900},{\"ttsResult\":\"哎，您好，请问您是高先生吗。\",\"asrResult\":\"长相关不喂\",\"ttsStartTime\":8120,\"ttsEndTime\":10120,\"asrStartTime\":7880,\"asrEndTime\":10220},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"哦，没有暂时不需要啊啊\",\"ttsStartTime\":13760,\"ttsEndTime\":19760,\"asrStartTime\":15640,\"asrEndTime\":19620},{\"ttsResult\":\"哦/明白（那就)不打扰您了以后有合适的机会
+
+=== 对话 11245066825 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是谈女士吗。\",\"asrResult\":\"喂;哪边\",\"ttsStartTime\":3840,\"ttsEndTime\":5840,\"asrStartTime\":1700,\"asrEndTime\":6190},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"哦，不，暂时先不考虑\",\"ttsStartTime\":11000,\"ttsEndTime\":17000,\"asrStartTime\":12780,\"asrEndTime\":14810},{\"ttsResult\":\"呃，是这样的，这家企业是昆山沪光汽车电器股份有限公司。给到的岗位是,采购工程师,./这个工作地点在苏州昆山市嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要接触一
+
+=== 对话 11138986734 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是欧阳希鹏欧先生吗。\",\"asrResult\":\"喂，你好;对\",\"ttsStartTime\":4880,\"ttsEndTime\":7880,\"asrStartTime\":1980,\"asrEndTime\":7860},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"嗯，可以啊\",\"ttsStartTime\":12360,\"ttsEndTime\":18360,\"asrStartTime\":14740,\"asrEndTime\":16060},{\"ttsResult\":\"呃，是这样的，这家企业是科沃斯机器人股份有限公司。给到的岗位是,产品营销经理,./这个工作地点在苏州吴中区嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要接触一
+
+=== 对话 11161892848 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是雷先生吗。\",\"asrResult\":\"你好;是的\",\"ttsStartTime\":3360,\"ttsEndTime\":5360,\"asrStartTime\":3040,\"asrEndTime\":6440},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"呃，什么岗位\",\"ttsStartTime\":10960,\"ttsEndTime\":16960,\"asrStartTime\":13780,\"asrEndTime\":15260},{\"ttsResult\":\"呃，是这样的，这家企业是苏州上声电子股份有限公司。给到的岗位是,设备工程师，需要英语作为工作语言,./这个工作地点在苏州相城区嗯这边在猎聘上也给您发了职位信息,./您看呃就是
+
+=== 对话 11184236144 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是孟女士吗。\",\"asrResult\":\"哎喂;嗯，你说\",\"ttsStartTime\":4445,\"ttsEndTime\":6445,\"asrStartTime\":1960,\"asrEndTime\":6680},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"嗯，你说\",\"ttsStartTime\":11805,\"ttsEndTime\":17805,\"asrStartTime\":13740,\"asrEndTime\":14960},{\"ttsResult\":\"呃，是这样的，这家企业是上海光通信有限公司。给到的岗位是,WAT测试工程师,./这个工作地点在上海嘉定区嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要接触一下呢？\"
+
+=== 对话 11265074209 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"喂\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":700,\"asrEndTime\":1370},{\"ttsResult\":\"哎，您好，请问您是李震李先生吗。\",\"asrResult\":\"你是谁\",\"ttsStartTime\":3281,\"ttsEndTime\":6281,\"asrStartTime\":5200,\"asrEndTime\":6050},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"哪个岗位，哪家公司\",\"ttsStartTime\":10880,\"ttsEndTime\":16880,\"asrStartTime\":12700,\"asrEndTime\":14470},{\"ttsResult\":\"呃，是这样的，这家企业是河北雅果食品有限公司。给到的岗位是,茶饮大客户经理,./这个工作地点在
+
+=== 对话 11240161872 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是周先生吗。\",\"asrResult\":\"喂;对\",\"ttsStartTime\":4001,\"ttsEndTime\":6001,\"asrStartTime\":2240,\"asrEndTime\":6160},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"啊，什么岗位\",\"ttsStartTime\":10721,\"ttsEndTime\":16721,\"asrStartTime\":12600,\"asrEndTime\":13800},{\"ttsResult\":\"呃，是这样的，这家企业是康诺亚生物医药科技有限公司。给到的岗位是,临床项目经理,./这个工作地点在上海嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要接触一下呢？\",\"
+
+=== 对话 11213929779 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"喂哪位啊\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":820,\"asrEndTime\":3220},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":7720,\"ttsEndTime\":13720},{\"ttsResult\":\"呃我先给您说下关于这个岗位的信息哈\",\"asrResult\":\"稍等一下啊\",\"ttsStartTime\":12640,\"ttsEndTime\":15640,\"asrStartTime\":12240,\"asrEndTime\":13620},{\"ttsResult\":\"好的\",\"asrResult\":\"啊，你你你说\",\"ttsStartTime\":13170,\"ttsEndTime\":13170,\"asrStartTi
+
+=== 对话 11194598065 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是顾佳顾女士吗。\",\"asrResult\":\"你是哪边\",\"ttsStartTime\":4439,\"ttsEndTime\":7439,\"asrStartTime\":6480,\"asrEndTime\":7900},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"猎聘好像不行吧，都都列了一年了，一个也没列上\",\"ttsStartTime\":12559,\"ttsEndTime\":18559,\"asrStartTime\":15700,\"asrEndTime\":20580},{\"ttsResult\":\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\",\"ttsStartTime\":23439,\"ttsEndTime\":28
+
+=== 对话 11110410199 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是潘先生吗。\",\"asrResult\":\"是哪里\",\"ttsStartTime\":4000,\"ttsEndTime\":6000,\"asrStartTime\":4120,\"asrEndTime\":4940},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"不考虑，暂时不考虑\",\"ttsStartTime\":9601,\"ttsEndTime\":15601,\"asrStartTime\":12480,\"asrEndTime\":13580},{\"ttsResult\":\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\",\"asrResult\":\"不用稳定\",\"ttsStartTime\":16640,\"ttsEndTim
+
+=== 对话 11167487532 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"喂哎，你好\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":560,\"asrEndTime\":3120},{\"ttsResult\":\"哎，您好，请问您是龚先生吗。\",\"asrResult\":\"对，是的\",\"ttsStartTime\":3640,\"ttsEndTime\":5640,\"asrStartTime\":6040,\"asrEndTime\":7200},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"啊，您说\",\"ttsStartTime\":11760,\"ttsEndTime\":17760,\"asrStartTime\":14160,\"asrEndTime\":15500},{\"ttsResult\":\"呃，是这样的，这家企业是鑫元基金管理有限公司。给到的岗位是,FOF研究员,./这个工作地点在上海嗯
+
+=== 对话 11117373887 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"喂\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":580,\"asrEndTime\":1440},{\"ttsResult\":\"哎，您好，请问您是林先生吗。\",\"asrResult\":\"哪里;哪里\",\"ttsStartTime\":2919,\"ttsEndTime\":4919,\"asrStartTime\":2380,\"asrEndTime\":5240},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"哪里的\",\"ttsStartTime\":9719,\"ttsEndTime\":15719,\"asrStartTime\":9920,\"asrEndTime\":10900},{\"ttsResult\":\"呃，是这样的，这家企业是上海易咖智车科技有限公司。给到的岗位是,汽车研发质量工程师,./这个工作地点在上海嘉定
+
+=== 对话 11110006344 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是姜南平姜先生吗。\",\"asrResult\":\"哪里;嗯，是的\",\"ttsStartTime\":4159,\"ttsEndTime\":7159,\"asrStartTime\":2100,\"asrEndTime\":6990},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":11919,\"ttsEndTime\":17919},{\"ttsResult\":\"呃我先给您说下关于这个岗位的信息哈;呃，是这样的，这家企业是杭州鸿昇企业管理有限公司。给到的岗位是,精益经理,./这个工作地点在温州龙湾区嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要接触一下呢？\",\"asrResult\":\"嗯，哦，不用
+
+=== 对话 11231118763 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"你什么\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":260,\"asrEndTime\":1260},{\"ttsResult\":\"哎，您好，请问您是李女士吗。\",\"asrResult\":\"你好对，已经车差了多少？啥不去了？最需要什么？谢你说\",\"ttsStartTime\":2921,\"ttsEndTime\":4921,\"asrStartTime\":2040,\"asrEndTime\":8700},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"千万不要，不要;啊，对要给注销错我就哦，我目前不考虑了总都会主席由周旭不是当选下面新康线标准体新表态\",\"ttsStartTime\":12600,\"ttsEndTime\":18600,\"asrStartTime\":9940,\"asrEndTime\":25480},{
+
+=== 对话 11192200878 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是江女士吗。\",\"asrResult\":\"嗯嗯;嗯，你好\",\"ttsStartTime\":3640,\"ttsEndTime\":5640,\"asrStartTime\":2460,\"asrEndTime\":7720},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"你可以讲一下\",\"ttsStartTime\":12200,\"ttsEndTime\":18200,\"asrStartTime\":15040,\"asrEndTime\":16560},{\"ttsResult\":\"呃，是这样的，这家企业是南龙集团有限公司。给到的岗位是,电商运营,./这个工作地点在金华永康市嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要接触一下呢？\",\"
+
+=== 对话 11236864233 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是侯虎侯先生吗。\",\"asrResult\":\"喂，你好;用户无应答\",\"ttsStartTime\":4201,\"ttsEndTime\":7201,\"asrStartTime\":1900},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"你是哪一位呢\",\"ttsStartTime\":8761,\"ttsEndTime\":14761,\"asrStartTime\":7600,\"asrEndTime\":9540},{\"ttsResult\":\"呃我是猎聘这边的猎头哈.现在呢是在帮麦楷亚洲财务咨询有限公司做招聘;呃，是这样的，这家企业是麦楷亚洲财务咨询有限公司。给到的岗位是,审计助理,./这个工作地点在北京朝阳区嗯这边在猎聘上也给您发了职位信息,.
+
+=== 对话 11226473421 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是王骁卿王先生吗。\",\"asrResult\":\"喂，哪位\",\"ttsStartTime\":2960,\"ttsEndTime\":5960,\"asrStartTime\":2560,\"asrEndTime\":3780},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"不考虑了\",\"ttsStartTime\":8400,\"ttsEndTime\":14400,\"asrStartTime\":11580,\"asrEndTime\":12420},{\"ttsResult\":\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\",\"ttsStartTime\":15440,\"ttsEndTime\":20440}]"
+
+=== 对话 11161501077 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"找;喂\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":40,\"asrEndTime\":1800},{\"ttsResult\":\"哎，您好，请问您是邱靓邱女士吗。\",\"asrResult\":\"呃，你哪位\",\"ttsStartTime\":3968,\"ttsEndTime\":6968,\"asrStartTime\":5360,\"asrEndTime\":6820},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"嗯，不用了，谢谢\",\"ttsStartTime\":11044,\"ttsEndTime\":17044,\"asrStartTime\":14320,\"asrEndTime\":15640},{\"ttsResult\":\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\",\"ttsStartTime\
+
+=== 对话 11226960836 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"喂\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":1020,\"asrEndTime\":1880},{\"ttsResult\":\"哎，您好，请问您是姚先生吗。\",\"asrResult\":\"哪位\",\"ttsStartTime\":3246,\"ttsEndTime\":5246,\"asrStartTime\":2520,\"asrEndTime\":3480},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"你说，你说，嗯\",\"ttsStartTime\":8000,\"ttsEndTime\":14000,\"asrStartTime\":10880,\"asrEndTime\":12500},{\"ttsResult\":\"呃，是这样的，这家企业是浙江天正电气股份有限公司。给到的岗位是,自动化设备编程员,./这个工作地点在嘉兴
+
+=== 对话 11163865307 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是佘女士吗。\",\"asrResult\":\"喂;是的\",\"ttsStartTime\":3840,\"ttsEndTime\":5840,\"asrStartTime\":2100,\"asrEndTime\":6680},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"没有了\",\"ttsStartTime\":11200,\"ttsEndTime\":17200,\"asrStartTime\":13140,\"asrEndTime\":14320},{\"ttsResult\":\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\",\"ttsStartTime\":17441,\"ttsEndTime\":22441}]"
+
+=== 对话 11191322511 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"喂，你好嗯\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":680,\"asrEndTime\":3000},{\"ttsResult\":\"哎，您好，请问您是邱伟家邱先生吗。\",\"asrResult\":\"嗯，对\",\"ttsStartTime\":3360,\"ttsEndTime\":6360,\"asrStartTime\":5560,\"asrEndTime\":6520},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"嗯，有\",\"ttsStartTime\":11160,\"ttsEndTime\":17160,\"asrStartTime\":13920,\"asrEndTime\":15040},{\"ttsResult\":\"呃，是这样的，这家企业是北京航天驭星科技股份有限公司。给到的岗位是,应付或成本会计,./这个工作
+
+=== 对话 11257777316 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是陆先生吗。\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":3439,\"ttsEndTime\":5439},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"你是\",\"ttsStartTime\":7199,\"ttsEndTime\":13199,\"asrStartTime\":7000,\"asrEndTime\":8240},{\"ttsResult\":\"呃我是猎聘这边的猎头哈.现在呢是在帮浙江吉利远程新能源商用车集团有限公司做招聘;呃，是这样的，这家企业是浙江吉利远程新能源商用车集团有限公司。给到的岗位是,质量数字化高级经理,./这个工作地点在杭州滨江区嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要接触一下呢？\
+
+=== 对话 11277083309 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"喂干嘛\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":660,\"asrEndTime\":3020},{\"ttsResult\":\"哎，您好，请问您是黄闵黄女士吗。\",\"asrResult\":\"什么事啊\",\"ttsStartTime\":3639,\"ttsEndTime\":6639,\"asrStartTime\":6000,\"asrEndTime\":7220},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"嗯，可以说明一现在是在哪个单位吗\",\"ttsStartTime\":11759,\"ttsEndTime\":17759,\"asrStartTime\":14740,\"asrEndTime\":17580},{\"ttsResult\":\"呃，是这样的，这家企业是在线途游科技有限公司。给到的岗位是,大客户运营,.
+
+=== 对话 11166804462 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是刘先生吗。\",\"asrResult\":\"喂;对\",\"ttsStartTime\":3560,\"ttsEndTime\":5560,\"asrStartTime\":1920,\"asrEndTime\":6840},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"不好意思\",\"ttsStartTime\":11480,\"ttsEndTime\":17480,\"asrStartTime\":11920,\"asrEndTime\":13000},{\"ttsResult\":\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\",\"asrResult\":\"嗯\",\"ttsStartTime\":15563,\"ttsEndTime\":205
+
+=== 对话 11114047914 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是壮先生吗。\",\"asrResult\":\"哪位\",\"ttsStartTime\":2520,\"ttsEndTime\":4520,\"asrStartTime\":2340,\"asrEndTime\":3380},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"呃，暂时没有哦嗯\",\"ttsStartTime\":7960,\"ttsEndTime\":13960,\"asrStartTime\":9700,\"asrEndTime\":12840},{\"ttsResult\":\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\",\"ttsStartTime\":12599,\"ttsEndTime\":17599}]"
+
+=== 对话 11188382288 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是杨深杨先生吗。\",\"asrResult\":\"你好;嗯\",\"ttsStartTime\":4080,\"ttsEndTime\":7080,\"asrStartTime\":2840,\"asrEndTime\":7340},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"嗯，目前已经找到工作了\",\"ttsStartTime\":11801,\"ttsEndTime\":17801,\"asrStartTime\":14200,\"asrEndTime\":16380},{\"ttsResult\":\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\",\"ttsStartTime\":19480,\"ttsEndTime\":24480}]"
+
+=== 对话 11223439537 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"喂\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":440,\"asrEndTime\":1190},{\"ttsResult\":\"哎，您好，请问您是秦可秦先生吗。\",\"asrResult\":\"嗯;嗯\",\"ttsStartTime\":3024,\"ttsEndTime\":6024,\"asrStartTime\":1820,\"asrEndTime\":5770},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"嗯，暂时不考虑，谢谢\",\"ttsStartTime\":10064,\"ttsEndTime\":16064,\"asrStartTime\":12500,\"asrEndTime\":14090},{\"ttsResult\":\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\",\"asrResult\":\"
+
+=== 对话 11135266811 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是陈先生吗。\",\"asrResult\":\"喂，你好;你是\",\"ttsStartTime\":4000,\"ttsEndTime\":6000,\"asrStartTime\":1980,\"asrEndTime\":7720},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"嗯哪里的\",\"ttsStartTime\":12201,\"ttsEndTime\":18201,\"asrStartTime\":14700,\"asrEndTime\":16640},{\"ttsResult\":\"呃，是这样的，这家企业是招商局积余产业运营服务股份有限公司。给到的岗位是,人资方向的产品经理,./这个工作地点在深圳南山区嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不
+
+=== 对话 11265052346 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是郭先生吗。\",\"asrResult\":\"你好;嗯，你哪位啊\",\"ttsStartTime\":3559,\"ttsEndTime\":5559,\"asrStartTime\":1700,\"asrEndTime\":6700},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"哦，暂时先不考虑了\",\"ttsStartTime\":11229,\"ttsEndTime\":17229,\"asrStartTime\":13700,\"asrEndTime\":15640},{\"ttsResult\":\"呃，是这样的，这家企业是河北雅果食品有限公司。给到的岗位是,大客户销售经理,./这个工作地点在石家庄长安区嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要
+
+=== 对话 11152010083 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"喂\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":1820,\"asrEndTime\":2880},{\"ttsResult\":\"哎，您好，请问您是陈厉婧陈女士吗。\",\"asrResult\":\"嗯\",\"ttsStartTime\":4999,\"ttsEndTime\":7999,\"asrStartTime\":6320,\"asrEndTime\":7340},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"不搞笑;你说\",\"ttsStartTime\":11999,\"ttsEndTime\":17999,\"asrStartTime\":11680,\"asrEndTime\":14880},{\"ttsResult\":\"呃，是这样的，这家企业是北京三元食品股份有限公司。给到的岗位是,大客户销售经理,./这个工作地点在上
+
+=== 对话 11274786223 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"喂，你好\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":1300,\"asrEndTime\":2200},{\"ttsResult\":\"哎，您好，请问您是高天娇高女士吗。\",\"asrResult\":\"喂\",\"ttsStartTime\":4641,\"ttsEndTime\":7641,\"asrStartTime\":7420,\"asrEndTime\":8240},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"嗯，不考虑了，谢谢\",\"ttsStartTime\":12840,\"ttsEndTime\":18840,\"asrStartTime\":15080,\"asrEndTime\":16820},{\"ttsResult\":\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\",\"ttsStartTime
+
+=== 对话 11245560399 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是鲁朝阳鲁先生吗。\",\"asrResult\":\"哪位\",\"ttsStartTime\":2559,\"ttsEndTime\":5559,\"asrStartTime\":2380,\"asrEndTime\":3400},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"什么公司啊\",\"ttsStartTime\":7999,\"ttsEndTime\":13999,\"asrStartTime\":10440,\"asrEndTime\":11660},{\"ttsResult\":\"呃，是这样的，这家企业是迈富时智能技术有限公司。给到的岗位是,城市总经理,./这个工作地点在南京浦口区嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要接触一下呢？\",\"
+
+=== 对话 11221703638 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"喂\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":980,\"asrEndTime\":1920},{\"ttsResult\":\"哎，您好，请问您是李工李先生吗。\",\"asrResult\":\"啊\",\"ttsStartTime\":3280,\"ttsEndTime\":6280,\"asrStartTime\":5520,\"asrEndTime\":6420},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"嗯，可以，我看一下\",\"ttsStartTime\":11000,\"ttsEndTime\":17000,\"asrStartTime\":13500,\"asrEndTime\":15280},{\"ttsResult\":\"嗯那我快速说下岗位.方便您等下查看哈;呃，是这样的，这家企业是上海友升铝业股份有限公司。给到的岗位
+
+=== 对话 11189970771 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"喂，你好\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":1840,\"asrEndTime\":3120},{\"ttsResult\":\"哎，您好，请问您是周先生吗。\",\"asrResult\":\"你哪儿\",\"ttsStartTime\":4560,\"ttsEndTime\":6560,\"asrStartTime\":6240,\"asrEndTime\":7300},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"呃，先不考虑了，谢谢\",\"ttsStartTime\":11880,\"ttsEndTime\":17880,\"asrStartTime\":13700,\"asrEndTime\":15480},{\"ttsResult\":\"呃，是这样的，这家企业是恒安标准人寿保险有限公司天津分公司。给到的岗位是,准营业组经理,
+
+=== 对话 11244819014 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是王先生吗。\",\"asrResult\":\"喂，你好;啊\",\"ttsStartTime\":3841,\"ttsEndTime\":5841,\"asrStartTime\":2400,\"asrEndTime\":6410},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"什么什么那个\",\"ttsStartTime\":11160,\"ttsEndTime\":17160,\"asrStartTime\":13420,\"asrEndTime\":14910},{\"ttsResult\":\"呃，是这样的，这家企业是鹿客科技股份有限公司。给到的岗位是,研发质量工程师,./这个工作地点在重庆铜梁区，您看就是呃要不要考虑接触一下？\",\"asrResult\":\
+
+=== 对话 11110658761 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"喂，哪位\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":1720,\"asrEndTime\":3040},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"嗯;哦，不考虑啊，谢谢啊\",\"ttsStartTime\":7956,\"ttsEndTime\":13956,\"asrStartTime\":5840,\"asrEndTime\":11080},{\"ttsResult\":\"呃，是这样的，这家企业是智元创新科技股份有限公司。给到的岗位是,采购,./这个工作地点在上海浦东新区嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要接触一下呢？\",\"asrResult\":\"嗯;哦，不用不用，谢谢啊\",\"ttsStartTime\":24964,\"ttsEndTime\":40964,\"asrStartTime\":11920,\
+
+=== 对话 11265180028 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"喂，你好\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":1840,\"asrEndTime\":2960},{\"ttsResult\":\"哎，您好，请问您是杨煜晖杨先生吗。\",\"asrResult\":\"对，哪位\",\"ttsStartTime\":5024,\"ttsEndTime\":8024,\"asrStartTime\":6320,\"asrEndTime\":7500},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"什么岗位\",\"ttsStartTime\":12000,\"ttsEndTime\":18000,\"asrStartTime\":14340,\"asrEndTime\":15600},{\"ttsResult\":\"呃，是这样的，这家企业是浙江凯瑞博科技股份有限公司。给到的岗位是,外贸业务经理,./这个工作
+
+=== 对话 11228780432 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是王津津王先生吗。\",\"asrResult\":\"喂，你好;嗯，对\",\"ttsStartTime\":4640,\"ttsEndTime\":7640,\"asrStartTime\":2200,\"asrEndTime\":6950},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"呃，我暂时不考虑了，我现在已经就职了\",\"ttsStartTime\":11760,\"ttsEndTime\":17760,\"asrStartTime\":13920,\"asrEndTime\":16410},{\"ttsResult\":\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\",\"ttsStartTime\":19600,\"ttsEndTime\":2
+
+=== 对话 11225466278 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是蒙先生吗。\",\"asrResult\":\"嗯，你好;哎，什么事情\",\"ttsStartTime\":3972,\"ttsEndTime\":5972,\"asrStartTime\":2520,\"asrEndTime\":7450},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":12940,\"ttsEndTime\":18940},{\"ttsResult\":\"呃我先给您说下关于这个岗位的信息哈\",\"asrResult\":\"你是AI还是人工啊\",\"ttsStartTime\":18332,\"ttsEndTime\":21332,\"asrStartTime\":15380,\"asrEndTim
+
+=== 对话 11225380104 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"尽力的那个\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":1340,\"asrEndTime\":2500},{\"ttsResult\":\"哎，您好，请问您是赵女士吗。\",\"asrResult\":\"哪位\",\"ttsStartTime\":4001,\"ttsEndTime\":6001,\"asrStartTime\":5940,\"asrEndTime\":7020},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"可以呀\",\"ttsStartTime\":11601,\"ttsEndTime\":17601,\"asrStartTime\":13960,\"asrEndTime\":15220},{\"ttsResult\":\"呃，是这样的，这家企业是天津大拇指环境工程有限公司。给到的岗位是,水处理工程师,./这个工作地点在天津
+
+=== 对话 11110049419 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是刘女士吗。\",\"asrResult\":\"嗯，对\",\"ttsStartTime\":4000,\"ttsEndTime\":6000,\"asrStartTime\":5380,\"asrEndTime\":6270},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"嗯，没有\",\"ttsStartTime\":11120,\"ttsEndTime\":17120,\"asrStartTime\":13020,\"asrEndTime\":14110},{\"ttsResult\":\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\",\"ttsStartTime\":17400,\"ttsEndTime\":22400}]"
+
+=== 对话 11138810858 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是田健新田先生吗。\",\"asrResult\":\"喂，你好;你是哪位\",\"ttsStartTime\":4560,\"ttsEndTime\":7560,\"asrStartTime\":2900,\"asrEndTime\":7860},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":12361,\"ttsEndTime\":18361},{\"ttsResult\":\"呃我先给您说下关于这个岗位的信息哈\",\"asrResult\":\"嗯，不用了，谢谢啊\",\"ttsStartTime\":16760,\"ttsEndTime\":19760,\"asrStartTime\":16020,\"asrEndTi
+
+=== 对话 11184587314 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"您好哎，你好\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":420,\"asrEndTime\":3180},{\"ttsResult\":\"哎，您好，请问您是张先生吗。\",\"asrResult\":\"啊，是的\",\"ttsStartTime\":3840,\"ttsEndTime\":5840,\"asrStartTime\":5220,\"asrEndTime\":6380},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"嗯，您可以先发我看一下;用户无应答\",\"ttsStartTime\":10920,\"ttsEndTime\":16920,\"asrStartTime\":13020},{\"ttsResult\":\"呃/我这边可能没法添加您的微信。我先给您介绍下企业吧;呃，是这样的，这家企业是上海亿通国际股份有限公司。给到的岗
+
+=== 对话 11254664739 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是唐先生吗。\",\"asrResult\":\"喂，你好;嗯，是的\",\"ttsStartTime\":3921,\"ttsEndTime\":5921,\"asrStartTime\":2660,\"asrEndTime\":6920},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"你好;嗯好\",\"ttsStartTime\":11481,\"ttsEndTime\":17481,\"asrStartTime\":7840,\"asrEndTime\":15200},{\"ttsResult\":\"呃，是这样的，这家企业是招商局仁和人寿保险股份有限公司。给到的岗位是,数字化系统架构师方向的领域专家岗,./这个工作地点在深圳南山区嗯这边在猎聘上也给您发了职位信息,./
+
+=== 对话 11237882459 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是黄女士吗。\",\"asrResult\":\"刚刚我查了一下还没我得，嗯\",\"ttsStartTime\":3992,\"ttsEndTime\":5992,\"asrStartTime\":4320,\"asrEndTime\":6840},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"喂，你好\",\"ttsStartTime\":10976,\"ttsEndTime\":16976,\"asrStartTime\":12880,\"asrEndTime\":14260},{\"ttsResult\":\"呃，是这样的，这家企业是大族激光科技产业集团股份有限公司。给到的岗位是,干部管理,./这个工作地点在深圳宝安区，您看就是呃要不要考虑接触一下？\",\"asrRe
+
+=== 对话 11194404703 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"喂，你好哪位\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":680,\"asrEndTime\":3380},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"嗯，是什么岗位啊请问\",\"ttsStartTime\":7996,\"ttsEndTime\":13996,\"asrStartTime\":10020,\"asrEndTime\":12260},{\"ttsResult\":\"呃，是这样的，这家企业是江苏德锐管理咨询有限公司。给到的岗位是,人力资源方向的管理咨询项目经理,./这个工作地点在南京雨花台区嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要接触一下呢？\",\"asrResult\":\"哦，不考虑，谢谢\",\"ttsStartTime\":18016,\"ttsEndTime\":37016,\"asrStartTime\
+
+=== 对话 11159495762 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"喂，你好\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":360,\"asrEndTime\":1480},{\"ttsResult\":\"哎，您好，请问您是刘汶栋刘先生吗。\",\"asrResult\":\"喂，你好，哪里\",\"ttsStartTime\":4120,\"ttsEndTime\":7120,\"asrStartTime\":5380,\"asrEndTime\":6600},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"嗯，在的\",\"ttsStartTime\":11201,\"ttsEndTime\":17201,\"asrStartTime\":13020,\"asrEndTime\":14160},{\"ttsResult\":\"呃，是这样的，这家企业是广州众诺微电子有限公司。给到的岗位是,高级培训专员兼HRBP,.
+
+=== 对话 11120182712 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"喂，你好嗯\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":340,\"asrEndTime\":2560},{\"ttsResult\":\"哎，您好，请问您是张先生吗。\",\"asrResult\":\"嗯，是的\",\"ttsStartTime\":3200,\"ttsEndTime\":5200,\"asrStartTime\":4540,\"asrEndTime\":5780},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"哪的岗位\",\"ttsStartTime\":10160,\"ttsEndTime\":16160,\"asrStartTime\":11940,\"asrEndTime\":13460},{\"ttsResult\":\"呃，是这样的，这家企业是湖南泽天智航电子技术有限公司。给到的岗位是,底层系统开发工程师，Rust或
+
+=== 对话 11255020579 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是陈先生吗。\",\"asrResult\":\"喂，你好;对\",\"ttsStartTime\":3999,\"ttsEndTime\":5999,\"asrStartTime\":2080,\"asrEndTime\":6380},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"哦;不考虑了，谢谢\",\"ttsStartTime\":10999,\"ttsEndTime\":16999,\"asrStartTime\":10620,\"asrEndTime\":13820},{\"ttsResult\":\"呃，是这样的，这家企业是华福证券股份有限公司。给到的岗位是,应用系统开发岗,./这个工作地点在上海浦东新区嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要接触一
+
+=== 对话 11275356194 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"喂\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":700,\"asrEndTime\":1350},{\"ttsResult\":\"哎，您好，请问您是葛娟葛女士吗。\",\"asrResult\":\"哎，您是哪位\",\"ttsStartTime\":3200,\"ttsEndTime\":6200,\"asrStartTime\":5680,\"asrEndTime\":6750},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"哪里呀\",\"ttsStartTime\":11520,\"ttsEndTime\":17520,\"asrStartTime\":14300,\"asrEndTime\":15050},{\"ttsResult\":\"呃，是这样的，这家企业是苏州万洲新材料有限公司。给到的岗位是,新媒体运营助理,./这个工作地点在苏州
+
+=== 对话 11276447455 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是木木木女士吗。\",\"asrResult\":\"喂;怎么了\",\"ttsStartTime\":3841,\"ttsEndTime\":6841,\"asrStartTime\":2860,\"asrEndTime\":7140},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"啊，不需要，谢谢\",\"ttsStartTime\":11640,\"ttsEndTime\":17640,\"asrStartTime\":12360,\"asrEndTime\":13780},{\"ttsResult\":\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\",\"ttsStartTime\":13439,\"ttsEndTime\":18439}]"
+
+=== 对话 11230898977 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是李先生吗。\",\"asrResult\":\"哪位\",\"ttsStartTime\":4000,\"ttsEndTime\":6000,\"asrStartTime\":5880,\"asrEndTime\":7020},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"不用不用，谢谢啊\",\"ttsStartTime\":11717,\"ttsEndTime\":17717,\"asrStartTime\":13420,\"asrEndTime\":15200},{\"ttsResult\":\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\",\"ttsStartTime\":18012,\"ttsEndTime\":23012}]"
+
+=== 对话 11127153610 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是周恒锋周先生吗。\",\"asrResult\":\"喂;哎，哪里\",\"ttsStartTime\":4000,\"ttsEndTime\":7000,\"asrStartTime\":2840,\"asrEndTime\":7020},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":11640,\"ttsEndTime\":17640},{\"ttsResult\":\"呃我先给您说下关于这个岗位的信息哈\",\"asrResult\":\"哎，你好，你讲\",\"ttsStartTime\":15880,\"ttsEndTime\":18880,\"asrStartTime\":15540,\"asrEndTime\":
+
+=== 对话 11216911628 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是王先生吗。\",\"asrResult\":\"喂;用户无应答\",\"ttsStartTime\":3841,\"ttsEndTime\":5841,\"asrStartTime\":1900},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"你说吧\",\"ttsStartTime\":12320,\"ttsEndTime\":18320,\"asrStartTime\":15380,\"asrEndTime\":16620},{\"ttsResult\":\"呃，是这样的，这家企业是浙江医学科技开发有限公司。给到的岗位是,BD经理,./这个工作地点在上海浦东新区嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要接触一下呢？\",\"asrResult\":\"嗯，不考
+
+=== 对话 11272097215 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是刘梦迎刘女士吗。\",\"asrResult\":\"喂，你好\",\"ttsStartTime\":3680,\"ttsEndTime\":6680,\"asrStartTime\":5540,\"asrEndTime\":7000},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"哎，你好;嗯，请问是什么类型的岗位\",\"ttsStartTime\":11560,\"ttsEndTime\":17560,\"asrStartTime\":8340,\"asrEndTime\":17100},{\"ttsResult\":\"呃，是这样的，这家企业是吉林亿联银行股份有限公司。给到的岗位是,信贷数据监测分析岗,./这个工作地点在长春朝阳区嗯这边在猎聘上也给您发了职位信息,./
+
+=== 对话 11249545196 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是杜欣杜女士吗。\",\"asrResult\":\"喂，你好，哪位\",\"ttsStartTime\":2600,\"ttsEndTime\":5600,\"asrStartTime\":1980,\"asrEndTime\":3270},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"哦，不用了，谢谢\",\"ttsStartTime\":8040,\"ttsEndTime\":14040,\"asrStartTime\":10060,\"asrEndTime\":11710},{\"ttsResult\":\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\",\"ttsStartTime\":14820,\"ttsEndTime\":19820}]"
+
+=== 对话 11215375842 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是王先生吗。\",\"asrResult\":\"喂，你好;是\",\"ttsStartTime\":3840,\"ttsEndTime\":5840,\"asrStartTime\":1760,\"asrEndTime\":6700},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"呃，哪里\",\"ttsStartTime\":11200,\"ttsEndTime\":17200,\"asrStartTime\":13220,\"asrEndTime\":15200},{\"ttsResult\":\"呃，是这样的，这家企业是江苏固芯能源科技有限公司。给到的岗位是,电芯研发工程师,./这个工作地点在常州溧阳市嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要接触一下呢？\
+
+=== 对话 11192025018 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"你好\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":1780,\"asrEndTime\":2740},{\"ttsResult\":\"哎，您好，请问您是任毅任先生吗。\",\"asrResult\":\"啊，您说\",\"ttsStartTime\":4280,\"ttsEndTime\":7280,\"asrStartTime\":6120,\"asrEndTime\":7280},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"嗯;啊岗位是在哪里\",\"ttsStartTime\":11761,\"ttsEndTime\":17761,\"asrStartTime\":10060,\"asrEndTime\":16580},{\"ttsResult\":\"呃，是这样的，这家企业是天津凯丽电子商务有限公司。给到的岗位是,人事专员,./这个工作地
+
+=== 对话 11226951406 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是王雅倩王女士吗。\",\"asrResult\":\"啊，您说;您是干嘛\",\"ttsStartTime\":4640,\"ttsEndTime\":7640,\"asrStartTime\":3000,\"asrEndTime\":9180},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"哦，暂时先不需要了，谢谢\",\"ttsStartTime\":13240,\"ttsEndTime\":19240,\"asrStartTime\":15500,\"asrEndTime\":18020},{\"ttsResult\":\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\",\"ttsStartTime\":20240,\"ttsEndTime\":25240}
+
+=== 对话 11119564047 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是温先生吗。\",\"asrResult\":\"哪里\",\"ttsStartTime\":3639,\"ttsEndTime\":5639,\"asrStartTime\":3480,\"asrEndTime\":4640},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"是哪里呀\",\"ttsStartTime\":9199,\"ttsEndTime\":15199,\"asrStartTime\":11900,\"asrEndTime\":13100},{\"ttsResult\":\"呃，是这样的，这家企业是锦浪科技股份有限公司。给到的岗位是,电气测试工程师,./这个工作地点在西安雁塔区嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要接触一下呢？\",\"asr
+
+=== 对话 11224694712 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"你好\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":740,\"asrEndTime\":1900},{\"ttsResult\":\"哎，您好，请问您是陈曦陈女士吗。\",\"asrResult\":\"嗯，对，是的\",\"ttsStartTime\":3599,\"ttsEndTime\":6599,\"asrStartTime\":5080,\"asrEndTime\":6400},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"嗯，有的\",\"ttsStartTime\":10959,\"ttsEndTime\":16959,\"asrStartTime\":13200,\"asrEndTime\":14400},{\"ttsResult\":\"呃，是这样的，这家企业是上海易行时代新能源科技有限公司。给到的岗位是,Tiktok运营专员,./
+
+=== 对话 11194327132 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"喂，你好\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":1540,\"asrEndTime\":2700},{\"ttsResult\":\"哎，您好，请问您是沙先生吗。\",\"asrResult\":\"喂，你好，说\",\"ttsStartTime\":4320,\"ttsEndTime\":6320,\"asrStartTime\":5460,\"asrEndTime\":6920},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"嗯，暂时不用了，谢谢啊\",\"ttsStartTime\":11521,\"ttsEndTime\":17521,\"asrStartTime\":13200,\"asrEndTime\":15300},{\"ttsResult\":\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\",\"ttsStart
+
+=== 对话 11277168033 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是姜正润姜先生吗。\",\"asrResult\":\"哪里\",\"ttsStartTime\":4080,\"ttsEndTime\":7080,\"asrStartTime\":6420,\"asrEndTime\":7280},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"哦，暂时没有\",\"ttsStartTime\":11720,\"ttsEndTime\":17720,\"asrStartTime\":13960,\"asrEndTime\":15360},{\"ttsResult\":\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\",\"ttsStartTime\":18360,\"ttsEndTime\":23360}]"
+
+=== 对话 11214367774 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"喂你好\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":900,\"asrEndTime\":3060},{\"ttsResult\":\"哎，您好，请问您是姬先生吗。\",\"asrResult\":\"嗯，对，是的\",\"ttsStartTime\":3188,\"ttsEndTime\":5188,\"asrStartTime\":5520,\"asrEndTime\":7020},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"啊，有的你说一下\",\"ttsStartTime\":11600,\"ttsEndTime\":17600,\"asrStartTime\":13400,\"asrEndTime\":15400},{\"ttsResult\":\"呃，是这样的，这家企业是益海嘉里金龙鱼食品集团股份有限公司。给到的岗位是,天猫超市销售,.
+
+=== 对话 11180439520 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"用户无应答\",\"ttsStartTime\":0,\"ttsEndTime\":0},{\"ttsResult\":\"哎，您好，请问您是唐女士吗。\",\"asrResult\":\"说;嗯\",\"ttsStartTime\":3560,\"ttsEndTime\":5560,\"asrStartTime\":2460,\"asrEndTime\":6600},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"做什么的\",\"ttsStartTime\":11240,\"ttsEndTime\":17240,\"asrStartTime\":12980,\"asrEndTime\":14260},{\"ttsResult\":\"呃，是这样的，这家企业是开平市赤坎旧埠旅游发展有限公司。给到的岗位是,旅行社销售专员,./这个工作地点在江门开平市嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要接触一下呢？\
+
+=== 对话 11189515744 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"喂喂，你好\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":460,\"asrEndTime\":2160},{\"ttsResult\":\"哎，您好，请问您是崔梦各崔女士吗。\",\"asrResult\":\"嗯，对，是的那其他没有什么我两个\",\"ttsStartTime\":3521,\"ttsEndTime\":6521,\"asrStartTime\":5760,\"asrEndTime\":9120},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"啊，不了不了，谢谢\",\"ttsStartTime\":12480,\"ttsEndTime\":18480,\"asrStartTime\":12760,\"asrEndTime\":14500},{\"ttsResult\":\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\"
+
+=== 对话 11244127896 (意向: F(无意向)) ===
+"[{\"ttsResult\":\"维/您好\",\"asrResult\":\"喂\",\"ttsStartTime\":0,\"ttsEndTime\":0,\"asrStartTime\":860,\"asrEndTime\":1900},{\"ttsResult\":\"哎，您好，请问您是何女士吗。\",\"asrResult\":\"怎么啦\",\"ttsStartTime\":2960,\"ttsEndTime\":4960,\"asrStartTime\":5160,\"asrEndTime\":6100},{\"ttsResult\":\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\",\"asrResult\":\"什么东西啊\",\"ttsStartTime\":10560,\"ttsEndTime\":16560,\"asrStartTime\":12560,\"asrEndTime\":13660},{\"ttsResult\":\"我这边是猎聘的猎头;呃，是这样的，这家企业是东莞市明易源电子有限公司。给到的岗位是,生产文员,./这个工作
+
+
+
+## 工作要求
+
+1. **逐条分析**：对每一条对话，分析"为什么这段对话没有导致有意向的结果？"
+2. **5 Why 追问**：对归因结果做逐步追问（至少 2 层，最多 5 层），找到根因。
+3. **归类**：将每条对话归入一个归因类别。如果无法归入已有类别，创建新类别。
+4. **典型案例**：对每个归因类别，从 `whys` 中提取 2-3 个典型对话的原文片段（直接引用用户或 AI 的对话原文），放入 `examples` 字段。这帮助读者看到真实的对话模式。
+5. **改进建议**：对每个归因类别，给出具体的、可操作的改进建议。不要用"建议优化"这类空话。要具体到"AI应该在XXX环节主动XXX"、"需要增加对XXX的检测"这样的级别。比如：如果归因是"AI未介绍岗位关键信息"，建议应该是"AI 在开场后 30 秒内应主动介绍岗位的核心信息（薪资、地点、企业类型），而不是急于索要简历"。
+
+## 输出格式
+
+必须输出严格的 JSON，格式如下：
+
+```json
+{
+  "batch_id": 3,
+  "total_conversations": 100,
+  "attribution_results": {
+    "A01: AI 未介绍岗位关键信息": {
+      "count": 15,
+      "ratio": 0.30,
+      "examples": [
+        "AI: 您好，我看到您在猎聘上活跃，我们这边有一个不错的岗位想推荐给您...",
+        "用户: 这个岗位具体做什么的？AI: 晚点让HR发详细资料给您看一下"
+      ],
+      "suggestion": "AI 在开场后应主动介绍岗位的核心信息（薪资、地点、企业类型），而不是急于索要简历",
+      "whys": [
+        {
+          "id": "对话ID",
+          "intent": "B(不确定)",
+          "analysis": {
+            "why1": "为什么没谈成？用户未了解岗位基本信息",
+            "why2": "为什么未了解？AI 全程未介绍薪资和地点",
+            "why3": "为什么未介绍？AI 直接进入要简历环节"
+          }
+        }
+      ]
+    }
+  },
+  "new_categories_discovered": [
+    {
+      "name": "新类别名称",
+      "count": 5,
+      "description": "类别描述"
+    }
+  ]
+}
+```
+
+**重要**：
+- 每条对话必须归入一个类别
+- `whys` 中至少包含 3 个典型案例的详细 5 Why 分析
+- `examples` 必须包含真实的对话原文片段，每个类别至少 2 条
+- `suggestion` 必须具体、可操作，针对该归因类别的核心问题
+- 只输出 JSON，不要输出其他内容

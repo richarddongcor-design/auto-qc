@@ -1,5 +1,29 @@
 # auto-qc 项目进展
 
+## 2026-06-02
+
+### 数据一致性修复（已完成）
+
+**发现的问题：**
+1. severity 字段混合使用 `HIGH`（英文）和 `高`（中文）
+2. stats.json 字段名（`total_conversations`）与 report_writer.py 期望（`total`）不匹配，导致 Sheet 3 基础指标为空
+3. 归因类别名称 4 个 Worker 各自命名不同，导致合并后 26 个类别（大量重复）
+
+**修复内容：**
+
+| 文件 | 变更 |
+|------|------|
+| `scripts/rules_parser.py` | severity 统一转为中文（HIGH→高, MEDIUM→中, LOW→低） |
+| `scripts/report_writer.py` | stats 字段兼容多种命名（total/total_conversations, pass/pass_count） |
+| `SKILL.md` | Step 5 归因分析流程从"（可选）"改为明确标注"默认模式必须执行"，消除执行歧义 |
+
+### 端到端质检运行
+
+使用真实数据完成 500 条对话质检全流程（合规检测 + 归因分析）：
+- 合规检测：5 个批次并发完成，违规率 10.4%
+- 归因分析：4 个批次并发完成，373 条非 A 意向对话，归一化为 13 个归因类别
+- 报告输出：`C:\Users\dongyi\Desktop\test-data\pi-500-data_质检报告.xlsx`（33K）
+
 ## 2026-06-01
 
 ### 并发协调器改造（已完成）

@@ -1,0 +1,151 @@
+{
+  "batch_id": 4,
+  "conversations": [
+    {
+      "id": "11167977060",
+      "intent": "F(无意向)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"喂;用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":160},{\\\"ttsResult\\\":\\\"哎，您好，请问您是叶女士吗。\\\",\\\"asrResult\\\":\\\"喂;嗯，是\\\",\\\"ttsStartTime\\\":3640,\\\"ttsEndTime\\\":5640,\\\"asrStartTime\\\":2160,\\\"asrEndTime\\\":6660},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"哦，没有没有没有\\\",\\\"ttsStartTime\\\":11200,\\\"ttsEndTime\\\":17200,\\\"asrStartTime\\\":12760,\\\"asrEndTime\\\":14280},{\\\"ttsResult\\\":\\\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\\\",\\\"ttsStartTime\\\":17280,\\\"ttsEndTime\\\":22280}]\""
+    },
+    {
+      "id": "11111674949",
+      "intent": "F(无意向)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"骚扰电话\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":220,\\\"asrEndTime\\\":1240},{\\\"ttsResult\\\":\\\"哎，您好，请问您是王超义王先生吗。\\\",\\\"asrResult\\\":\\\"喂啊\\\",\\\"ttsStartTime\\\":3479,\\\"ttsEndTime\\\":6479,\\\"asrStartTime\\\":2200,\\\"asrEndTime\\\":3660}]\""
+    },
+    {
+      "id": "11193827435",
+      "intent": "F(无意向)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"喂\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":620,\\\"asrEndTime\\\":1560},{\\\"ttsResult\\\":\\\"哎，您好，请问您是罗雪罗女士吗。\\\",\\\"asrResult\\\":\\\"嗯，是的\\\",\\\"ttsStartTime\\\":3161,\\\"ttsEndTime\\\":6161,\\\"asrStartTime\\\":5080,\\\"asrEndTime\\\":6300},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"是什么呀\\\",\\\"ttsStartTime\\\":10760,\\\"ttsEndTime\\\":16760,\\\"asrStartTime\\\":12800,\\\"asrEndTime\\\":14020},{\\\"ttsResult\\\":\\\"呃，是这样的，这家企业是泰康养老保险股份有限公司重庆分公司。给到的岗位是,储备销售管理岗,./这个工作地点在重庆渝中区嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要接触一下呢？\\\",\\\"asrResult\\\":\\\"嗯，不用了，不用了，谢谢你们，不用打了的\\\",\\\"ttsStartTime\\\":20361,\\\"ttsEndTime\\\":38361,\\\"asrStartTime\\\":17820,\\\"asrEndTime\\\":21120},{\\\"ttsResult\\\":\\\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\\\",\\\"ttsStartTime\\\":24240,\\\"ttsEndTime\\\":29240}]\""
+    },
+    {
+      "id": "11216966521",
+      "intent": "F(无意向)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"是这个意思哎，你好，哪里呀\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":160,\\\"asrEndTime\\\":3120},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"嗯;呃，您说具体情况吧，嗯\\\",\\\"ttsStartTime\\\":7560,\\\"ttsEndTime\\\":13560,\\\"asrStartTime\\\":4380,\\\"asrEndTime\\\":11900},{\\\"ttsResult\\\":\\\"呃，是这样的，这家企业是江苏豪森药业集团有限公司。给到的岗位是,HRBP经理,./这个工作地点在上海浦东新区嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要接触一下呢？\\\",\\\"asrResult\\\":\\\"呃，我想知道一下区间\\\",\\\"ttsStartTime\\\":27280,\\\"ttsEndTime\\\":44280,\\\"asrStartTime\\\":29260,\\\"asrEndTime\\\":31940},{\\\"ttsResult\\\":\\\"呃好，那稍后我把您的简历还有联系方式呢给企业HR看一下，如果合适的话企业HR会再联系您,您看可以吗？\\\",\\\"asrResult\\\":\\\"啊，不用不用不用，您先搞我不用不用不用啊不用了，谢谢嗯，不用了，谢谢，嗯\\\",\\\"ttsStartTime\\\":37201,\\\"ttsEndTime\\\":47201,\\\"asrStartTime\\\":36200,\\\"asrEndTime\\\":42000},{\\\"ttsResult\\\":\\\"好的明白啦，那这次机会咱们就先不推荐了哈，我这边在猎聘上呢，还为您推荐了其他几个，呃跟您过往经历匹配度比较高的，是在上海的，HRBP的职位，您方便的话可以登录猎聘查看一下，那我这边就不多打扰了，祝您生活愉快，再见。\\\",\\\"asrResult\\\":\\\"嗯\\\",\\\"ttsStartTime\\\":43159,\\\"ttsEndTime\\\":64159,\\\"asrStartTime\\\":36200,\\\"asrEndTime\\\":42600}]\""
+    },
+    {
+      "id": "11192444074",
+      "intent": "F(无意向)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"喂，你好嗯\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":180,\\\"asrEndTime\\\":2440},{\\\"ttsResult\\\":\\\"哎，您好，请问您是严先生吗。\\\",\\\"asrResult\\\":\\\"嗯，对\\\",\\\"ttsStartTime\\\":2919,\\\"ttsEndTime\\\":4919,\\\"asrStartTime\\\":4340,\\\"asrEndTime\\\":5520},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"哪个城市啊？什么岗位\\\",\\\"ttsStartTime\\\":9960,\\\"ttsEndTime\\\":15960,\\\"asrStartTime\\\":13160,\\\"asrEndTime\\\":15140},{\\\"ttsResult\\\":\\\"呃，是这样的，这家企业是养生堂有限公司。给到的岗位是,注册经理,./这个工作地点在杭州西湖区嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要接触一下呢？\\\",\\\"asrResult\\\":\\\"嗯;嗯;嗯;嗯;嗯\\\",\\\"ttsStartTime\\\":28319,\\\"ttsEndTime\\\":43319,\\\"asrStartTime\\\":20480,\\\"asrEndTime\\\":29560},{\\\"ttsResult\\\":\\\"呃好，那稍后我把您的简历还有联系方式呢给企业HR看一下，如果合适的话企业HR会再联系您,您看可以吗？\\\",\\\"asrResult\\\":\\\"好，嗯;啊，不需要不需要，这岗位不合适嗯嗯嗯\\\",\\\"ttsStartTime\\\":37600,\\\"ttsEndTime\\\":47600,\\\"asrStartTime\\\":30520,\\\"asrEndTime\\\":45100},{\\\"ttsResult\\\":\\\"好的明白啦，那这次机会咱们就先不推荐了哈，我这边在猎聘上呢，还为您推荐了其他几个，呃跟您过往经历匹配度比较高的，是在上海的，生产总监，经理的职位，您方便的话可以登录猎聘查看一下，那我这边就不多打扰了，祝您生活愉快，再见。\\\",\\\"asrResult\\\":\\\"嗯;嗯;好;嗯;嗯;嗯嗯\\\",\\\"ttsStartTime\\\":61239,\\\"ttsEndTime\\\":83239,\\\"asrStartTime\\\":47100,\\\"asrEndTime\\\":61700}]\""
+    },
+    {
+      "id": "11155869797",
+      "intent": "F(无意向)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是黄景韬黄先生吗。\\\",\\\"asrResult\\\":\\\"啊，你说\\\",\\\"ttsStartTime\\\":4560,\\\"ttsEndTime\\\":7560,\\\"asrStartTime\\\":6780,\\\"asrEndTime\\\":7660},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"喂，你好\\\",\\\"ttsStartTime\\\":12160,\\\"ttsEndTime\\\":18160,\\\"asrStartTime\\\":15220,\\\"asrEndTime\\\":16040},{\\\"ttsResult\\\":\\\"呃，是这样的，这家企业是唯品会有限公司。给到的岗位是,高级商业分析师,./这个工作地点在广州海珠区嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要接触一下呢？\\\",\\\"asrResult\\\":\\\"我看一下我去看一下好吧\\\",\\\"ttsStartTime\\\":29800,\\\"ttsEndTime\\\":45800,\\\"asrStartTime\\\":32800,\\\"asrEndTime\\\":35160},{\\\"ttsResult\\\":\\\"啊.您可以晚点详细看下具体岗位细节哈\\\",\\\"asrResult\\\":\\\"嗯，好，拜拜\\\",\\\"ttsStartTime\\\":36121,\\\"ttsEndTime\\\":39121,\\\"asrStartTime\\\":36140,\\\"asrEndTime\\\":37100},{\\\"ttsResult\\\":\\\"呃好，那稍后我把您的简历还有联系方式呢给企业HR看一下，如果合适的话企业HR会再联系您,您看可以吗？\\\",\\\"asrResult\\\":\\\"嗯;呃;你先不要给他吧啊\\\",\\\"ttsStartTime\\\":44960,\\\"ttsEndTime\\\":54960,\\\"asrStartTime\\\":36140,\\\"asrEndTime\\\":49540},{\\\"ttsResult\\\":\\\"好的明白啦，那这次机会咱们就先不推荐了哈，我这边在猎聘上呢，还为您推荐了其他几个，呃跟您过往经历匹配度比较高的，是在广州的，数据分析师的职位，您方便的话可以登录猎聘查看一下，那我这边就不多打扰了，祝您生活愉快，再见。\\\",\\\"ttsStartTime\\\":51276,\\\"ttsEndTime\\\":72276}]\""
+    },
+    {
+      "id": "11270871847",
+      "intent": "F(无意向)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"喂，你好你好\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":960,\\\"asrEndTime\\\":3480},{\\\"ttsResult\\\":\\\"哎，您好，请问您是孙先生吗。\\\",\\\"asrResult\\\":\\\"对，您是\\\",\\\"ttsStartTime\\\":3799,\\\"ttsEndTime\\\":5799,\\\"asrStartTime\\\":5800,\\\"asrEndTime\\\":7080},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"嗯，打打啥样的\\\",\\\"ttsStartTime\\\":11559,\\\"ttsEndTime\\\":17559,\\\"asrStartTime\\\":13880,\\\"asrEndTime\\\":16060},{\\\"ttsResult\\\":\\\"呃，是这样的，这家企业是深圳市高新投三江电子股份有限公司。给到的岗位是,电气工程师,./这个工作地点在深圳南山区，您看就是呃要不要考虑接触一下？\\\",\\\"asrResult\\\":\\\"嗯，不用了\\\",\\\"ttsStartTime\\\":27799,\\\"ttsEndTime\\\":41799,\\\"asrStartTime\\\":30000,\\\"asrEndTime\\\":31280},{\\\"ttsResult\\\":\\\"哦/明白，那就先不打扰您了，以后有合适的机会再联系您再见\\\",\\\"ttsStartTime\\\":31978,\\\"ttsEndTime\\\":36978}]\""
+    },
+    {
+      "id": "11111678538",
+      "intent": "F(无意向)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是龙先生吗。\\\",\\\"asrResult\\\":\\\"哪位\\\",\\\"ttsStartTime\\\":2919,\\\"ttsEndTime\\\":4919,\\\"asrStartTime\\\":2840,\\\"asrEndTime\\\":3880},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"嗯;嗯，哪家公司\\\",\\\"ttsStartTime\\\":8359,\\\"ttsEndTime\\\":14359,\\\"asrStartTime\\\":6520,\\\"asrEndTime\\\":11700},{\\\"ttsResult\\\":\\\"呃，是这样的，这家企业是湖南永清环境科技产业集团有限公司。给到的岗位是,营销总监或经理,./这个工作地点在长沙芙蓉区嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要接触一下呢？\\\",\\\"asrResult\\\":\\\"嗯;我;呃，暂时不用，嗯\\\",\\\"ttsStartTime\\\":25399,\\\"ttsEndTime\\\":43399,\\\"asrStartTime\\\":20340,\\\"asrEndTime\\\":28880},{\\\"ttsResult\\\":\\\"好的了解，那就先不打扰您了，祝您职场发展顺利，再见；\\\",\\\"asrResult\\\":\\\"嗯\\\",\\\"ttsStartTime\\\":31799,\\\"ttsEndTime\\\":36799,\\\"asrStartTime\\\":30620,\\\"asrEndTime\\\":31400}]\""
+    },
+    {
+      "id": "11180660985",
+      "intent": "F(无意向)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"喂\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":180,\\\"asrEndTime\\\":1020},{\\\"ttsResult\\\":\\\"哎，您好，请问您是唐先生吗。\\\",\\\"asrResult\\\":\\\"嗯;什么事\\\",\\\"ttsStartTime\\\":2441,\\\"ttsEndTime\\\":4441,\\\"asrStartTime\\\":2180,\\\"asrEndTime\\\":5860},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"是什么\\\",\\\"ttsStartTime\\\":10320,\\\"ttsEndTime\\\":16320,\\\"asrStartTime\\\":12540,\\\"asrEndTime\\\":13820},{\\\"ttsResult\\\":\\\"呃，是这样的，这家企业是广州市优联外籍人员子女学校。给到的岗位是,采购员,./这个工作地点在广州南沙区嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要接触一下呢？\\\",\\\"asrResult\\\":\\\"学校\\\",\\\"ttsStartTime\\\":26560,\\\"ttsEndTime\\\":42560,\\\"asrStartTime\\\":29220,\\\"asrEndTime\\\":30420},{\\\"ttsResult\\\":\\\"呃好，那稍后我把您的简历还有联系方式呢给企业HR看一下，如果合适的话企业HR会再联系您,您看可以吗？\\\",\\\"asrResult\\\":\\\"呃;不用不不不用不用不用不用不用不用不用不用不用不用不用\\\",\\\"ttsStartTime\\\":35720,\\\"ttsEndTime\\\":45720,\\\"asrStartTime\\\":31780,\\\"asrEndTime\\\":40320},{\\\"ttsResult\\\":\\\"好的明白啦，那这次机会咱们就先不推荐了哈，我这边在猎聘上呢，还为您推荐了其他几个，呃跟您过往经历匹配度比较高的，是在重庆的，质量管理工程师的职位，您方便的话可以登录猎聘查看一下，那我这边就不多打扰了，祝您生活愉快，再见。\\\",\\\"ttsStartTime\\\":39979,\\\"ttsEndTime\\\":61979}]\""
+    },
+    {
+      "id": "11273320801",
+      "intent": "F(无意向)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"喂，你好哪位\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":940,\\\"asrEndTime\\\":3000},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"啊，不用了\\\",\\\"ttsStartTime\\\":7360,\\\"ttsEndTime\\\":13360,\\\"asrStartTime\\\":8040,\\\"asrEndTime\\\":9160},{\\\"ttsResult\\\":\\\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\\\",\\\"asrResult\\\":\\\"不用了，谢谢\\\",\\\"ttsStartTime\\\":9739,\\\"ttsEndTime\\\":14739,\\\"asrStartTime\\\":9540,\\\"asrEndTime\\\":10600}]\""
+    },
+    {
+      "id": "11188698819",
+      "intent": "F(无意向)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是敖龙敖先生吗。\\\",\\\"asrResult\\\":\\\"你咋是出去的真的肯定讲\\\",\\\"ttsStartTime\\\":4481,\\\"ttsEndTime\\\":7481,\\\"asrStartTime\\\":2240,\\\"asrEndTime\\\":4320},{\\\"ttsResult\\\":\\\"哎，您好，请问您是敖龙敖先生吗。\\\",\\\"asrResult\\\":\\\"一般的朋友去喂\\\",\\\"ttsStartTime\\\":4481,\\\"ttsEndTime\\\":7481,\\\"asrStartTime\\\":5260,\\\"asrEndTime\\\":7960},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"嗯什么呀\\\",\\\"ttsStartTime\\\":11720,\\\"ttsEndTime\\\":17720,\\\"asrStartTime\\\":13420,\\\"asrEndTime\\\":15620},{\\\"ttsResult\\\":\\\"我这边是猎聘的猎头;呃，是这样的，这家企业是北京仁光律师事务所。给到的岗位是,律师助理,./这个工作地点在北京海淀区嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要接触一下呢？\\\",\\\"asrResult\\\":\\\"这样子上面吧\\\",\\\"ttsStartTime\\\":17080,\\\"ttsEndTime\\\":35080,\\\"asrStartTime\\\":26740,\\\"asrEndTime\\\":28500},{\\\"ttsResult\\\":\\\"呃，是这样的，这家企业是北京仁光律师事务所。给到的岗位是,律师助理,./这个工作地点在北京海淀区嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要接触一下呢？\\\",\\\"asrResult\\\":\\\"进去可以那个大块的肉液\\\",\\\"ttsStartTime\\\":30720,\\\"ttsEndTime\\\":46720,\\\"asrStartTime\\\":30320,\\\"asrEndTime\\\":32960},{\\\"ttsResult\\\":\\\"呃好，那稍后我把您的简历还有联系方式呢给企业HR看一下，如果合适的话企业HR会再联系您,您看可以吗？\\\",\\\"asrResult\\\":\\\"干嘛;应该得多远的;还有啥，嗯，我\\\",\\\"ttsStartTime\\\":40041,\\\"ttsEndTime\\\":50041,\\\"asrStartTime\\\":36620,\\\"asrEndTime\\\":44360},{\\\"ttsResult\\\":\\\"嗯，您看可以的话，这边让企业HR联系您，你们详细沟通下怎么样？\\\",\\\"asrResult\\\":\\\"我;还有啥，嗯，我明白\\\",\\\"ttsStartTime\\\":51920,\\\"ttsEndTime\\\":57920,\\\"asrStartTime\\\":40360,\\\"asrEndTime\\\":46020},{\\\"ttsResult\\\":\\\"嗯，您看可以的话，这边让企业HR联系您，你们详细沟通下怎么样？\\\",\\\"asrResult\\\":\\\"呃，喂不不不，我我现在不找北京那边的说已经挂了你喂，您好\\\",\\\"ttsStartTime\\\":51920,\\\"ttsEndTime\\\":57920,\\\"asrStartTime\\\":46920,\\\"asrEndTime\\\":56140},{\\\"ttsResult\\\":\\\"好的明白啦，那这次机会咱们就先不推荐了哈，我这边在猎聘上呢，还为您推荐了其他几个，呃跟您过往经历匹配度比较高的，是在成都的，财会的职位，您方便的话可以登录猎聘查看一下，那我这边就不多打扰了，祝您生活愉快，再见。\\\",\\\"asrResult\\\":\\\"干嘛那你给知道啥\\\",\\\"ttsStartTime\\\":74040,\\\"ttsEndTime\\\":95040,\\\"asrStartTime\\\":60360,\\\"asrEndTime\\\":63400},{\\\"ttsResult\\\":\\\"好的明白啦，那这次机会咱们就先不推荐了哈，我这边在猎聘上呢，还为您推荐了其他几个，呃跟您过往经历匹配度比较高的，是在成都的，财会的职位，您方便的话可以登录猎聘查看一下，那我这边就不多打扰了，祝您生活愉快，再见。\\\",\\\"asrResult\\\":\\\"喂，你的没有给我办\\\",\\\"ttsStartTime\\\":74040,\\\"ttsEndTime\\\":95040,\\\"asrStartTime\\\":64640,\\\"asrEndTime\\\":66760},{\\\"ttsResult\\\":\\\"好的明白啦，那这次机会咱们就先不推荐了哈，我这边在猎聘上呢，还为您推荐了其他几个，呃跟您过往经历匹配度比较高的，是在成都的，财会的职位，您方便的话可以登录猎聘查看一下，那我这边就不多打扰了，祝您生活愉快，再见。\\\",\\\"asrResult\\\":\\\"对呀;用的呀;嗯;用的呀好的\\\",\\\"ttsStartTime\\\":74040,\\\"ttsEndTime\\\":95040,\\\"asrStartTime\\\":67540,\\\"asrEndTime\\\":74160},{\\\"ttsResult\\\":\\\"好的明白啦，那这次机会咱们就先不推荐了哈，我这边在猎聘上呢，还为您推荐了其他几个，呃跟您过往经历匹配度比较高的，是在成都的，财会的职位，您方便的话可以登录猎聘查看一下，那我这边就不多打扰了，祝您生活愉快，再见。\\\",\\\"ttsStartTime\\\":74040,\\\"ttsEndTime\\\":95040}]\""
+    },
+    {
+      "id": "11139684337",
+      "intent": "F(无意向)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是孙女士吗。\\\",\\\"asrResult\\\":\\\"哪位\\\",\\\"ttsStartTime\\\":2960,\\\"ttsEndTime\\\":4960,\\\"asrStartTime\\\":2700,\\\"asrEndTime\\\":3760},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"嗯，不要再打电话了，给我发消息吧。好吧，谢谢啊\\\",\\\"ttsStartTime\\\":8400,\\\"ttsEndTime\\\":14400,\\\"asrStartTime\\\":8280,\\\"asrEndTime\\\":11380},{\\\"ttsResult\\\":\\\"抱歉，这边先不打扰您了，再见！\\\",\\\"ttsStartTime\\\":11219,\\\"ttsEndTime\\\":14219}]\""
+    },
+    {
+      "id": "11108184545",
+      "intent": "F(无意向)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是仁青达哇仁先生吗。\\\",\\\"asrResult\\\":\\\"你好;不是\\\",\\\"ttsStartTime\\\":4480,\\\"ttsEndTime\\\":7480,\\\"asrStartTime\\\":2600,\\\"asrEndTime\\\":7300},{\\\"ttsResult\\\":\\\"哦，这样啊，那不好意思打扰了，再见\\\",\\\"ttsStartTime\\\":9199,\\\"ttsEndTime\\\":12199}]\""
+    },
+    {
+      "id": "11116934203",
+      "intent": "F(无意向)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是殷先生吗。\\\",\\\"asrResult\\\":\\\"喂;嗯\\\",\\\"ttsStartTime\\\":3839,\\\"ttsEndTime\\\":5839,\\\"asrStartTime\\\":2980,\\\"asrEndTime\\\":6400},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"哦，暂时没有\\\",\\\"ttsStartTime\\\":11080,\\\"ttsEndTime\\\":17080,\\\"asrStartTime\\\":13420,\\\"asrEndTime\\\":14760},{\\\"ttsResult\\\":\\\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\\\",\\\"ttsStartTime\\\":17719,\\\"ttsEndTime\\\":22719}]\""
+    },
+    {
+      "id": "11193116591",
+      "intent": "F(无意向)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"哎，你好哎，哪里\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":420,\\\"asrEndTime\\\":2980},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"嗯，不需要啊，谢谢，嗯\\\",\\\"ttsStartTime\\\":7600,\\\"ttsEndTime\\\":13600,\\\"asrStartTime\\\":7520,\\\"asrEndTime\\\":9820},{\\\"ttsResult\\\":\\\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\\\",\\\"ttsStartTime\\\":9359,\\\"ttsEndTime\\\":14359}]\""
+    },
+    {
+      "id": "11166393308",
+      "intent": "F(无意向)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"因为\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":180,\\\"asrEndTime\\\":1280},{\\\"ttsResult\\\":\\\"哎，您好，请问您是温女士吗。\\\",\\\"asrResult\\\":\\\"哪里\\\",\\\"ttsStartTime\\\":2873,\\\"ttsEndTime\\\":4873,\\\"asrStartTime\\\":4480,\\\"asrEndTime\\\":5480},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"在哪里的\\\",\\\"ttsStartTime\\\":9992,\\\"ttsEndTime\\\":15992,\\\"asrStartTime\\\":13000,\\\"asrEndTime\\\":14100},{\\\"ttsResult\\\":\\\"呃，是这样的，这家企业是佛山市贝斯乐建材有限公司。给到的岗位是,外贸业务员,./这个工作地点在佛山禅城区嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要接触一下呢？\\\",\\\"asrResult\\\":\\\"哦，不用了，谢谢\\\",\\\"ttsStartTime\\\":28072,\\\"ttsEndTime\\\":45072,\\\"asrStartTime\\\":30680,\\\"asrEndTime\\\":32440},{\\\"ttsResult\\\":\\\"哦/明白，那就先不打扰您了，以后有合适的机会再联系您再见\\\",\\\"ttsStartTime\\\":31951,\\\"ttsEndTime\\\":36951}]\""
+    },
+    {
+      "id": "11253662511",
+      "intent": "F(无意向)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是李亚君李先生吗。\\\",\\\"asrResult\\\":\\\"你好;嗯，是的\\\",\\\"ttsStartTime\\\":4000,\\\"ttsEndTime\\\":7000,\\\"asrStartTime\\\":2360,\\\"asrEndTime\\\":7400},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"你说一说看\\\",\\\"ttsStartTime\\\":11961,\\\"ttsEndTime\\\":17961,\\\"asrStartTime\\\":14480,\\\"asrEndTime\\\":16280},{\\\"ttsResult\\\":\\\"呃，是这样的，这家企业是重庆市超群工业股份有限公司。给到的岗位是,3D产品设计师,./这个工作地点在重庆南川区，您看就是呃要不要考虑接触一下？\\\",\\\"asrResult\\\":\\\"啊暂时不考虑\\\",\\\"ttsStartTime\\\":27080,\\\"ttsEndTime\\\":41080,\\\"asrStartTime\\\":30160,\\\"asrEndTime\\\":31800},{\\\"ttsResult\\\":\\\"好的了解，那就先不打扰您了，祝您职场发展顺利，再见；\\\",\\\"ttsStartTime\\\":34841,\\\"ttsEndTime\\\":39841}]\""
+    },
+    {
+      "id": "11237195919",
+      "intent": "F(无意向)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是王维王先生吗。\\\",\\\"asrResult\\\":\\\"喂，你好;啊，对\\\",\\\"ttsStartTime\\\":4360,\\\"ttsEndTime\\\":7360,\\\"asrStartTime\\\":2200,\\\"asrEndTime\\\":7260},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"我没;嗯\\\",\\\"ttsStartTime\\\":11841,\\\"ttsEndTime\\\":17841,\\\"asrStartTime\\\":10200,\\\"asrEndTime\\\":13400},{\\\"ttsResult\\\":\\\"呃，是这样的，这家企业是深圳市康奈特电子有限公司。给到的岗位是,自动化工程师,./这个工作地点在深圳龙华区嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要接触一下呢？\\\",\\\"asrResult\\\":\\\"嗯;在哪里啊？深圳哪里\\\",\\\"ttsStartTime\\\":27800,\\\"ttsEndTime\\\":44800,\\\"asrStartTime\\\":23640,\\\"asrEndTime\\\":32020},{\\\"ttsResult\\\":\\\"工作地点在深圳龙华区，呃这个具体位置在猎聘上面发您了.一会儿您可以看下，那您看这个大体位置可以吗\\\",\\\"asrResult\\\":\\\"嗯;啊，不行，我现在在一个惠州大亚湾定居了找工作的话在大亚湾这里\\\",\\\"ttsStartTime\\\":39920,\\\"ttsEndTime\\\":48920,\\\"asrStartTime\\\":38200,\\\"asrEndTime\\\":48740},{\\\"ttsResult\\\":\\\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\\\",\\\"ttsStartTime\\\":50320,\\\"ttsEndTime\\\":55320}]\""
+    },
+    {
+      "id": "11148141904",
+      "intent": "F(无意向)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是乔彦荣乔女士吗。\\\",\\\"asrResult\\\":\\\"你好;是哪位\\\",\\\"ttsStartTime\\\":4000,\\\"ttsEndTime\\\":7000,\\\"asrStartTime\\\":3060,\\\"asrEndTime\\\":6960},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":11520,\\\"ttsEndTime\\\":17520},{\\\"ttsResult\\\":\\\"呃我先给您说下关于这个岗位的信息哈\\\",\\\"asrResult\\\":\\\"嗯，不考虑了，谢谢啊\\\",\\\"ttsStartTime\\\":16320,\\\"ttsEndTime\\\":19320,\\\"asrStartTime\\\":14960,\\\"asrEndTime\\\":17280},{\\\"ttsResult\\\":\\\"呃，是这样的，这家企业是北京瑞草世家生物科技有限公司。给到的岗位是,销售总监,./这个工作地点在北京西城区嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要接触一下呢？\\\",\\\"ttsStartTime\\\":17939,\\\"ttsEndTime\\\":34939}]\""
+    },
+    {
+      "id": "11160906467",
+      "intent": "F(无意向)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"喂，你好喂，你好\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":420,\\\"asrEndTime\\\":3280},{\\\"ttsResult\\\":\\\"哎，您好，请问您是张先生吗。\\\",\\\"asrResult\\\":\\\"嗯，对嗯\\\",\\\"ttsStartTime\\\":3680,\\\"ttsEndTime\\\":5680,\\\"asrStartTime\\\":5040,\\\"asrEndTime\\\":7880},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"您说哪个\\\",\\\"ttsStartTime\\\":11360,\\\"ttsEndTime\\\":17360,\\\"asrStartTime\\\":13120,\\\"asrEndTime\\\":14800},{\\\"ttsResult\\\":\\\"呃，是这样的，这家企业是山高嵩信私募基金管理有限公司。给到的岗位是,投资经理,./这个工作地点在北京西城区嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要接触一下呢？\\\",\\\"asrResult\\\":\\\"呃，不需要了哈，谢谢，嗯\\\",\\\"ttsStartTime\\\":29280,\\\"ttsEndTime\\\":46280,\\\"asrStartTime\\\":30520,\\\"asrEndTime\\\":33900},{\\\"ttsResult\\\":\\\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\\\",\\\"ttsStartTime\\\":36841,\\\"ttsEndTime\\\":41841}]\""
+    },
+    {
+      "id": "11182991153",
+      "intent": "F(无意向)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是李先生吗。\\\",\\\"asrResult\\\":\\\"哪位\\\",\\\"ttsStartTime\\\":2945,\\\"ttsEndTime\\\":4945,\\\"asrStartTime\\\":3000,\\\"asrEndTime\\\":3960},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"岗位\\\",\\\"ttsStartTime\\\":9079,\\\"ttsEndTime\\\":15079,\\\"asrStartTime\\\":11400,\\\"asrEndTime\\\":12440},{\\\"ttsResult\\\":\\\"呃，是这样的，这家企业是武汉江夏楚能汽车技术研发有限公司。给到的岗位是,跨域功能开发,./这个工作地点在武汉江夏区嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要接触一下呢？\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":26960,\\\"ttsEndTime\\\":44960},{\\\"ttsResult\\\":\\\"呃您好，您看这个机会是否还要接触一下呢？\\\",\\\"asrResult\\\":\\\"不用我带着，我已经去嗯，是在第家方上\\\",\\\"ttsStartTime\\\":31940,\\\"ttsEndTime\\\":35940,\\\"asrStartTime\\\":30500,\\\"asrEndTime\\\":35100},{\\\"ttsResult\\\":\\\"呃好，那稍后我把您的简历还有联系方式呢给企业HR看一下，如果合适的话企业HR会再联系您,您看可以吗？\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":41036,\\\"ttsEndTime\\\":51036},{\\\"ttsResult\\\":\\\"呃您好，要么我先把您简历给企业HR看看，合适的话企业HR就直接联系您，您看行吗\\\",\\\"asrResult\\\":\\\"嗯，不用了，不用了。我已经在这家公司上班了\\\",\\\"ttsStartTime\\\":47519,\\\"ttsEndTime\\\":54519,\\\"asrStartTime\\\":45000,\\\"asrEndTime\\\":47920},{\\\"ttsResult\\\":\\\"明白了，不好意思，那就先不打扰您了，祝您工作顺利，再见。\\\",\\\"ttsStartTime\\\":51020,\\\"ttsEndTime\\\":56020}]\""
+    },
+    {
+      "id": "11214798853",
+      "intent": "F(无意向)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"喂\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":660,\\\"asrEndTime\\\":1680},{\\\"ttsResult\\\":\\\"哎，您好，请问您是邵艺玮邵先生吗。\\\",\\\"asrResult\\\":\\\"哪里\\\",\\\"ttsStartTime\\\":3360,\\\"ttsEndTime\\\":6360,\\\"asrStartTime\\\":5000,\\\"asrEndTime\\\":6140},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"你加我微信吧，好吧;用户无应答\\\",\\\"ttsStartTime\\\":10561,\\\"ttsEndTime\\\":16561,\\\"asrStartTime\\\":12340},{\\\"ttsResult\\\":\\\"呃/我这边可能没法添加您的微信。我先给您介绍下企业吧;呃，是这样的，这家企业是上海移远通信技术股份有限公司。给到的岗位是,销售管理部负责人,./这个工作地点在上海松江区嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要接触一下呢？\\\",\\\"asrResult\\\":\\\"嗯，我先看一下猎聘吧，好吧\\\",\\\"ttsStartTime\\\":18041,\\\"ttsEndTime\\\":41041,\\\"asrStartTime\\\":35100,\\\"asrEndTime\\\":37660},{\\\"ttsResult\\\":\\\"啊.您可以晚点详细看下具体岗位细节哈;呃好，那稍后我把您的简历还有联系方式呢给企业HR看一下，如果合适的话企业HR会再联系您,您看可以吗？\\\",\\\"asrResult\\\":\\\"哎哎，好的好的好的，嗯;啊，先不用了吧，好吧，谢谢啊\\\",\\\"ttsStartTime\\\":39800,\\\"ttsEndTime\\\":52800,\\\"asrStartTime\\\":40200,\\\"asrEndTime\\\":53160},{\\\"ttsResult\\\":\\\"好的明白啦，那这次机会咱们就先不推荐了哈，我这边在猎聘上呢，还为您推荐了其他几个，呃跟您过往经历匹配度比较高的，是在上海的，区域销售经理，主管的职位，您方便的话可以登录猎聘查看一下，那我这边就不多打扰了，祝您生活愉快，再见。\\\",\\\"asrResult\\\":\\\"嗯嗯;对对，好，嗯;嗯;嗯;好好好好的，谢谢啊\\\",\\\"ttsStartTime\\\":68720,\\\"ttsEndTime\\\":90720,\\\"asrStartTime\\\":54460,\\\"asrEndTime\\\":69600}]\""
+    },
+    {
+      "id": "11248760420",
+      "intent": "F(无意向)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是朱倩岚朱女士吗。\\\",\\\"asrResult\\\":\\\"哪位\\\",\\\"ttsStartTime\\\":3960,\\\"ttsEndTime\\\":6960,\\\"asrStartTime\\\":5940,\\\"asrEndTime\\\":6810},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"哦，不用了，谢谢\\\",\\\"ttsStartTime\\\":11601,\\\"ttsEndTime\\\":17601,\\\"asrStartTime\\\":14480,\\\"asrEndTime\\\":16110},{\\\"ttsResult\\\":\\\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\\\",\\\"ttsStartTime\\\":15559,\\\"ttsEndTime\\\":20559}]\""
+    },
+    {
+      "id": "11243265141",
+      "intent": "F(无意向)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是王玥王女士吗。\\\",\\\"asrResult\\\":\\\"喂;哪位\\\",\\\"ttsStartTime\\\":3984,\\\"ttsEndTime\\\":6984,\\\"asrStartTime\\\":2740,\\\"asrEndTime\\\":6720},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"嗯，先不考虑了\\\",\\\"ttsStartTime\\\":11016,\\\"ttsEndTime\\\":17016,\\\"asrStartTime\\\":12980,\\\"asrEndTime\\\":14580},{\\\"ttsResult\\\":\\\"呃，是这样的，这家企业是悦锦数字科技股份有限公司。给到的岗位是,需求分析师，风险合规方向,./这个工作地点在上海普陀区嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要接触一下呢？\\\",\\\"ttsStartTime\\\":19700,\\\"ttsEndTime\\\":37700}]\""
+    },
+    {
+      "id": "11149607386",
+      "intent": "F(无意向)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"喂你好\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":660,\\\"asrEndTime\\\":2760},{\\\"ttsResult\\\":\\\"哎，您好，请问您是舒女士吗。\\\",\\\"asrResult\\\":\\\"嗯，你是哪里\\\",\\\"ttsStartTime\\\":3680,\\\"ttsEndTime\\\":5680,\\\"asrStartTime\\\":5560,\\\"asrEndTime\\\":7000},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":11720,\\\"ttsEndTime\\\":17720},{\\\"ttsResult\\\":\\\"呃我先给您说下关于这个岗位的信息哈\\\",\\\"asrResult\\\":\\\"嗯，我现在不考虑\\\",\\\"ttsStartTime\\\":15841,\\\"ttsEndTime\\\":18841,\\\"asrStartTime\\\":14880,\\\"asrEndTime\\\":16580},{\\\"ttsResult\\\":\\\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\\\",\\\"ttsStartTime\\\":17899,\\\"ttsEndTime\\\":22899}]\""
+    },
+    {
+      "id": "11155594000",
+      "intent": "F(无意向)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是王先生吗。\\\",\\\"asrResult\\\":\\\"你好;嗯\\\",\\\"ttsStartTime\\\":3839,\\\"ttsEndTime\\\":5839,\\\"asrStartTime\\\":2640,\\\"asrEndTime\\\":6360},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"暂时不考虑\\\",\\\"ttsStartTime\\\":10879,\\\"ttsEndTime\\\":16879,\\\"asrStartTime\\\":13800,\\\"asrEndTime\\\":14980},{\\\"ttsResult\\\":\\\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\\\",\\\"ttsStartTime\\\":18000,\\\"ttsEndTime\\\":23000}]\""
+    },
+    {
+      "id": "11193055713",
+      "intent": "F(无意向)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是遇女士吗。\\\",\\\"asrResult\\\":\\\"你好\\\",\\\"ttsStartTime\\\":3712,\\\"ttsEndTime\\\":5712,\\\"asrStartTime\\\":3680,\\\"asrEndTime\\\":4700},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"不\\\",\\\"ttsStartTime\\\":6353,\\\"ttsEndTime\\\":12353,\\\"asrStartTime\\\":6140,\\\"asrEndTime\\\":7320},{\\\"ttsResult\\\":\\\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\\\",\\\"asrResult\\\":\\\"你好，你打错了\\\",\\\"ttsStartTime\\\":10233,\\\"ttsEndTime\\\":15233,\\\"asrStartTime\\\":9940,\\\"asrEndTime\\\":11400}]\""
+    },
+    {
+      "id": "11216306585",
+      "intent": "F(无意向)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"喂喂，你好，哪里\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":480,\\\"asrEndTime\\\":3000},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"哦，可以考虑一下\\\",\\\"ttsStartTime\\\":7600,\\\"ttsEndTime\\\":13600,\\\"asrStartTime\\\":9500,\\\"asrEndTime\\\":11180},{\\\"ttsResult\\\":\\\"呃，是这样的，这家企业是东富龙科技集团股份有限公司。给到的岗位是,制药设备方向的项目经理,./这个工作地点在上海金山区嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要接触一下呢？\\\",\\\"asrResult\\\":\\\"啊先了解一下吧\\\",\\\"ttsStartTime\\\":25040,\\\"ttsEndTime\\\":43040,\\\"asrStartTime\\\":27720,\\\"asrEndTime\\\":29540},{\\\"ttsResult\\\":\\\"啊.您可以晚点详细看下具体岗位细节哈;呃好，那稍后我把您的简历还有联系方式呢给企业HR看一下，如果合适的话企业HR会再联系您,您看可以吗？\\\",\\\"asrResult\\\":\\\"呃，暂时不用联系HR了\\\",\\\"ttsStartTime\\\":31840,\\\"ttsEndTime\\\":44840,\\\"asrStartTime\\\":43100,\\\"asrEndTime\\\":45380},{\\\"ttsResult\\\":\\\"好的明白啦，那这次机会咱们就先不推荐了哈，我这边在猎聘上呢，还为您推荐了其他几个，呃跟您过往经历匹配度比较高的，是在武汉的，生产设备管理的职位，您方便的话可以登录猎聘查看一下，那我这边就不多打扰了，祝您生活愉快，再见。\\\",\\\"ttsStartTime\\\":64960,\\\"ttsEndTime\\\":85960}]\""
+    },
+    {
+      "id": "11242427612",
+      "intent": "F(无意向)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是马文龙马先生吗。\\\",\\\"asrResult\\\":\\\"喂;嗯\\\",\\\"ttsStartTime\\\":4359,\\\"ttsEndTime\\\":7359,\\\"asrStartTime\\\":2140,\\\"asrEndTime\\\":7060},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"嗯，可以\\\",\\\"ttsStartTime\\\":11719,\\\"ttsEndTime\\\":17719,\\\"asrStartTime\\\":14160,\\\"asrEndTime\\\":15420},{\\\"ttsResult\\\":\\\"呃，是这样的，这家企业是玛龙通电气有限公司。给到的岗位是,工艺工程师,./这个工作地点在无锡滨湖区嗯这边在猎聘上也给您发了职位信息,./您看呃就是要不要接触一下呢？\\\",\\\"asrResult\\\":\\\"哦，不考虑，谢谢\\\",\\\"ttsStartTime\\\":29440,\\\"ttsEndTime\\\":45440,\\\"asrStartTime\\\":31920,\\\"asrEndTime\\\":33640},{\\\"ttsResult\\\":\\\"哦/明白（那就)不打扰您了以后有合适的机会再联系您再见\\\",\\\"ttsStartTime\\\":36759,\\\"ttsEndTime\\\":41759}]\""
+    }
+  ],
+  "intent": "F(无意向)"
+}

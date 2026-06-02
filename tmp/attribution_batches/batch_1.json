@@ -1,0 +1,506 @@
+{
+  "batch_id": 1,
+  "conversations": [
+    {
+      "id": "11126472134",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是程先生吗。\\\",\\\"ttsStartTime\\\":2021,\\\"ttsEndTime\\\":4021}]\""
+    },
+    {
+      "id": "11194402434",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"喂所以我感觉\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":420,\\\"asrEndTime\\\":2580},{\\\"ttsResult\\\":\\\"哎，您好，请问您是钟先生吗。\\\",\\\"ttsStartTime\\\":2350,\\\"ttsEndTime\\\":4350}]\""
+    },
+    {
+      "id": "11127791782",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是曹先生吗。\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":3056,\\\"ttsEndTime\\\":5056},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":7525,\\\"ttsEndTime\\\":13525}]\""
+    },
+    {
+      "id": "11225217839",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是王勇凯王先生吗。\\\",\\\"asrResult\\\":\\\"你好，你哪位\\\",\\\"ttsStartTime\\\":3599,\\\"ttsEndTime\\\":6599,\\\"asrStartTime\\\":3160,\\\"asrEndTime\\\":4480},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":7893,\\\"ttsEndTime\\\":13893}]\""
+    },
+    {
+      "id": "11192592993",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是吕先生吗。\\\",\\\"asrResult\\\":\\\"喂，你好;啊，你好\\\",\\\"ttsStartTime\\\":3441,\\\"ttsEndTime\\\":5441,\\\"asrStartTime\\\":2840,\\\"asrEndTime\\\":6160},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":8982,\\\"ttsEndTime\\\":14982}]\""
+    },
+    {
+      "id": "11113967325",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是刘涵刘女士吗。\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":4240,\\\"ttsEndTime\\\":7240},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":10605,\\\"ttsEndTime\\\":16605}]\""
+    },
+    {
+      "id": "11189706525",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是张晶晶张女士吗。\\\",\\\"asrResult\\\":\\\"哪位\\\",\\\"ttsStartTime\\\":1920,\\\"ttsEndTime\\\":4920,\\\"asrStartTime\\\":1940,\\\"asrEndTime\\\":2920},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":4619,\\\"ttsEndTime\\\":10619}]\""
+    },
+    {
+      "id": "11138840503",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"喂\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":300,\\\"asrEndTime\\\":1180},{\\\"ttsResult\\\":\\\"哎，您好，请问您是朱泰立朱先生吗。\\\",\\\"ttsStartTime\\\":1959,\\\"ttsEndTime\\\":4959}]\""
+    },
+    {
+      "id": "11221401575",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是崔女士吗。\\\",\\\"asrResult\\\":\\\"你好;你是\\\",\\\"ttsStartTime\\\":3440,\\\"ttsEndTime\\\":5440,\\\"asrStartTime\\\":2180,\\\"asrEndTime\\\":5940},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":7299,\\\"ttsEndTime\\\":13299}]\""
+    },
+    {
+      "id": "11267948527",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是杨玉婷杨女士吗。\\\",\\\"asrResult\\\":\\\"哎喂;嗯，说\\\",\\\"ttsStartTime\\\":4560,\\\"ttsEndTime\\\":7560,\\\"asrStartTime\\\":2860,\\\"asrEndTime\\\":8460},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":10899,\\\"ttsEndTime\\\":16899}]\""
+    },
+    {
+      "id": "11237542423",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是李先生吗。\\\",\\\"asrResult\\\":\\\"哎，你好，哪里\\\",\\\"ttsStartTime\\\":2600,\\\"ttsEndTime\\\":4600,\\\"asrStartTime\\\":2160,\\\"asrEndTime\\\":3460},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":6499,\\\"ttsEndTime\\\":12499}]\""
+    },
+    {
+      "id": "11122697848",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是陆女士吗。\\\",\\\"ttsStartTime\\\":4080,\\\"ttsEndTime\\\":6080}]\""
+    },
+    {
+      "id": "11237249282",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是王丹伟王女士吗。\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":4080,\\\"ttsEndTime\\\":7080},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":11319,\\\"ttsEndTime\\\":17319}]\""
+    },
+    {
+      "id": "11186770505",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"通话已转至语音留言，你尝试联系的用户无法接听，请在提示音后录制留言录音完成\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":0,\\\"asrEndTime\\\":8200}]\""
+    },
+    {
+      "id": "11223109097",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是马先生吗。\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":3840,\\\"ttsEndTime\\\":5840},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":8499,\\\"ttsEndTime\\\":14499}]\""
+    },
+    {
+      "id": "11271781154",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"哎，你好\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":1480,\\\"asrEndTime\\\":2700},{\\\"ttsResult\\\":\\\"哎，您好，请问您是张旭张女士吗。\\\",\\\"asrResult\\\":\\\"嗯\\\",\\\"ttsStartTime\\\":4680,\\\"ttsEndTime\\\":7680,\\\"asrStartTime\\\":6340,\\\"asrEndTime\\\":7420},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":12120,\\\"ttsEndTime\\\":18120},{\\\"ttsResult\\\":\\\"呃我先给您说下关于这个岗位的信息哈\\\",\\\"ttsStartTime\\\":17139,\\\"ttsEndTime\\\":20139}]\""
+    },
+    {
+      "id": "11245039485",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是赖毅哲赖先生吗。\\\",\\\"asrResult\\\":\\\"喂;是\\\",\\\"ttsStartTime\\\":4240,\\\"ttsEndTime\\\":7240,\\\"asrStartTime\\\":2000,\\\"asrEndTime\\\":7130},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":11920,\\\"ttsEndTime\\\":17920},{\\\"ttsResult\\\":\\\"呃我先给您说下关于这个岗位的信息哈\\\",\\\"ttsStartTime\\\":15100,\\\"ttsEndTime\\\":18100}]\""
+    },
+    {
+      "id": "11267965346",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"喂嗯\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":820,\\\"asrEndTime\\\":3120},{\\\"ttsResult\\\":\\\"哎，您好，请问您是蒋美玲蒋女士吗。\\\",\\\"asrResult\\\":\\\"干什么\\\",\\\"ttsStartTime\\\":4031,\\\"ttsEndTime\\\":7031,\\\"asrStartTime\\\":6260,\\\"asrEndTime\\\":7380},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":12000,\\\"ttsEndTime\\\":18000}]\""
+    },
+    {
+      "id": "11185979985",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"哎，你好喂哪位\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":160,\\\"asrEndTime\\\":4240},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"是的，你哪位可以，知道吧\\\",\\\"ttsStartTime\\\":5281,\\\"ttsEndTime\\\":11281,\\\"asrStartTime\\\":4880,\\\"asrEndTime\\\":7480},{\\\"ttsResult\\\":\\\"呃我是猎聘这边的猎头哈.现在呢是在帮北京禾沐家办商务咨询有限公司做招聘\\\",\\\"ttsStartTime\\\":7179,\\\"ttsEndTime\\\":14179}]\""
+    },
+    {
+      "id": "11222489498",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是李女士吗。\\\",\\\"asrResult\\\":\\\"嗯，你好;你哪位\\\",\\\"ttsStartTime\\\":3920,\\\"ttsEndTime\\\":5920,\\\"asrStartTime\\\":2660,\\\"asrEndTime\\\":6580},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":11321,\\\"ttsEndTime\\\":17321}]\""
+    },
+    {
+      "id": "11248796084",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"喂，你好\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":160,\\\"asrEndTime\\\":1210},{\\\"ttsResult\\\":\\\"哎，您好，请问您是夏先生吗。\\\",\\\"ttsStartTime\\\":2921,\\\"ttsEndTime\\\":4921}]\""
+    },
+    {
+      "id": "11187758201",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"喂，你好喂，你好\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":760,\\\"asrEndTime\\\":2600},{\\\"ttsResult\\\":\\\"哎，您好，请问您是东先生吗。\\\",\\\"asrResult\\\":\\\"啊，你好\\\",\\\"ttsStartTime\\\":3480,\\\"ttsEndTime\\\":5480,\\\"asrStartTime\\\":5180,\\\"asrEndTime\\\":6280},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"嗯，不用，谢谢\\\",\\\"ttsStartTime\\\":10918,\\\"ttsEndTime\\\":16918,\\\"asrStartTime\\\":10740,\\\"asrEndTime\\\":11860}]\""
+    },
+    {
+      "id": "11123283355",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是徐奕徐先生吗。\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":3984,\\\"ttsEndTime\\\":6984},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":9032,\\\"ttsEndTime\\\":15032}]\""
+    },
+    {
+      "id": "11115874735",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是林女士吗。\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":3840,\\\"ttsEndTime\\\":5840},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":10119,\\\"ttsEndTime\\\":16119}]\""
+    },
+    {
+      "id": "11235078900",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"喂，你好\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":1380,\\\"asrEndTime\\\":2130},{\\\"ttsResult\\\":\\\"哎，您好，请问您是陈俊陈先生吗。\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":5048,\\\"ttsEndTime\\\":8048},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":13287,\\\"ttsEndTime\\\":19287}]\""
+    },
+    {
+      "id": "11221691638",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是程先生吗。\\\",\\\"asrResult\\\":\\\"喂，你好;对\\\",\\\"ttsStartTime\\\":3560,\\\"ttsEndTime\\\":5560,\\\"asrStartTime\\\":2280,\\\"asrEndTime\\\":6680},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":9899,\\\"ttsEndTime\\\":15899}]\""
+    },
+    {
+      "id": "11120432438",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是马锡琦马女士吗。\\\",\\\"asrResult\\\":\\\"你好;是的\\\",\\\"ttsStartTime\\\":4840,\\\"ttsEndTime\\\":7840,\\\"asrStartTime\\\":2820,\\\"asrEndTime\\\":7760},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":12360,\\\"ttsEndTime\\\":18360}]\""
+    },
+    {
+      "id": "11135273773",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"喂\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":220,\\\"asrEndTime\\\":1260},{\\\"ttsResult\\\":\\\"哎，您好，请问您是张女士吗。\\\",\\\"asrResult\\\":\\\"啊，你是\\\",\\\"ttsStartTime\\\":2399,\\\"ttsEndTime\\\":4399,\\\"asrStartTime\\\":4100,\\\"asrEndTime\\\":5440},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":10040,\\\"ttsEndTime\\\":16040},{\\\"ttsResult\\\":\\\"呃我先给您说下关于这个岗位的信息哈\\\",\\\"ttsStartTime\\\":15038,\\\"ttsEndTime\\\":18038}]\""
+    },
+    {
+      "id": "11123288771",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是汤继贤汤先生吗。\\\",\\\"ttsStartTime\\\":4561,\\\"ttsEndTime\\\":7561}]\""
+    },
+    {
+      "id": "11118835750",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是陈女士吗。\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":3840,\\\"ttsEndTime\\\":5840},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":9881,\\\"ttsEndTime\\\":15881}]\""
+    },
+    {
+      "id": "11277319329",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0}]\""
+    },
+    {
+      "id": "11226959815",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是李先生吗。\\\",\\\"ttsStartTime\\\":2558,\\\"ttsEndTime\\\":4558}]\""
+    },
+    {
+      "id": "11164095118",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"喂\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":720,\\\"asrEndTime\\\":1720},{\\\"ttsResult\\\":\\\"哎，您好，请问您是徐女士吗。\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":2920,\\\"ttsEndTime\\\":4920},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":7579,\\\"ttsEndTime\\\":13579}]\""
+    },
+    {
+      "id": "11275226648",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是刘世洋刘先生吗。\\\",\\\"asrResult\\\":\\\"喂，你好;用户无应答\\\",\\\"ttsStartTime\\\":3880,\\\"ttsEndTime\\\":6880,\\\"asrStartTime\\\":1940},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"微信\\\",\\\"ttsStartTime\\\":7940,\\\"ttsEndTime\\\":13940,\\\"asrStartTime\\\":8180,\\\"asrEndTime\\\":8860}]\""
+    },
+    {
+      "id": "11252997170",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"办法喂\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":20,\\\"asrEndTime\\\":1540},{\\\"ttsResult\\\":\\\"哎，您好，请问您是羊女士吗。\\\",\\\"asrResult\\\":\\\"哪位\\\",\\\"ttsStartTime\\\":2520,\\\"ttsEndTime\\\":4520,\\\"asrStartTime\\\":4080,\\\"asrEndTime\\\":5140},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":7979,\\\"ttsEndTime\\\":13979}]\""
+    },
+    {
+      "id": "11137922458",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是李思毅李女士吗。\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":4956,\\\"ttsEndTime\\\":7956},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":9276,\\\"ttsEndTime\\\":15276}]\""
+    },
+    {
+      "id": "11122426444",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是余宝珠余女士吗。\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":4008,\\\"ttsEndTime\\\":7008},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":12894,\\\"ttsEndTime\\\":18894},{\\\"ttsResult\\\":\\\"呃我先给您说下关于这个岗位的信息哈\\\",\\\"ttsStartTime\\\":17255,\\\"ttsEndTime\\\":20255}]\""
+    },
+    {
+      "id": "11126358904",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是余佳伦余先生吗。\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":4520,\\\"ttsEndTime\\\":7520},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":12213,\\\"ttsEndTime\\\":18213},{\\\"ttsResult\\\":\\\"呃我先给您说下关于这个岗位的信息哈\\\",\\\"ttsStartTime\\\":18157,\\\"ttsEndTime\\\":21157}]\""
+    },
+    {
+      "id": "11109884565",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是韩旭韩先生吗。\\\",\\\"asrResult\\\":\\\"嗯\\\",\\\"ttsStartTime\\\":4240,\\\"ttsEndTime\\\":7240,\\\"asrStartTime\\\":6400,\\\"asrEndTime\\\":7280},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":10779,\\\"ttsEndTime\\\":16779}]\""
+    },
+    {
+      "id": "11134026834",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是张含赟张女士吗。\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":4240,\\\"ttsEndTime\\\":7240},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":8899,\\\"ttsEndTime\\\":14899}]\""
+    },
+    {
+      "id": "11227742649",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是杨炯杨先生吗。\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":3921,\\\"ttsEndTime\\\":6921},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":11719,\\\"ttsEndTime\\\":17719}]\""
+    },
+    {
+      "id": "11191268330",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是牛英企牛先生吗。\\\",\\\"asrResult\\\":\\\"你好;嗯\\\",\\\"ttsStartTime\\\":5120,\\\"ttsEndTime\\\":8120,\\\"asrStartTime\\\":2460,\\\"asrEndTime\\\":5760}]\""
+    },
+    {
+      "id": "11193014344",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是赵楠赵女士吗。\\\",\\\"asrResult\\\":\\\"哎，喂，你好;哦，怎么\\\",\\\"ttsStartTime\\\":4240,\\\"ttsEndTime\\\":7240,\\\"asrStartTime\\\":2400,\\\"asrEndTime\\\":7360},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":8794,\\\"ttsEndTime\\\":14794}]\""
+    },
+    {
+      "id": "11266836228",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是刘先生吗。\\\",\\\"asrResult\\\":\\\"喂，你好;嗯，对\\\",\\\"ttsStartTime\\\":3560,\\\"ttsEndTime\\\":5560,\\\"asrStartTime\\\":2700,\\\"asrEndTime\\\":6780},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":9899,\\\"ttsEndTime\\\":15899}]\""
+    },
+    {
+      "id": "11216871389",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"嗯嗯你好\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":1100,\\\"asrEndTime\\\":3760},{\\\"ttsResult\\\":\\\"哎，您好，请问您是左亮左先生吗。\\\",\\\"asrResult\\\":\\\"对\\\",\\\"ttsStartTime\\\":4041,\\\"ttsEndTime\\\":7041,\\\"asrStartTime\\\":6060,\\\"asrEndTime\\\":6880},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":11360,\\\"ttsEndTime\\\":17360},{\\\"ttsResult\\\":\\\"呃我先给您说下关于这个岗位的信息哈\\\",\\\"ttsStartTime\\\":14459,\\\"ttsEndTime\\\":17459}]\""
+    },
+    {
+      "id": "11189326149",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"通知\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":760,\\\"asrEndTime\\\":1480},{\\\"ttsResult\\\":\\\"哎，您好，请问您是林贝林女士吗。\\\",\\\"ttsStartTime\\\":1399,\\\"ttsEndTime\\\":4399}]\""
+    },
+    {
+      "id": "11273573899",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是孙璐孙女士吗。\\\",\\\"ttsStartTime\\\":4639,\\\"ttsEndTime\\\":7639}]\""
+    },
+    {
+      "id": "11115184967",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是李芊李先生吗。\\\",\\\"asrResult\\\":\\\"喂，你好;用户无应答\\\",\\\"ttsStartTime\\\":3880,\\\"ttsEndTime\\\":6880,\\\"asrStartTime\\\":2500},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":12401,\\\"ttsEndTime\\\":18401},{\\\"ttsResult\\\":\\\"呃我先给您说下关于这个岗位的信息哈\\\",\\\"ttsStartTime\\\":16441,\\\"ttsEndTime\\\":19441}]\""
+    },
+    {
+      "id": "11127625020",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是郭先生吗。\\\",\\\"asrResult\\\":\\\"喂，你好;你，你说\\\",\\\"ttsStartTime\\\":3560,\\\"ttsEndTime\\\":5560,\\\"asrStartTime\\\":2360,\\\"asrEndTime\\\":6980},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"怎么什么\\\",\\\"ttsStartTime\\\":11640,\\\"ttsEndTime\\\":17640,\\\"asrStartTime\\\":12440,\\\"asrEndTime\\\":13620},{\\\"ttsResult\\\":\\\"我这边是猎聘的猎头\\\",\\\"ttsStartTime\\\":14378,\\\"ttsEndTime\\\":15378}]\""
+    },
+    {
+      "id": "11109922615",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是周先生吗。\\\",\\\"ttsStartTime\\\":2952,\\\"ttsEndTime\\\":4952}]\""
+    },
+    {
+      "id": "11188372731",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"通话已转至语音留言，你尝试联系的用户无法接听\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":60,\\\"asrEndTime\\\":4660}]\""
+    },
+    {
+      "id": "11164516742",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"嗯\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":920,\\\"asrEndTime\\\":1660},{\\\"ttsResult\\\":\\\"哎，您好，请问您是沈复兴沈先生吗。\\\",\\\"asrResult\\\":\\\"喂;怎么\\\",\\\"ttsStartTime\\\":3480,\\\"ttsEndTime\\\":6480,\\\"asrStartTime\\\":2300,\\\"asrEndTime\\\":6080},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":8299,\\\"ttsEndTime\\\":14299}]\""
+    },
+    {
+      "id": "11240113415",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"喂喂，你好\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":880,\\\"asrEndTime\\\":2600},{\\\"ttsResult\\\":\\\"哎，您好，请问您是生俊顺生先生吗。\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":4519,\\\"ttsEndTime\\\":7519},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":8118,\\\"ttsEndTime\\\":14118}]\""
+    },
+    {
+      "id": "11155015988",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是薛先生吗。\\\",\\\"ttsStartTime\\\":3859,\\\"ttsEndTime\\\":5859}]\""
+    },
+    {
+      "id": "11114139008",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是阚先生吗。\\\",\\\"ttsStartTime\\\":4161,\\\"ttsEndTime\\\":6161}]\""
+    },
+    {
+      "id": "11194344442",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"话已转至语音\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":120,\\\"asrEndTime\\\":1940},{\\\"ttsResult\\\":\\\"哎，您好，请问您是朱俊俊朱先生吗。\\\",\\\"asrResult\\\":\\\"哎，你哪位\\\",\\\"ttsStartTime\\\":4000,\\\"ttsEndTime\\\":7000,\\\"asrStartTime\\\":5640,\\\"asrEndTime\\\":7000},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"啊，您稍等一下好吧？哎\\\",\\\"ttsStartTime\\\":11560,\\\"ttsEndTime\\\":17560,\\\"asrStartTime\\\":13060,\\\"asrEndTime\\\":15380},{\\\"ttsResult\\\":\\\"好的，您说；\\\",\\\"ttsStartTime\\\":15519,\\\"ttsEndTime\\\":16519}]\""
+    },
+    {
+      "id": "11135923178",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是黄女士吗。\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":3920,\\\"ttsEndTime\\\":5920},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":12399,\\\"ttsEndTime\\\":18399}]\""
+    },
+    {
+      "id": "11235676212",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是陈先生吗。\\\",\\\"ttsStartTime\\\":4000,\\\"ttsEndTime\\\":6000}]\""
+    },
+    {
+      "id": "11156325026",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"喂，你好\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":400,\\\"asrEndTime\\\":1760},{\\\"ttsResult\\\":\\\"哎，您好，请问您是吴女士吗。\\\",\\\"ttsStartTime\\\":2899,\\\"ttsEndTime\\\":4899}]\""
+    },
+    {
+      "id": "11237987461",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是王先生吗。\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":3840,\\\"ttsEndTime\\\":5840},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":11278,\\\"ttsEndTime\\\":17278}]\""
+    },
+    {
+      "id": "11159531526",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"喂，你好\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":1860,\\\"asrEndTime\\\":2980},{\\\"ttsResult\\\":\\\"哎，您好，请问您是蒋先生吗。\\\",\\\"asrResult\\\":\\\"喂，你好\\\",\\\"ttsStartTime\\\":4240,\\\"ttsEndTime\\\":6240,\\\"asrStartTime\\\":6160,\\\"asrEndTime\\\":7180},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":11800,\\\"ttsEndTime\\\":17800}]\""
+    },
+    {
+      "id": "11225409690",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是李波凤李女士吗。\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":5040,\\\"ttsEndTime\\\":8040},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":9099,\\\"ttsEndTime\\\":15099}]\""
+    },
+    {
+      "id": "11231291673",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"这个没法\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":200,\\\"asrEndTime\\\":1130},{\\\"ttsResult\\\":\\\"哎，您好，请问您是聂先生吗。\\\",\\\"asrResult\\\":\\\"对方;好好好，拜拜李哥，嗯，拜拜\\\",\\\"ttsStartTime\\\":3000,\\\"ttsEndTime\\\":5000,\\\"asrStartTime\\\":1940,\\\"asrEndTime\\\":5410},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":5558,\\\"ttsEndTime\\\":11558}]\""
+    },
+    {
+      "id": "11221697613",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"已转至语音留言，你尝试联系的用户无法接\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":120,\\\"asrEndTime\\\":4120}]\""
+    },
+    {
+      "id": "11154969689",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"喂诶，你好，诶\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":920,\\\"asrEndTime\\\":2860},{\\\"ttsResult\\\":\\\"哎，您好，请问您是肖智勇肖先生吗。\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":4401,\\\"ttsEndTime\\\":7401},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"你好，哎\\\",\\\"ttsStartTime\\\":11380,\\\"ttsEndTime\\\":17380,\\\"asrStartTime\\\":7840,\\\"asrEndTime\\\":8980}]\""
+    },
+    {
+      "id": "11265286298",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是姜斌峰姜先生吗。\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":4360,\\\"ttsEndTime\\\":7360},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":12524,\\\"ttsEndTime\\\":18524}]\""
+    },
+    {
+      "id": "11130444663",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"喂哦\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":1000,\\\"asrEndTime\\\":3160},{\\\"ttsResult\\\":\\\"哎，您好，请问您是刘女士吗。\\\",\\\"asrResult\\\":\\\"你哪位\\\",\\\"ttsStartTime\\\":4201,\\\"ttsEndTime\\\":6201,\\\"asrStartTime\\\":6200,\\\"asrEndTime\\\":7460},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":12000,\\\"ttsEndTime\\\":18000}]\""
+    },
+    {
+      "id": "11116989395",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是班超班先生吗。\\\",\\\"asrResult\\\":\\\"嗯，哪位\\\",\\\"ttsStartTime\\\":2720,\\\"ttsEndTime\\\":5720,\\\"asrStartTime\\\":2060,\\\"asrEndTime\\\":3560},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"嗯，加我这手机号微信\\\",\\\"ttsStartTime\\\":8160,\\\"ttsEndTime\\\":14160,\\\"asrStartTime\\\":10500,\\\"asrEndTime\\\":12740},{\\\"ttsResult\\\":\\\"呃/我这边是不允许添加您微信的，更详细的信息您可以登录猎聘查看，我们已经推送到您的消息页面了，嗯/那北京银数传媒科技有限公司的这个家生活场景运营岗岗位您这边有兴趣跟企业接触一下吗？\\\",\\\"ttsStartTime\\\":21219,\\\"ttsEndTime\\\":39219}]\""
+    },
+    {
+      "id": "11116000081",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是栾女士吗。\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":3561,\\\"ttsEndTime\\\":5561},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":11879,\\\"ttsEndTime\\\":17879}]\""
+    },
+    {
+      "id": "11216758809",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是毛宇欣毛女士吗。\\\",\\\"asrResult\\\":\\\"喂，你好;是的，你好\\\",\\\"ttsStartTime\\\":4439,\\\"ttsEndTime\\\":7439,\\\"asrStartTime\\\":2380,\\\"asrEndTime\\\":8760},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":13399,\\\"ttsEndTime\\\":19399}]\""
+    },
+    {
+      "id": "11268032546",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是徐浩楠徐先生吗。\\\",\\\"ttsStartTime\\\":4240,\\\"ttsEndTime\\\":7240}]\""
+    },
+    {
+      "id": "11148963463",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是骆女士吗。\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":3560,\\\"ttsEndTime\\\":5560},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":12041,\\\"ttsEndTime\\\":18041}]\""
+    },
+    {
+      "id": "11115906306",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是戴敏敏戴先生吗。\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":4240,\\\"ttsEndTime\\\":7240},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":12720,\\\"ttsEndTime\\\":18720}]\""
+    },
+    {
+      "id": "11191566972",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"通话已转至语音留言，你尝试联系的用户无法接听，请在提示音后录制留言录音完成\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":140,\\\"asrEndTime\\\":8340}]\""
+    },
+    {
+      "id": "11185680775",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"通话已转至语音留言，你查\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":40,\\\"asrEndTime\\\":3000}]\""
+    },
+    {
+      "id": "11110036808",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是丁世搏丁先生吗。\\\",\\\"ttsStartTime\\\":4099,\\\"ttsEndTime\\\":7099}]\""
+    },
+    {
+      "id": "11132079277",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是李先生吗。\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":4001,\\\"ttsEndTime\\\":6001},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":8579,\\\"ttsEndTime\\\":14579}]\""
+    },
+    {
+      "id": "11145612250",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是李玉芳李女士吗。\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":4160,\\\"ttsEndTime\\\":7160},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":13009,\\\"ttsEndTime\\\":19009}]\""
+    },
+    {
+      "id": "11252600983",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是秦天秦先生吗。\\\",\\\"ttsStartTime\\\":4720,\\\"ttsEndTime\\\":7720}]\""
+    },
+    {
+      "id": "11151629213",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是田先生吗。\\\",\\\"asrResult\\\":\\\"你哪位啊\\\",\\\"ttsStartTime\\\":3910,\\\"ttsEndTime\\\":5910,\\\"asrStartTime\\\":5760,\\\"asrEndTime\\\":7040},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":9870,\\\"ttsEndTime\\\":15870}]\""
+    },
+    {
+      "id": "11215411552",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"嗯\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":760,\\\"asrEndTime\\\":1560},{\\\"ttsResult\\\":\\\"哎，您好，请问您是高倩高女士吗。\\\",\\\"ttsStartTime\\\":3560,\\\"ttsEndTime\\\":6560}]\""
+    },
+    {
+      "id": "11192687841",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是王先生吗。\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":3840,\\\"ttsEndTime\\\":5840},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":10061,\\\"ttsEndTime\\\":16061}]\""
+    },
+    {
+      "id": "11115794608",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是董天帅董先生吗。\\\",\\\"ttsStartTime\\\":4360,\\\"ttsEndTime\\\":7360}]\""
+    },
+    {
+      "id": "11138682166",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"喂\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":140,\\\"asrEndTime\\\":940},{\\\"ttsResult\\\":\\\"哎，您好，请问您是赵捷赵先生吗。\\\",\\\"asrResult\\\":\\\"怎么了\\\",\\\"ttsStartTime\\\":2280,\\\"ttsEndTime\\\":5280,\\\"asrStartTime\\\":4740,\\\"asrEndTime\\\":5920},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"下那;早一点;不用了，不用\\\",\\\"ttsStartTime\\\":10560,\\\"ttsEndTime\\\":16560,\\\"asrStartTime\\\":7020,\\\"asrEndTime\\\":12140}]\""
+    },
+    {
+      "id": "11267968319",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是唐女士吗。\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":3559,\\\"ttsEndTime\\\":5559},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":12040,\\\"ttsEndTime\\\":18040}]\""
+    },
+    {
+      "id": "11124087344",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是李旭李女士吗。\\\",\\\"asrResult\\\":\\\"嗯，你好，哪位\\\",\\\"ttsStartTime\\\":3040,\\\"ttsEndTime\\\":6040,\\\"asrStartTime\\\":2420,\\\"asrEndTime\\\":3820},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":7500,\\\"ttsEndTime\\\":13500}]\""
+    },
+    {
+      "id": "11120285245",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"哪位\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":1700,\\\"asrEndTime\\\":2680},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":7200,\\\"ttsEndTime\\\":13200}]\""
+    },
+    {
+      "id": "11237752158",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是林女士吗。\\\",\\\"ttsStartTime\\\":1859,\\\"ttsEndTime\\\":3859}]\""
+    },
+    {
+      "id": "11244977987",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"已转至语音\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":0,\\\"asrEndTime\\\":1400}]\""
+    },
+    {
+      "id": "11237531325",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是唐先生吗。\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":3921,\\\"ttsEndTime\\\":5921},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":10339,\\\"ttsEndTime\\\":16339}]\""
+    },
+    {
+      "id": "11131084498",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是肖承银肖女士吗。\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":4056,\\\"ttsEndTime\\\":7056},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":9712,\\\"ttsEndTime\\\":15712}]\""
+    },
+    {
+      "id": "11123229065",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是张磊张女士吗。\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":4000,\\\"ttsEndTime\\\":7000},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":9159,\\\"ttsEndTime\\\":15159}]\""
+    },
+    {
+      "id": "11179651419",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是霍子豪霍先生吗。\\\",\\\"ttsStartTime\\\":1859,\\\"ttsEndTime\\\":4859}]\""
+    },
+    {
+      "id": "11267996463",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是杨女士吗。\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":3720,\\\"ttsEndTime\\\":5720},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":8498,\\\"ttsEndTime\\\":14498}]\""
+    },
+    {
+      "id": "11216257376",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是汪子英汪女士吗。\\\",\\\"asrResult\\\":\\\"嗯\\\",\\\"ttsStartTime\\\":4153,\\\"ttsEndTime\\\":7153,\\\"asrStartTime\\\":6020,\\\"asrEndTime\\\":7000},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":10411,\\\"ttsEndTime\\\":16411}]\""
+    },
+    {
+      "id": "11277857318",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是李清泰李先生吗。\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":4439,\\\"ttsEndTime\\\":7439},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":12919,\\\"ttsEndTime\\\":18919}]\""
+    },
+    {
+      "id": "11132909798",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是黄女士吗。\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":3920,\\\"ttsEndTime\\\":5920},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":12360,\\\"ttsEndTime\\\":18360}]\""
+    },
+    {
+      "id": "11109230778",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"哎喂嗯，你说\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0,\\\"asrStartTime\\\":1140,\\\"asrEndTime\\\":3360},{\\\"ttsResult\\\":\\\"哎，您好，请问您是李磊李先生吗。\\\",\\\"asrResult\\\":\\\"就是猎聘是吧\\\",\\\"ttsStartTime\\\":4867,\\\"ttsEndTime\\\":7867,\\\"asrStartTime\\\":6380,\\\"asrEndTime\\\":7980},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"ttsStartTime\\\":11225,\\\"ttsEndTime\\\":17225}]\""
+    },
+    {
+      "id": "11240223726",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是佘文涛佘先生吗。\\\",\\\"ttsStartTime\\\":4080,\\\"ttsEndTime\\\":7080}]\""
+    },
+    {
+      "id": "11274591916",
+      "intent": "I(开场白挂断)",
+      "conversation": "\"[{\\\"ttsResult\\\":\\\"维/您好\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":0,\\\"ttsEndTime\\\":0},{\\\"ttsResult\\\":\\\"哎，您好，请问您是冯先生吗。\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":3720,\\\"ttsEndTime\\\":5720},{\\\"ttsResult\\\":\\\"您好我是猎聘的猎头，这边是有一个岗位想给您推荐。您目前还有考虑吗\\\",\\\"asrResult\\\":\\\"用户无应答\\\",\\\"ttsStartTime\\\":12200,\\\"ttsEndTime\\\":18200},{\\\"ttsResult\\\":\\\"呃我先给您说下关于这个岗位的信息哈\\\",\\\"ttsStartTime\\\":17239,\\\"ttsEndTime\\\":20239}]\""
+    }
+  ],
+  "intent": "I(开场白挂断)"
+}
