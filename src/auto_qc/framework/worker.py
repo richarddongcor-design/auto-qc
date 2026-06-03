@@ -3,6 +3,7 @@ import os
 import json
 import asyncio
 import re
+import httpx
 from anthropic import AsyncAnthropic
 from anthropic.types import TextBlock
 from json_repair import repair_json
@@ -10,16 +11,35 @@ from json_repair import repair_json
 MAX_RETRIES = 3
 
 
+class _BearerAuthTransport(httpx.AsyncHTTPTransport):
+    """
+    自定义 HTTP 传输层，修复代理认证格式。
+    某些 Anthropic 兼容代理（如 tongdaoren.cn）只接受 Authorization: Bearer，
+    不接受 Anthropic SDK 默认的 x-api-key 格式。
+    此处移除 x-api-key 头，确保只用 Bearer token 认证。
+    """
+
+    async def handle_async_request(self, request: httpx.Request) -> httpx.Response:
+        token = os.environ.get("ANTHROPIC_AUTH_TOKEN", "")
+        if token:
+            request.headers["Authorization"] = f"Bearer {token}"
+        # 移除 Anthropic SDK 默认添加的 x-api-key，避免代理拒绝
+        request.headers.pop("x-api-key", None)
+        return await super().handle_async_request(request)
+
+
 def _get_client() -> AsyncAnthropic:
     """从环境变量创建 Anthropic 客户端。"""
+    transport = _BearerAuthTransport()
     return AsyncAnthropic(
         base_url=os.environ.get("ANTHROPIC_BASE_URL", "https://api.anthropic.com"),
         api_key=os.environ.get("ANTHROPIC_AUTH_TOKEN", ""),
+        http_client=httpx.AsyncClient(transport=transport),
     )
 
 
 def _get_model() -> str:
-    return os.environ.get("ANTHROPIC_MODEL", os.environ.get("ANTHROPIC_DEFAULT_SONNET_MODEL", "claude-sonnet-4-6"))
+    return os.environ.get("ANTHROPIC_MODEL", os.environ.get("ANTHROPIC_DEFAULT_SONNET_MODEL", "qwen3.6-plus"))
 
 
 async def call_llm(prompt: str, max_tokens: int = 4000) -> str:
