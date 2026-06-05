@@ -80,7 +80,7 @@ def _get_client() -> AsyncAnthropic:
     return AsyncAnthropic(
         base_url=os.environ.get("ANTHROPIC_BASE_URL", "https://api.anthropic.com"),
         api_key=os.environ.get("ANTHROPIC_AUTH_TOKEN", ""),
-        http_client=httpx.AsyncClient(transport=transport),
+        http_client=httpx.AsyncClient(transport=transport, timeout=httpx.Timeout(120.0, connect=30.0)),
     )
 
 
