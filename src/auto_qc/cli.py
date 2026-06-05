@@ -14,20 +14,25 @@ def main():
     parser.add_argument("--rules", help="合规规则 Markdown 文件路径（--attribution-only 时不需要）")
     parser.add_argument("--no-attribution", action="store_true", help="关闭归因分析")
     parser.add_argument("--attribution-only", action="store_true", help="仅执行归因分析")
-    parser.add_argument("--output", help="报告输出路径（默认输出到数据文件同目录）")
-    parser.add_argument("--work-dir", default="./auto_qc_work", help="工作目录（临时文件存放）")
+    parser.add_argument("--output", help="报告输出路径（默认 output/<timestamp>_<数据文件名>/ 目录下）")
+    parser.add_argument("--work-dir", help="工作目录，存放中间结果（默认 output/<timestamp>_<数据文件名>/）")
+    parser.add_argument("--run-name", help="运行名称，用于输出目录命名（默认从数据文件名推断）")
 
     args = parser.parse_args()
+
+    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+
+    # 确定运行名称
+    run_name = args.run_name or Path(args.data).stem
+
+    # 确定工作目录
+    work_dir = args.work_dir or f"output/{timestamp}_{run_name}"
 
     # 确定输出路径
     if args.output:
         output_path = args.output
     else:
-        data_path = Path(args.data)
-        timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-        output_path = str(
-            data_path.parent / f"{data_path.stem}_质检报告_{timestamp}.xlsx"
-        )
+        output_path = f"{work_dir}/质检报告_{timestamp}.xlsx"
 
     # 模式判断
     attribution_only = args.attribution_only
@@ -46,7 +51,7 @@ def main():
             data_path=args.data,
             rules_path=args.rules,
             output_path=output_path,
-            work_dir=args.work_dir,
+            work_dir=work_dir,
             skip_attribution=skip_attribution,
         ))
 

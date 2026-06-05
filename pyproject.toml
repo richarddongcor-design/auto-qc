@@ -2,12 +2,11 @@
 name = "auto-qc"
 version = "0.1.0"
 description = "外呼通话文本质检 CLI"
-readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "anthropic>=0.60.0",
     "openpyxl==3.1.5",
-
+    "python-dotenv>=1.1.0",
     "json-repair==0.59.10",
 ]
 

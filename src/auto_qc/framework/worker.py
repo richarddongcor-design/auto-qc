@@ -4,11 +4,57 @@ import json
 import asyncio
 import re
 import httpx
+from dataclasses import dataclass, field
 from anthropic import AsyncAnthropic
 from anthropic.types import TextBlock
+from dotenv import load_dotenv
 from json_repair import repair_json
 
+# 启动时自动加载项目根目录的 .env 文件
+load_dotenv()
+
 MAX_RETRIES = 3
+
+
+# ─── Token 统计 ───
+
+@dataclass
+class TokenStats:
+    """累计 Token 消耗统计。"""
+    total_input: int = 0
+    total_output: int = 0
+
+    def add(self, input_tokens: int, output_tokens: int) -> None:
+        self.total_input += input_tokens
+        self.total_output += output_tokens
+
+    @property
+    def total(self) -> int:
+        return self.total_input + self.total_output
+
+    def summary(self) -> dict:
+        return {
+            "total_input_tokens": self.total_input,
+            "total_output_tokens": self.total_output,
+            "total_tokens": self.total,
+        }
+
+
+_token_stats = TokenStats()
+
+
+def get_token_stats() -> TokenStats:
+    """获取全局 Token 统计。"""
+    return _token_stats
+
+
+def reset_token_stats() -> None:
+    """重置 Token 统计（每次新运行前调用）。"""
+    _token_stats.total_input = 0
+    _token_stats.total_output = 0
+
+
+# ─── HTTP 传输层 ───
 
 
 class _BearerAuthTransport(httpx.AsyncHTTPTransport):
@@ -42,10 +88,11 @@ def _get_model() -> str:
     return os.environ.get("ANTHROPIC_MODEL", os.environ.get("ANTHROPIC_DEFAULT_SONNET_MODEL", "qwen3.6-plus"))
 
 
-async def call_llm(prompt: str, max_tokens: int = 4000) -> str:
+async def call_llm(prompt: str, max_tokens: int = 8000) -> str:
     """
     调用 LLM API，返回仅包含 text 内容的响应字符串。
     自动过滤 ThinkingBlock，只取 TextBlock。
+    自动累计 Token 消耗到全局统计。
     """
     client = _get_client()
     model = _get_model()
@@ -56,6 +103,13 @@ async def call_llm(prompt: str, max_tokens: int = 4000) -> str:
         messages=[{"role": "user", "content": prompt}],
     )
 
+    # 记录 Token 消耗
+    if response.usage:
+        _token_stats.add(
+            input_tokens=response.usage.input_tokens or 0,
+            output_tokens=response.usage.output_tokens or 0,
+        )
+
     texts = []
     for block in response.content:
         if isinstance(block, TextBlock):
@@ -64,7 +118,7 @@ async def call_llm(prompt: str, max_tokens: int = 4000) -> str:
     return "\n".join(texts)
 
 
-async def call_llm_with_retry(prompt: str, max_tokens: int = 4000) -> str:
+async def call_llm_with_retry(prompt: str, max_tokens: int = 8000) -> str:
     """
     调用 LLM，失败时重试最多 MAX_RETRIES 次。
     """

@@ -29,11 +29,11 @@
 ```json
 {
   "batch_id": {{BATCH_ID}},
-  "rules_checked": ["R01", "R02", "R03", ...],
+  "rules_checked": ["RULE-001", "RULE-002", ...],
   "spot_check_details": [
     {
       "id": "对话ID",
-      "reasoning": "我检查了这条对话，逐条规则过了一遍。R01: 用户说xxx，AI回应xxx，未触发违规。R02: ..."
+      "reasoning": "我检查了这条对话，逐条规则过了一遍。RULE-001: 用户说xxx，AI回应xxx，未触发违规。RULE-002: ..."
     }
   ],
   "results": [
@@ -47,7 +47,7 @@
       "status": "violation",
       "violations": [
         {
-          "rule_id": "R01",
+          "rule_id": "RULE-001",
           "rule_name": "规则名称",
           "severity": "高",
           "evidence": "用户: xxx | AI: xxx",

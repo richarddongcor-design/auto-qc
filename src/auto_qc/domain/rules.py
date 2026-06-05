@@ -7,16 +7,30 @@ _SEVERITY_MAP = {"高": "高", "中": "中", "低": "低", "HIGH": "高", "MEDIU
 
 
 def parse_rules_markdown(markdown_text: str) -> list[Rule]:
-    """解析 Markdown 格式的规则文本，返回 Rule 列表。"""
+    """解析 Markdown 格式的规则文本，返回 Rule 列表。
+
+    支持两种规则 ID 格式:
+      - ## R01: 规则名称
+      - ## RULE-001: 规则名称
+    支持两种严重程度字段:
+      - **严重程度**: 高/中/低
+      - **置信度**: HIGH/MEDIUM/LOW
+    """
     rules = []
-    pattern = re.compile(r"(?:\n|^)## (R\d+):\s*(.+?)\n(.*?)(?=(?:\n|^)## R|\Z)", re.DOTALL)
+    # 匹配 ## R01: 或 ## RULE-001: 格式
+    # 捕获组1: 完整规则ID (如 "R01" 或 "RULE-001")
+    pattern = re.compile(
+        r"(?:\n|^)## (R\d+|RULE-\d+):\s*(.+?)\n(.*?)(?=(?:\n|^)## (?:R|RULE-)|\Z)",
+        re.DOTALL,
+    )
 
     for match in pattern.finditer(markdown_text):
         rule_id = match.group(1)
         name = match.group(2).strip()
         content = match.group(3)
 
-        severity_match = re.search(r"\*\*严重程度\*\*[:：]\s*(.+)", content)
+        # 兼容两种字段名：严重程度 / 置信度
+        severity_match = re.search(r"\*\*(?:严重程度|置信度)\*\*[:：]\s*(.+)", content)
         severity = severity_match.group(1).strip() if severity_match else ""
         severity = _SEVERITY_MAP.get(severity, severity)
 

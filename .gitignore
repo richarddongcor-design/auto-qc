@@ -8,3 +8,9 @@ wheels/
 
 # Virtual environments
 .venv
+
+# Test output
+output/
+
+# Environment variables
+.env

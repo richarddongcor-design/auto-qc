@@ -117,13 +117,16 @@ class Batch:
 @dataclass
 class CrossValidationResult:
     """交叉验证结果"""
-    total_compared: int          # 对比的规则判断总数
-    mismatches: int              # 不一致数
-    discrepancy_rate: float      # 差异率
-    status: str                  # "ok" | "suspicious" | "high"
+    total_compared: int            # 对比的规则判断总数
+    mismatches: int                # 不一致数
+    discrepancy_rate: float        # 差异率
+    status: str                    # "ok" | "suspicious" | "high"
+    per_rule: dict = field(default_factory=dict)   # 每条规则的一致性/Kappa
+    kappa: float = 0.0             # 总体 Cohen's Kappa
+    kappa_status: str = "unknown"  # poor | fair | moderate | substantial | almost_perfect
 
     @classmethod
-    def compute(cls, mismatches: int, total: int) -> "CrossValidationResult":
+    def compute(cls, mismatches: int, total: int, per_rule: dict = None) -> "CrossValidationResult":
         rate = mismatches / total if total > 0 else 0.0
         if rate < 0.05:
             status = "ok"
@@ -131,11 +134,35 @@ class CrossValidationResult:
             status = "suspicious"
         else:
             status = "high"
+
+        per_rule = per_rule or {}
+
+        # 按规则判断次数加权平均 Kappa
+        overall_kappa = 0.0
+        if per_rule:
+            weighted = sum(d["kappa"] * d["total_judgments"] for d in per_rule.values())
+            total_w = sum(d["total_judgments"] for d in per_rule.values())
+            overall_kappa = round(weighted / total_w, 4) if total_w > 0 else 0.0
+
+        if overall_kappa >= 0.8:
+            kappa_status = "almost_perfect"
+        elif overall_kappa >= 0.6:
+            kappa_status = "substantial"
+        elif overall_kappa >= 0.4:
+            kappa_status = "moderate"
+        elif overall_kappa >= 0.2:
+            kappa_status = "fair"
+        else:
+            kappa_status = "poor"
+
         return cls(
             total_compared=total,
             mismatches=mismatches,
             discrepancy_rate=rate,
             status=status,
+            per_rule=per_rule,
+            kappa=overall_kappa,
+            kappa_status=kappa_status,
         )
 
 

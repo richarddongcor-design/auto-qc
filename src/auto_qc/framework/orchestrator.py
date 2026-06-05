@@ -14,10 +14,10 @@ from auto_qc.domain.report import write_report, verify_report_exists
 from auto_qc.framework.validator import (
     validate_rule_package, validate_batches, validate_worker_output, validate_merge_results,
 )
-from auto_qc.framework.worker import call_llm_with_retry, extract_json
+from auto_qc.framework.worker import call_llm_with_retry, extract_json, reset_token_stats, get_token_stats
 from auto_qc.framework.progress import create_progress, load_progress, save_progress, has_unfinished, reset_running_batches
 from auto_qc.framework.coordinator import Coordinator
-from auto_qc.framework.cross_validator import stratified_sample, compare_results
+from auto_qc.framework.cross_validator import fixed_sample, compare_results
 
 
 async def _process_batch(
@@ -75,6 +75,51 @@ async def _process_batch(
     return []
 
 
+async def _process_attribution_batch(
+    batch: Batch,
+    rule_ids: list[str],   # 未使用，保持签名兼容
+    prompt_builder,        # 未使用
+    coordinator: Coordinator,
+    work_dir: str,
+) -> list[dict]:
+    """
+    处理归因批次：调 LLM → 解析 attribution_results → 校验对话数 → 返回。
+    与 _process_batch 签名一致，可被 _dispatch_phase 调用。
+    """
+    prompt = build_attribution_prompt(batch)
+
+    for attempt in range(3):
+        try:
+            raw = await call_llm_with_retry(prompt)
+            json_text = extract_json(raw)
+            data = json.loads(json_text)
+
+            if "attribution_results" not in data:
+                raise ValueError("缺少 attribution_results 字段")
+
+            total = data.get("total_conversations", 0)
+            if total != batch.size:
+                raise ValueError(f"对话数不匹配: 期望 {batch.size}，实际 {total}")
+
+            coordinator.mark_done(batch.batch_id)
+
+            result_path = Path(work_dir) / f"attr_batch_{batch.batch_id}_result.json"
+            result_path.write_text(json_text, encoding="utf-8")
+
+            # 用列表包裹，兼容 _dispatch_phase 的 extend 语义
+            return [data["attribution_results"]]
+
+        except Exception as e:
+            retries = coordinator.increment_retry(batch.batch_id)
+            if retries >= 3:
+                coordinator.mark_failed(batch.batch_id)
+                print(f"归因批次 {batch.batch_id} 失败（已重试 3 次）: {e}")
+                return []
+            print(f"归因批次 {batch.batch_id} 第 {retries} 次重试: {e}")
+
+    return []
+
+
 async def _dispatch_phase(
     batches: list[Batch],
     rule_ids: list[str],
@@ -82,13 +127,18 @@ async def _dispatch_phase(
     coordinator: Coordinator,
     work_dir: str,
     sem: asyncio.Semaphore,
+    process_func=None,
 ) -> list[dict]:
-    """并发分发批次，收集所有结果。"""
+    """
+    并发分发批次，收集所有结果。
+    process_func: 可选自定义处理函数，默认为 _process_batch。
+    """
     all_results = []
 
     async def _run_one(batch: Batch):
         async with sem:
-            return await _process_batch(batch, rule_ids, prompt_builder, coordinator, work_dir)
+            func = process_func or _process_batch
+            return await func(batch, rule_ids, prompt_builder, coordinator, work_dir)
 
     while True:
         next_ids = coordinator.get_next_batches()
@@ -120,6 +170,9 @@ async def run_qc(
     """
     Path(work_dir).mkdir(parents=True, exist_ok=True)
 
+    # 重置 Token 统计
+    reset_token_stats()
+
     # ─── Step 1: 环境检查 ───
     print("[Step 1] 环境检查...")
     from auto_qc.domain.report import HEADER_FONT  # 验证 openpyxl 可用
@@ -140,10 +193,13 @@ async def run_qc(
 
     # ─── Step 3: 数据加载 + 拆分 ───
     print("[Step 3] 数据加载 + 批次拆分...")
-    batches = load_conversations(data_path, batch_size=100)
+    batches = load_conversations(data_path, batch_size=25)
     validate_batches(batches)
     total_ids = sum(b.size for b in batches)
     print(f"  ✅ 加载完成: {total_ids} 条对话, {len(batches)} 批")
+
+    # 构建 id → conversation 映射，供交叉验证使用
+    conv_text_map = {c.id: c.conversation for b in batches for c in b.conversations}
 
     # 保存批次到临时目录
     save_batches(batches, work_dir)
@@ -165,28 +221,43 @@ async def run_qc(
 
     # ─── Step 5: 交叉验证 ───
     print("[Step 5] 交叉验证...")
-    sample = stratified_sample(qc_results)
+    sample = fixed_sample(qc_results, sample_size=200)
     if sample:
-        sample_batch = Batch(batch_id=999, conversations=[
-            Conversation(id=s["id"], time=s.get("time", ""),
-                         intent=s.get("intent", ""), conversation="")
-            for s in sample
-        ])
-        # 用新 Worker 重新判断
-        prompt = build_qc_prompt(sample_batch, rule_package)
-        raw = await call_llm_with_retry(prompt)
-        json_text = extract_json(raw)
-        recheck_output = validate_worker_output(json_text, sample_batch.size, rule_ids)
+        recheck_results = []
+        # 拆成 25 条一批，逐批让 LLM 复检
+        for i in range(0, len(sample), 25):
+            chunk = sample[i:i + 25]
+            chunk_batch = Batch(batch_id=999, conversations=[
+                Conversation(id=s["id"], time=s.get("time", ""),
+                             intent=s.get("intent", ""),
+                             conversation=conv_text_map.get(s["id"], ""))
+                for s in chunk
+            ])
+            prompt = build_qc_prompt(chunk_batch, rule_package)
+            raw = await call_llm_with_retry(prompt)
+            json_text = extract_json(raw)
+            recheck_output = validate_worker_output(json_text, chunk_batch.size, rule_ids)
+            recheck_results.extend([
+                {"id": r.id, "violations": [{"rule_id": v.rule_id} for v in r.violations]}
+                for r in recheck_output.results
+            ])
 
-        # 对比
-        recheck_results = [
-            {"id": r.id, "violations": [
-                {"rule_id": v.rule_id} for v in r.violations
-            ]}
-            for r in recheck_output.results
-        ]
+        # 规则级 Kappa 对比
         cross_result = compare_results(sample, recheck_results)
-        print(f"  ✅ 交叉验证: {cross_result.status} (差异率 {cross_result.discrepancy_rate:.1%})")
+        print(f"  ✅ 交叉验证: 抽检 {len(sample)} 条")
+        print(f"     总体 Kappa={cross_result.kappa:.3f} ({cross_result.kappa_status}), 差异率 {cross_result.discrepancy_rate:.1%}")
+        for rule_id, s in cross_result.per_rule.items():
+            if s["kappa"] >= 0.8:
+                label = "几乎完全一致"
+            elif s["kappa"] >= 0.6:
+                label = "高度一致"
+            elif s["kappa"] >= 0.4:
+                label = "中等一致"
+            elif s["kappa"] >= 0.2:
+                label = "一致性低"
+            else:
+                label = "一致性差"
+            print(f"     {rule_id}: Kappa={s['kappa']:.2f} ({label}), 一致率 {s['agreement']:.0%} ({s['total_judgments']}次判断)")
     else:
         print("  ⚠️ 跳过交叉验证（样本不足）")
 
@@ -195,7 +266,7 @@ async def run_qc(
     if not skip_attribution:
         print("[Step 6] 归因分析...")
         # 过滤非 A 意向的对话
-        attr_batches = load_conversations(data_path, batch_size=100, exclude_intent="A(有意向)")
+        attr_batches = load_conversations(data_path, batch_size=25, exclude_intent="A(有意向)")
         if attr_batches:
             attr_rule_ids = ["A01", "A02", "A03", "A04", "A05", "A06"]
             attr_coordinator = Coordinator(work_dir)
@@ -207,6 +278,7 @@ async def run_qc(
                 coordinator=attr_coordinator,
                 work_dir=work_dir,
                 sem=sem,
+                process_func=_process_attribution_batch,
             )
             print(f"  ✅ 归因分析完成: {len(attr_results)} 条结果")
             attr_data = _group_attribution(attr_results)
@@ -223,6 +295,30 @@ async def run_qc(
         print(f"  ✅ 报告已生成: {output_path}")
     else:
         raise RuntimeError("报告文件生成失败")
+
+    # ─── Token 消耗 ───
+    token_summary = get_token_stats().summary()
+    print("\n  📊 Token 消耗")
+    print(f"     输入: {token_summary['total_input_tokens']:,} tokens")
+    print(f"     输出: {token_summary['total_output_tokens']:,} tokens")
+    print(f"     总计: {token_summary['total_tokens']:,} tokens")
+
+    # 写 summary.json
+    summary_data = {
+        "data_file": data_path,
+        "rules_file": rules_path,
+        "total_conversations": total_ids,
+        "total_batches": len(batches),
+        "attribution_enabled": not skip_attribution,
+        "violation_rate": stats["violation_rate"],
+        "token_usage": token_summary,
+    }
+    summary_path = Path(work_dir) / "summary.json"
+    summary_path.write_text(
+        json.dumps(summary_data, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+    print(f"  ✅ 运行摘要已保存: {summary_path}")
 
 
 # ─── 辅助函数 ───
@@ -249,8 +345,36 @@ def _compute_stats(qc_results: list[dict], rule_package) -> dict:
     }
 
 
-def _group_attribution(results: list[dict]) -> dict:
-    """将归因结果按 intent 分组。"""
-    # 归因 Worker 输出与 QC Worker 格式相同，domain 层处理分组逻辑
-    # 此处简化为直接收集
-    return {"B(不确定)": [], "F(无意向)": []}
+def _group_attribution(attr_results: list[dict]) -> dict:
+    """
+    将归因结果按 intent 分组，生成 write_report 所需的格式。
+
+    输入： [{cat_name: {count, ratio, examples, suggestion, whys}}, ...]
+    输出： {intent: [{category, ratio, count, examples, suggestion}, ...], ...}
+    """
+    intent_groups: dict[str, list] = {}
+
+    for cat_dict in attr_results:
+        for cat_name, cat_data in cat_dict.items():
+            whys = cat_data.get("whys", [])
+
+            # 从 whys 中取多数 intent 决定分组
+            intent_counts: dict[str, int] = {}
+            for w in whys:
+                intent = w.get("intent", "B(不确定)")
+                intent_counts[intent] = intent_counts.get(intent, 0) + 1
+            dominant = max(intent_counts, key=intent_counts.get) if intent_counts else "B(不确定)"
+
+            entry = {
+                "category": cat_name,
+                "ratio": cat_data.get("ratio", 0),
+                "count": cat_data.get("count", 0),
+                "examples": cat_data.get("examples", []),
+                "suggestion": cat_data.get("suggestion", ""),
+            }
+
+            if dominant not in intent_groups:
+                intent_groups[dominant] = []
+            intent_groups[dominant].append(entry)
+
+    return intent_groups

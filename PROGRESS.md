@@ -1,5 +1,26 @@
 # auto-qc 项目进展
 
+## 2026-06-05
+
+### 目录清理 + 输出目录规范化
+
+**清理了无用文件：**
+- 删除 `tmp/`（旧版运行遗留的中间文件）、`scripts/`（空目录）、`main.py`（旧的 hello-world 入口）、`README.md`（空文件）、`requirements.txt`（已过时）、`auto-qc-distribution.zip`（旧分发包）、`AGENTS.md`（旧架构文档）
+- 删除异常命名的目录 `CUsersdongyimyprojectsauto-qctmp`
+
+**新建 `output/` 目录：**
+- 每次运行自动创建 `output/<timestamp>_<数据文件名>/` 文件夹
+- 最终报告（Excel）、中间结果（batch_N_result.json）、进度文件（progress.json）都放在这个文件夹里
+- `--work-dir` 和 `--output` 默认都指向这个目录，也支持手动指定
+- 新增 `--run-name` 参数自定义运行名称
+- `output/` 已加入 `.gitignore`，测试输出不会误提交
+
+**验证：** 56 项测试全部通过
+
+### 500 条数据测试
+
+进行中——准备用 auto-pi 产出的 rules.md 跑 500 条合规检测 + 归因分析。
+
 ## 2026-06-02
 
 ### 数据一致性修复（已完成）
