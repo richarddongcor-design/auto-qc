@@ -176,27 +176,27 @@ async def run_qc(
     # ─── Step 1: 环境检查 ───
     print("[Step 1] 环境检查...")
     from auto_qc.domain.report import HEADER_FONT  # 验证 openpyxl 可用
-    print("  ✅ 依赖就绪")
+    print("  [OK] 依赖就绪")
 
     if not Path(data_path).exists():
         raise FileNotFoundError(f"数据文件不存在: {data_path}")
     if not Path(rules_path).exists():
         raise FileNotFoundError(f"规则文件不存在: {rules_path}")
-    print("  ✅ 文件存在")
+    print("  [OK] 文件存在")
 
     # ─── Step 2: 规则解析 + 校验 ───
     print("[Step 2] 规则解析 + 校验...")
     rule_package = parse_rules_file(rules_path)
     validate_rule_package(rule_package)
     rule_ids = rule_package.rule_ids
-    print(f"  ✅ 解析完成: {len(rule_package.rules)} 条规则 ({', '.join(rule_ids)})")
+    print(f"  [OK] 解析完成: {len(rule_package.rules)} 条规则 ({', '.join(rule_ids)})")
 
     # ─── Step 3: 数据加载 + 拆分 ───
     print("[Step 3] 数据加载 + 批次拆分...")
     batches = load_conversations(data_path, batch_size=25)
     validate_batches(batches)
     total_ids = sum(b.size for b in batches)
-    print(f"  ✅ 加载完成: {total_ids} 条对话, {len(batches)} 批")
+    print(f"  [OK] 加载完成: {total_ids} 条对话, {len(batches)} 批")
 
     # 构建 id → conversation 映射，供交叉验证使用
     conv_text_map = {c.id: c.conversation for b in batches for c in b.conversations}
@@ -217,7 +217,7 @@ async def run_qc(
         work_dir=work_dir,
         sem=sem,
     )
-    print(f"  ✅ 合规检测完成: {len(qc_results)} 条结果")
+    print(f"  [OK] 合规检测完成: {len(qc_results)} 条结果")
 
     # ─── Step 5: 交叉验证 ───
     print("[Step 5] 交叉验证...")
@@ -256,7 +256,7 @@ async def run_qc(
 
         # 规则级 Kappa 对比
         cross_result = compare_results(sample, recheck_results)
-        print(f"  ✅ 交叉验证: 抽检 {len(sample)} 条")
+        print(f"  [OK] 交叉验证: 抽检 {len(sample)} 条")
         print(f"     总体 Kappa={cross_result.kappa:.3f} ({cross_result.kappa_status}), 差异率 {cross_result.discrepancy_rate:.1%}")
         for rule_id, s in cross_result.per_rule.items():
             if s["kappa"] >= 0.8:
@@ -271,7 +271,7 @@ async def run_qc(
                 label = "一致性差"
             print(f"     {rule_id}: Kappa={s['kappa']:.2f} ({label}), 一致率 {s['agreement']:.0%} ({s['total_judgments']}次判断)")
     else:
-        print("  ⚠️ 跳过交叉验证（样本不足）")
+        print("  [!] 跳过交叉验证（样本不足）")
 
     # ─── Step 6: 归因分析 ───
     attr_data = {}
@@ -292,10 +292,10 @@ async def run_qc(
                 sem=sem,
                 process_func=_process_attribution_batch,
             )
-            print(f"  ✅ 归因分析完成: {len(attr_results)} 条结果")
+            print(f"  [OK] 归因分析完成: {len(attr_results)} 条结果")
             attr_data = _group_attribution(attr_results)
         else:
-            print("  ⚠️ 无待归因对话")
+            print("  [!] 无待归因对话")
 
     # ─── Step 7: 报告生成 ───
     print("[Step 7] 报告生成...")
@@ -304,13 +304,13 @@ async def run_qc(
 
     write_report(output_path, qc_results, attr_data, stats)
     if verify_report_exists(output_path):
-        print(f"  ✅ 报告已生成: {output_path}")
+        print(f"  [OK] 报告已生成: {output_path}")
     else:
         raise RuntimeError("报告文件生成失败")
 
     # ─── Token 消耗 ───
     token_summary = get_token_stats().summary()
-    print("\n  📊 Token 消耗")
+    print("\n  [数据] Token 消耗")
     print(f"     输入: {token_summary['total_input_tokens']:,} tokens")
     print(f"     输出: {token_summary['total_output_tokens']:,} tokens")
     print(f"     总计: {token_summary['total_tokens']:,} tokens")
@@ -330,7 +330,7 @@ async def run_qc(
         json.dumps(summary_data, ensure_ascii=False, indent=2),
         encoding="utf-8",
     )
-    print(f"  ✅ 运行摘要已保存: {summary_path}")
+    print(f"  [OK] 运行摘要已保存: {summary_path}")
 
 
 # ─── 辅助函数 ───
