@@ -224,7 +224,7 @@ async def run_qc(
     sample = fixed_sample(qc_results, sample_size=200)
     if sample:
         recheck_results = []
-        # 拆成 25 条一批，逐批让 LLM 复检
+        # 拆成 25 条一批，逐批让 LLM 复检（带重试）
         for i in range(0, len(sample), 25):
             chunk = sample[i:i + 25]
             chunk_batch = Batch(batch_id=999, conversations=[
@@ -233,10 +233,22 @@ async def run_qc(
                              conversation=conv_text_map.get(s["id"], ""))
                 for s in chunk
             ])
-            prompt = build_qc_prompt(chunk_batch, rule_package)
-            raw = await call_llm_with_retry(prompt)
-            json_text = extract_json(raw)
-            recheck_output = validate_worker_output(json_text, chunk_batch.size, rule_ids)
+            recheck_output = None
+            for attempt in range(3):
+                try:
+                    prompt = build_qc_prompt(chunk_batch, rule_package)
+                    raw = await call_llm_with_retry(prompt)
+                    json_text = extract_json(raw)
+                    recheck_output = validate_worker_output(json_text, chunk_batch.size, rule_ids)
+                    break
+                except Exception as e:
+                    if attempt >= 2:
+                        print(f"  交叉验证抽样批次 {i//25+1} 失败: {e}")
+                        break
+                    print(f"  交叉验证抽样批次 {i//25+1} 第 {attempt+1} 次重试: {e}")
+
+            if recheck_output is None:
+                continue
             recheck_results.extend([
                 {"id": r.id, "violations": [{"rule_id": v.rule_id} for v in r.violations]}
                 for r in recheck_output.results
