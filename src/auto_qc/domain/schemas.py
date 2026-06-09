@@ -171,7 +171,7 @@ class Progress:
     """进度追踪"""
     total_batches: int = 0
     completed_batches: int = 0
-    phase: str = "init"        # init | qc | cross_validation | attribution | reporting | done
+    phase: str = "init"        # init | qc | cross_validation | reporting | done
     batch_status: dict[str, str] = field(default_factory=dict)   # "1": "done", ...
     retry_count: dict[str, int] = field(default_factory=dict)
     failed_batches: list[int] = field(default_factory=list)
