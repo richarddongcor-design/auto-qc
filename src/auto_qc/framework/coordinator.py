@@ -2,7 +2,7 @@
 from auto_qc.domain.schemas import Progress
 from auto_qc.framework.progress import load_progress, save_progress
 
-MAX_CONCURRENCY = 5
+MAX_CONCURRENCY = 50
 
 
 class Coordinator:
