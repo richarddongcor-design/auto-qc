@@ -124,6 +124,7 @@ class CrossValidationResult:
     per_rule: dict = field(default_factory=dict)   # 每条规则的一致性/Kappa
     kappa: float = 0.0             # 总体 Cohen's Kappa
     kappa_status: str = "unknown"  # poor | fair | moderate | substantial | almost_perfect
+    adjudicated_rules: list[str] = field(default_factory=list)  # 被裁决过的规则 ID
 
     @classmethod
     def compute(cls, mismatches: int, total: int, per_rule: dict = None) -> "CrossValidationResult":
@@ -163,6 +164,7 @@ class CrossValidationResult:
             per_rule=per_rule,
             kappa=overall_kappa,
             kappa_status=kappa_status,
+            adjudicated_rules=[],
         )
 
 
