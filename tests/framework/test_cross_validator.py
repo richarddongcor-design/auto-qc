@@ -1,4 +1,4 @@
-from auto_qc.framework.cross_validator import fixed_sample, compare_results
+from auto_qc.framework.cross_validator import fixed_sample, compare_results, _build_adjudication_prompt
 
 
 def test_fixed_sample():
@@ -94,3 +94,21 @@ async def test_adjudicate_fixes_disagreement():
     assert not any(v["rule_id"] == "R01" for v in result_map["1"]["violations"])
     # 2 原来无违规，应被添加 R01
     assert any(v["rule_id"] == "R01" for v in result_map["2"]["violations"])
+
+
+def test_adjudication_prompt_format():
+    """裁决 prompt 应包含前两次判断和对话内容。"""
+    original = [
+        {"id": "1", "violations": [{"rule_id": "R01", "rule_name": "无视用户拒绝"}]},
+    ]
+    recheck = [
+        {"id": "1", "violations": []},
+    ]
+    prompt = _build_adjudication_prompt(
+        ["1"], "R01", original, recheck, {"1": "用户：我不需要\n客服：好的"}
+    )
+    assert "R01" in prompt
+    assert "无视用户拒绝" in prompt
+    assert "违规" in prompt
+    assert "通过" in prompt
+    assert "裁决" in prompt
