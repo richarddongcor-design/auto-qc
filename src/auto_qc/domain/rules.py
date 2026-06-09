@@ -140,6 +140,14 @@ def _read_cache(cache_dir: str, name: str, source_hash: str | None = None) -> di
     return data
 
 
+def _load_cache(cache_dir: str, name: str) -> dict | None:
+    """加载缓存 JSON，返回 None 表示缓存不存在。不校验 hash。"""
+    cache_path = Path(cache_dir) / f"{name}.json"
+    if not cache_path.exists():
+        return None
+    return json.loads(cache_path.read_text(encoding="utf-8"))
+
+
 def load_or_parse_rules(
     md_path: str | None = None,
     name: str | None = None,
@@ -147,6 +155,7 @@ def load_or_parse_rules(
 ) -> RulePackage:
     """
     加载规则：优先从缓存读取，否则解析 markdown 并写入缓存。
+    当检测到 hash 不一致时，交互式询问用户是否更新缓存。
 
     参数:
         md_path: rules.md 路径。传 None 时仅从缓存加载。
@@ -163,13 +172,21 @@ def load_or_parse_rules(
     # 计算 source_hash
     source_hash = _hash_file(md_path) if md_path else None
 
-    # 尝试从缓存加载
+    # 尝试从缓存加载（不校验 hash）
     if name:
-        cached = _read_cache(cache_dir, name, source_hash)
-        if cached:
-            return RulePackage.from_dict(cached)
+        cached_data = _load_cache(cache_dir, name)
+        if cached_data is not None:
+            cached_hash = cached_data.get("_source_hash")
+            # 无 md_path（纯缓存加载）或 hash 匹配 → 直接返回
+            if source_hash is None or cached_hash == source_hash:
+                return RulePackage.from_dict(cached_data)
+            # hash 不匹配 → 交互式确认
+            answer = input("检测到规则文件有变更，是否更新缓存？[y/N] ")
+            if answer.strip().lower() != "y":
+                return RulePackage.from_dict(cached_data)
+            # y/Y → 继续往下，重新解析并覆盖缓存
 
-    # 没有缓存或 hash 不匹配 → 解析 markdown
+    # 没有缓存或 hash 不匹配且用户选择更新 → 解析 markdown
     if not md_path:
         raise FileNotFoundError(
             f"缓存未命中且未提供规则文件: name={name}"
