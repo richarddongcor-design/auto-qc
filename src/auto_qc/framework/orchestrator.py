@@ -16,7 +16,7 @@ from auto_qc.framework.validator import (
 from auto_qc.framework.worker import call_llm_with_retry, extract_json, reset_token_stats, get_token_stats
 from auto_qc.framework.progress import create_progress, load_progress, save_progress
 from auto_qc.framework.coordinator import Coordinator
-from auto_qc.framework.cross_validator import fixed_sample, compare_results
+from auto_qc.framework.cross_validator import fixed_sample, compare_results, adjudicate
 
 
 async def _process_batch(
@@ -234,6 +234,22 @@ async def run_qc(
             else:
                 label = "一致性差"
             print(f"     {rule_id}: Kappa={s['kappa']:.2f} ({label}), 一致率 {s['agreement']:.0%} ({s['total_judgments']}次判断)")
+
+        # 对低一致性规则执行自动裁决
+        if cross_result.kappa < 0.6:
+            print(f"  检测到低一致性规则，启动自动裁决...")
+            for rule_id, stats in cross_result.per_rule.items():
+                if stats["kappa"] < 0.6:
+                    print(f"    裁决 {rule_id}: Kappa={stats['kappa']:.2f}")
+                    qc_results, _ = await adjudicate(
+                        sample, recheck_results, qc_results, rule_id,
+                        call_llm_with_retry, conv_text_map,
+                    )
+                    cross_result.adjudicated_rules.append(rule_id)
+                    cross_result.per_rule[rule_id]["adjudicated"] = True
+
+            if cross_result.adjudicated_rules:
+                print(f"  [OK] 已裁决规则: {', '.join(cross_result.adjudicated_rules)}")
     else:
         print("  [!] 跳过交叉验证（样本不足）")
 
@@ -263,6 +279,9 @@ async def run_qc(
         "total_batches": len(batches),
         "violation_rate": stats["violation_rate"],
         "token_usage": token_summary,
+        "adjudication": {
+            "adjudicated_rules": getattr(cross_result, "adjudicated_rules", []) if sample else [],
+        } if sample else [],
     }
     summary_path = Path(work_dir) / "summary.json"
     summary_path.write_text(
