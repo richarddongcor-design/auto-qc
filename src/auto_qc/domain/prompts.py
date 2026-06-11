@@ -1,7 +1,7 @@
 """Prompt 模板组装——把规则 + 对话拼成 LLM 可理解的完整 prompt"""
 import json
 from pathlib import Path
-from auto_qc.domain.schemas import RulePackage, Batch
+from auto_qc.domain.schemas import RulePackage, Batch, Rule
 
 _TEMPLATES_DIR = Path(__file__).resolve().parent.parent.parent.parent / "templates"
 
@@ -38,6 +38,37 @@ def build_qc_prompt(batch: Batch, rule_package: RulePackage) -> str:
     )
 
     prompt = template.replace("{{RULES_JSON}}", rules_json)
+    prompt = prompt.replace("{{BATCH_SIZE}}", str(batch.size))
+    prompt = prompt.replace("{{CONVERSATIONS}}", conversations_json)
+    prompt = prompt.replace("{{BATCH_ID}}", str(batch.batch_id))
+
+    return prompt
+
+
+def build_single_rule_prompt(batch: Batch, rule: Rule) -> str:
+    """
+    组装单规则质检 prompt。
+    每条规则独立构建一次 prompt，只包含一条规则的描述。
+    """
+    template = _load_template("worker-prompt.md")
+
+    conversations_json = json.dumps(
+        [{"id": c.id, "time": c.time, "intent": c.intent, "conversation": c.conversation}
+         for c in batch.conversations],
+        ensure_ascii=False,
+        indent=2,
+    )
+
+    rule_json = json.dumps(
+        {"rule_id": rule.rule_id, "name": rule.name, "severity": rule.severity,
+         "description": rule.description, "detection_logic": rule.detection_logic,
+         "examples": rule.examples},
+        ensure_ascii=False,
+        indent=2,
+    )
+
+    prompt = template.replace("{{RULE_JSON}}", rule_json)
+    prompt = prompt.replace("{{RULE_ID}}", rule.rule_id)
     prompt = prompt.replace("{{BATCH_SIZE}}", str(batch.size))
     prompt = prompt.replace("{{CONVERSATIONS}}", conversations_json)
     prompt = prompt.replace("{{BATCH_ID}}", str(batch.batch_id))
