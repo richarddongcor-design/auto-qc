@@ -11,16 +11,16 @@ def main():
         prog="auto-qc",
     )
     parser.add_argument("--data", required=True, help="源数据 Excel 文件路径")
-    parser.add_argument("--rules", help="规则 Markdown 文件路径（与 --rules-name 二选一或合并使用）")
-    parser.add_argument("--rules-name", help="规则名称，用于缓存命名和后续引用。不传时从 --rules 文件名推断")
+    parser.add_argument("--rule-sets", required=True,
+                        help="规则集名称，多个用逗号分隔（如 auto-pi,project-standards）")
     parser.add_argument("--output", help="报告输出路径（默认 output/<timestamp>_<run_name>/ 目录下）")
     parser.add_argument("--work-dir", help="工作目录（默认 output/<timestamp>_<run_name>/）")
     parser.add_argument("--run-name", help="运行名称（默认从数据文件名推断）")
 
     args = parser.parse_args()
-
-    if not args.rules and not args.rules_name:
-        parser.error("请提供 --rules（规则文件）或 --rules-name（使用缓存的规则）")
+    rule_set_names = [s.strip() for s in args.rule_sets.split(",") if s.strip()]
+    if not rule_set_names:
+        parser.error("--rule-sets 至少需要指定一个规则集")
 
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
     run_name = args.run_name or Path(args.data).stem
@@ -30,8 +30,7 @@ def main():
     from auto_qc.framework.orchestrator import run_qc
     asyncio.run(run_qc(
         data_path=args.data,
-        rules_path=args.rules,
-        rules_name=args.rules_name,
+        rule_set_names=rule_set_names,
         output_path=output_path,
         work_dir=work_dir,
     ))
