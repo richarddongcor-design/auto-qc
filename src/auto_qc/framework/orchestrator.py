@@ -3,7 +3,6 @@ import asyncio
 import json
 from pathlib import Path
 
-from auto_qc.domain.schemas import Batch, Conversation
 from auto_qc.domain.rules import load_rule_sets
 from auto_qc.domain.data_loader import load_conversations, save_batches
 from auto_qc.domain.prompts import build_single_rule_prompt
@@ -11,6 +10,7 @@ from auto_qc.domain.report import write_report, verify_report_exists
 from auto_qc.domain.merger import merge_to_wide_rows
 
 from auto_qc.framework.validator import (
+    validate_batches,
     validate_single_rule_output,
 )
 from auto_qc.framework.worker import call_llm_with_retry, extract_json, reset_token_stats, get_token_stats
@@ -43,21 +43,19 @@ async def run_qc(
     rule_sets = load_rule_sets(rule_set_names)
     all_rules = []
     rule_name_map = {}
-    rule_set_map = {}
     for rs in rule_sets:
         for r in rs.rules:
             all_rules.append(r)
             rule_name_map[r.rule_id] = r.name
-            rule_set_map[r.rule_id] = rs.name
     print(f"  [OK] 加载 {len(rule_sets)} 个规则集, {len(all_rules)} 条规则")
 
     # ─── Step 3: 数据加载 + 批次拆分 ───
     print("[Step 3] 数据加载 + 批次拆分...")
     batches = load_conversations(data_path, batch_size=25)
     total_ids = sum(b.size for b in batches)
+    validate_batches(batches)
     print(f"  [OK] 加载完成: {total_ids} 条对话, {len(batches)} 批")
 
-    conv_text_map = {c.id: c.conversation for b in batches for c in b.conversations}
     all_convs = []
     for b in batches:
         for c in b.conversations:
@@ -82,25 +80,26 @@ async def run_qc(
         rule_conv_results = {}
 
         async def _check_batch(batch):
-            for attempt in range(3):
-                try:
-                    prompt = build_single_rule_prompt(batch, rule)
-                    raw = await call_llm_with_retry(prompt)
-                    json_text = extract_json(raw)
-                    data = validate_single_rule_output(
-                        json_text, batch.size, rule.rule_id, batch_conv_ids[batch.batch_id],
-                    )
-                    coordinator.mark_done(batch.batch_id)
-                    return data["results"]
-                except Exception as e:
-                    retries = coordinator.increment_retry(batch.batch_id)
-                    if retries >= 3:
-                        coordinator.mark_failed(batch.batch_id)
-                        print(f"  {rule.rule_id} 批次 {batch.batch_id} 失败: {e}")
-                        return [{"id": cid, "violates": False, "evidence": "", "reasoning": ""}
-                                for cid in batch_conv_ids[batch.batch_id]]
-                    if attempt < 2:
-                        print(f"  {rule.rule_id} 批次 {batch.batch_id} 第 {attempt+1} 次重试: {e}")
+            async with sem:
+                for attempt in range(3):
+                    try:
+                        prompt = build_single_rule_prompt(batch, rule)
+                        raw = await call_llm_with_retry(prompt)
+                        json_text = extract_json(raw)
+                        data = validate_single_rule_output(
+                            json_text, batch.size, rule.rule_id, batch_conv_ids[batch.batch_id],
+                        )
+                        coordinator.mark_done(batch.batch_id)
+                        return data["results"]
+                    except Exception as e:
+                        retries = coordinator.increment_retry(batch.batch_id)
+                        if retries >= 3:
+                            coordinator.mark_failed(batch.batch_id)
+                            print(f"  {rule.rule_id} 批次 {batch.batch_id} 失败: {e}")
+                            return [{"id": cid, "violates": False, "evidence": "", "reasoning": ""}
+                                    for cid in batch_conv_ids[batch.batch_id]]
+                        if attempt < 2:
+                            print(f"  {rule.rule_id} 批次 {batch.batch_id} 第 {attempt+1} 次重试: {e}")
             return []
 
         tasks = [_check_batch(b) for b in batches]
