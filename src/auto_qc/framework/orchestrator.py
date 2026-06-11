@@ -1,315 +1,216 @@
-"""全流程编排器——串联 Step 0 到 Step 7"""
+"""全流程编排器——Step 1 到 Step 6"""
 import asyncio
 import json
 from pathlib import Path
-from typing import Optional
 
 from auto_qc.domain.schemas import Batch, Conversation
-from auto_qc.domain.rules import load_or_parse_rules
+from auto_qc.domain.rules import load_rule_sets
 from auto_qc.domain.data_loader import load_conversations, save_batches
-from auto_qc.domain.prompts import build_qc_prompt
+from auto_qc.domain.prompts import build_single_rule_prompt
 from auto_qc.domain.report import write_report, verify_report_exists
+from auto_qc.domain.merger import merge_to_wide_rows
 
 from auto_qc.framework.validator import (
-    validate_rule_package, validate_batches, validate_worker_output, validate_merge_results,
+    validate_single_rule_output,
 )
 from auto_qc.framework.worker import call_llm_with_retry, extract_json, reset_token_stats, get_token_stats
 from auto_qc.framework.progress import create_progress, load_progress, save_progress
 from auto_qc.framework.coordinator import Coordinator
-from auto_qc.framework.cross_validator import fixed_sample, compare_results, adjudicate
-
-
-async def _process_batch(
-    batch: Batch,
-    rule_ids: list[str],
-    prompt_builder,
-    coordinator: Coordinator,
-    work_dir: str,
-) -> list[dict]:
-    """
-    处理单个批次：拼 prompt → 调 LLM → 校验 → 重试。
-    prompt_builder: (Batch) -> str 的函数。
-    """
-    prompt = prompt_builder(batch)
-
-    for attempt in range(3):
-        try:
-            raw = await call_llm_with_retry(prompt)
-            json_text = extract_json(raw)
-            output = validate_worker_output(json_text, batch.size, rule_ids)
-            coordinator.mark_done(batch.batch_id)
-
-            # 返回带原始字段（id/time/intent）的结果
-            conv_map = {c.id: c for c in batch.conversations}
-            enriched = []
-            for r in output.results:
-                conv = conv_map.get(r.id, None)
-                enriched.append({
-                    "id": r.id,
-                    "time": conv.time if conv else "",
-                    "intent": conv.intent if conv else "",
-                    "status": r.status,
-                    "violations": [
-                        {"rule_id": v.rule_id, "rule_name": v.rule_name,
-                         "severity": v.severity, "evidence": v.evidence,
-                         "suggestion": v.suggestion}
-                        for v in r.violations
-                    ],
-                })
-
-            # 保存单批结果
-            result_path = Path(work_dir) / f"batch_{batch.batch_id}_result.json"
-            result_path.write_text(json.dumps(enriched, ensure_ascii=False, indent=2), encoding="utf-8")
-
-            return enriched
-
-        except Exception as e:
-            retries = coordinator.increment_retry(batch.batch_id)
-            if retries >= 3:
-                coordinator.mark_failed(batch.batch_id)
-                print(f"批次 {batch.batch_id} 失败（已重试 3 次）: {e}")
-                return []
-            print(f"批次 {batch.batch_id} 第 {retries} 次重试: {e}")
-
-    return []
-
-
-async def _dispatch_phase(
-    batches: list[Batch],
-    rule_ids: list[str],
-    prompt_builder,
-    coordinator: Coordinator,
-    work_dir: str,
-    sem: asyncio.Semaphore,
-    process_func=None,
-) -> list[dict]:
-    """
-    并发分发批次，收集所有结果。
-    process_func: 可选自定义处理函数，默认为 _process_batch。
-    """
-    all_results = []
-
-    async def _run_one(batch: Batch):
-        async with sem:
-            func = process_func or _process_batch
-            return await func(batch, rule_ids, prompt_builder, coordinator, work_dir)
-
-    while True:
-        next_ids = coordinator.get_next_batches()
-        if not next_ids:
-            break
-
-        batch_map = {b.batch_id: b for b in batches}
-        tasks = [_run_one(batch_map[bid]) for bid in next_ids]
-        batch_results = await asyncio.gather(*tasks)
-        for r in batch_results:
-            all_results.extend(r)
-
-        summary = coordinator.get_summary()
-        total_progress = summary["done"] + summary["failed"]
-        print(f"进度: {total_progress}/{summary['total']} 批")
-
-    return all_results
 
 
 async def run_qc(
     data_path: str,
+    rule_set_names: list[str],
     output_path: str,
     work_dir: str = "./auto_qc_work",
-    rules_path: str | None = None,
-    rules_name: str | None = None,
 ) -> None:
     """
-    完整质检流程驱动入口。
+    完整质检流程驱动入口（v2.0 逐规则打标模式）。
     """
     Path(work_dir).mkdir(parents=True, exist_ok=True)
-
-    # 重置 Token 统计
     reset_token_stats()
 
     # ─── Step 1: 环境检查 ───
     print("[Step 1] 环境检查...")
-    from auto_qc.domain.report import HEADER_FONT  # 验证 openpyxl 可用
+    from auto_qc.domain.report import HEADER_FONT
     print("  [OK] 依赖就绪")
-
     if not Path(data_path).exists():
         raise FileNotFoundError(f"数据文件不存在: {data_path}")
-    if rules_path and not Path(rules_path).exists():
-        raise FileNotFoundError(f"规则文件不存在: {rules_path}")
     print("  [OK] 文件存在")
 
-    # ─── Step 2: 规则解析 + 校验 ───
-    print("[Step 2] 规则解析 + 校验...")
-    rule_package = load_or_parse_rules(md_path=rules_path, name=rules_name)
-    validate_rule_package(rule_package)
-    rule_ids = rule_package.rule_ids
-    print(f"  [OK] 解析完成: {len(rule_package.rules)} 条规则 ({', '.join(rule_ids)})")
+    # ─── Step 2: 规则集加载 ───
+    print("[Step 2] 规则集加载...")
+    rule_sets = load_rule_sets(rule_set_names)
+    all_rules = []
+    rule_name_map = {}
+    rule_set_map = {}
+    for rs in rule_sets:
+        for r in rs.rules:
+            all_rules.append(r)
+            rule_name_map[r.rule_id] = r.name
+            rule_set_map[r.rule_id] = rs.name
+    print(f"  [OK] 加载 {len(rule_sets)} 个规则集, {len(all_rules)} 条规则")
 
-    # ─── Step 3: 数据加载 + 拆分 ───
+    # ─── Step 3: 数据加载 + 批次拆分 ───
     print("[Step 3] 数据加载 + 批次拆分...")
     batches = load_conversations(data_path, batch_size=25)
-    validate_batches(batches)
     total_ids = sum(b.size for b in batches)
     print(f"  [OK] 加载完成: {total_ids} 条对话, {len(batches)} 批")
 
-    # 构建 id → conversation 映射，供交叉验证使用
     conv_text_map = {c.id: c.conversation for b in batches for c in b.conversations}
+    all_convs = []
+    for b in batches:
+        for c in b.conversations:
+            all_convs.append({"id": c.id, "time": c.time, "intent": c.intent})
 
-    # 保存批次到临时目录
     save_batches(batches, work_dir)
 
-    # ─── Step 4: 并发质检 ───
-    print("[Step 4] 并发质检...")
+    # ─── Step 4: 逐规则并发打标 ───
+    print("[Step 4] 逐规则并发打标...")
     coordinator = Coordinator(work_dir)
     create_progress(work_dir, len(batches), phase="qc")
 
-    sem = asyncio.Semaphore(50)  # 最多 50 并发
-    qc_results = await _dispatch_phase(
-        batches, rule_ids,
-        prompt_builder=lambda b: build_qc_prompt(b, rule_package),
-        coordinator=coordinator,
-        work_dir=work_dir,
-        sem=sem,
-    )
-    print(f"  [OK] 合规检测完成: {len(qc_results)} 条结果")
+    batch_conv_ids = {b.batch_id: set(b.ids) for b in batches}
+    sem = asyncio.Semaphore(50)
 
-    # ─── Step 5: 交叉验证 ───
-    print("[Step 5] 交叉验证...")
-    sample = fixed_sample(qc_results, sample_size=200)
-    if sample:
-        recheck_results = []
-        # 计算 chunk 数，初始化交叉验证进度
-        chunk_count = (len(sample) + 24) // 25
-        for i in range(0, len(sample), 25):
-            chunk_idx = i // 25 + 1
-            chunk = sample[i:i + 25]
-            chunk_batch = Batch(batch_id=chunk_idx, conversations=[
-                Conversation(id=s["id"], time=s.get("time", ""),
-                             intent=s.get("intent", ""),
-                             conversation=conv_text_map.get(s["id"], ""))
-                for s in chunk
-            ])
-            recheck_output = None
+    per_rule_results: dict[str, dict[str, dict]] = {}
+
+    async def _run_single_rule(
+        rule,
+        batches,
+    ) -> dict[str, dict[str, dict]]:
+        rule_conv_results = {}
+
+        async def _check_batch(batch):
             for attempt in range(3):
                 try:
-                    prompt = build_qc_prompt(chunk_batch, rule_package)
+                    prompt = build_single_rule_prompt(batch, rule)
                     raw = await call_llm_with_retry(prompt)
                     json_text = extract_json(raw)
-                    recheck_output = validate_worker_output(json_text, chunk_batch.size, rule_ids)
-                    break
-                except Exception as e:
-                    if attempt >= 2:
-                        print(f"  交叉验证抽样批次 {chunk_idx} 失败: {e}")
-                        break
-                    print(f"  交叉验证抽样批次 {chunk_idx} 第 {attempt+1} 次重试: {e}")
-
-            # update cross-validation progress
-            progress = load_progress(work_dir)
-            progress.batch_status[str(chunk_idx)] = "done" if recheck_output else "failed"
-            progress.completed_batches = sum(
-                1 for s in progress.batch_status.values() if s in ("done", "failed")
-            )
-            save_progress(work_dir, progress)
-
-            if recheck_output is None:
-                continue
-            recheck_results.extend([
-                {"id": r.id, "violations": [{"rule_id": v.rule_id} for v in r.violations]}
-                for r in recheck_output.results
-            ])
-
-        # 规则级 Kappa 对比
-        cross_result = compare_results(sample, recheck_results)
-        print(f"  [OK] 交叉验证: 抽检 {len(sample)} 条")
-        print(f"     总体 Kappa={cross_result.kappa:.3f} ({cross_result.kappa_status}), 差异率 {cross_result.discrepancy_rate:.1%}")
-        for rule_id, s in cross_result.per_rule.items():
-            if s["kappa"] >= 0.8:
-                label = "几乎完全一致"
-            elif s["kappa"] >= 0.6:
-                label = "高度一致"
-            elif s["kappa"] >= 0.4:
-                label = "中等一致"
-            elif s["kappa"] >= 0.2:
-                label = "一致性低"
-            else:
-                label = "一致性差"
-            print(f"     {rule_id}: Kappa={s['kappa']:.2f} ({label}), 一致率 {s['agreement']:.0%} ({s['total_judgments']}次判断)")
-
-        # 对低一致性规则执行自动裁决
-        if cross_result.kappa < 0.6:
-            print(f"  检测到低一致性规则，启动自动裁决...")
-            for rule_id, stats in cross_result.per_rule.items():
-                if stats["kappa"] < 0.6:
-                    print(f"    裁决 {rule_id}: Kappa={stats['kappa']:.2f}")
-                    qc_results, _ = await adjudicate(
-                        sample, recheck_results, qc_results, rule_id,
-                        call_llm_with_retry, conv_text_map,
+                    data = validate_single_rule_output(
+                        json_text, batch.size, rule.rule_id, batch_conv_ids[batch.batch_id],
                     )
-                    cross_result.adjudicated_rules.append(rule_id)
-                    cross_result.per_rule[rule_id]["adjudicated"] = True
+                    coordinator.mark_done(batch.batch_id)
+                    return data["results"]
+                except Exception as e:
+                    retries = coordinator.increment_retry(batch.batch_id)
+                    if retries >= 3:
+                        coordinator.mark_failed(batch.batch_id)
+                        print(f"  {rule.rule_id} 批次 {batch.batch_id} 失败: {e}")
+                        return [{"id": cid, "violates": False, "evidence": "", "reasoning": ""}
+                                for cid in batch_conv_ids[batch.batch_id]]
+                    if attempt < 2:
+                        print(f"  {rule.rule_id} 批次 {batch.batch_id} 第 {attempt+1} 次重试: {e}")
+            return []
 
-            if cross_result.adjudicated_rules:
-                print(f"  [OK] 已裁决规则: {', '.join(cross_result.adjudicated_rules)}")
-    else:
-        print("  [!] 跳过交叉验证（样本不足）")
+        tasks = [_check_batch(b) for b in batches]
+        all_batch_results = await asyncio.gather(*tasks)
 
-    # ─── Step 7: 报告生成 ───
-    print("[Step 7] 报告生成...")
-    validate_merge_results(qc_results, total_ids)
-    stats = _compute_stats(qc_results, rule_package)
+        for batch_results in all_batch_results:
+            for r in batch_results:
+                rule_conv_results[r["id"]] = {
+                    "violates": r.get("violates", False),
+                    "evidence": r.get("evidence", ""),
+                }
+        return rule_conv_results
 
-    write_report(output_path, qc_results, stats)
+    # 对所有规则并发执行
+    rule_tasks = [_run_single_rule(r, batches) for r in all_rules]
+    all_results_list = await asyncio.gather(*rule_tasks)
+
+    for i, rule in enumerate(all_rules):
+        per_rule_results[rule.rule_id] = all_results_list[i]
+
+    wide_rows = merge_to_wide_rows(per_rule_results, all_convs, rule_name_map)
+    print(f"  [OK] 逐规则打标完成: {len(all_rules)} 条规则 × {len(batches)} 批 = {len(all_rules) * len(batches)} 次调用")
+
+    # ─── Step 5: 统计计算 ───
+    print("[Step 5] 统计计算...")
+    stats = _compute_stats_v2(wide_rows, rule_sets, rule_name_map)
+    print(f"  [OK] 总体违规率: {stats['violation_rate']}")
+
+    # ─── Step 6: 报告生成 ───
+    print("[Step 6] 报告生成...")
+    write_report(output_path, wide_rows, stats)
     if verify_report_exists(output_path):
         print(f"  [OK] 报告已生成: {output_path}")
     else:
         raise RuntimeError("报告文件生成失败")
 
-    # ─── Token 消耗 ───
+    # Token 消耗
     token_summary = get_token_stats().summary()
-    print("\n  [数据] Token 消耗")
-    print(f"     输入: {token_summary['total_input_tokens']:,} tokens")
-    print(f"     输出: {token_summary['total_output_tokens']:,} tokens")
-    print(f"     总计: {token_summary['total_tokens']:,} tokens")
+    print(f"\n  [数据] Token 消耗: 输入 {token_summary['total_input_tokens']:,} | 输出 {token_summary['total_output_tokens']:,} | 总计 {token_summary['total_tokens']:,}")
 
-    # 写 summary.json
     summary_data = {
         "data_file": data_path,
-        "rules_file": rules_path,
+        "rule_sets": rule_set_names,
         "total_conversations": total_ids,
-        "total_batches": len(batches),
+        "total_checks": len(all_rules) * total_ids,
         "violation_rate": stats["violation_rate"],
         "token_usage": token_summary,
-        "adjudication": {
-            "adjudicated_rules": getattr(cross_result, "adjudicated_rules", []) if sample else [],
-        } if sample else [],
     }
     summary_path = Path(work_dir) / "summary.json"
-    summary_path.write_text(
-        json.dumps(summary_data, ensure_ascii=False, indent=2),
-        encoding="utf-8",
-    )
+    summary_path.write_text(json.dumps(summary_data, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"  [OK] 运行摘要已保存: {summary_path}")
 
 
 # ─── 辅助函数 ───
 
-def _compute_stats(qc_results: list[dict], rule_package) -> dict:
-    """计算统计概览。"""
-    total = len(qc_results)
-    pass_count = sum(1 for r in qc_results if not r.get("violations"))
-    violation_rate = f"{((total - pass_count) / total * 100):.1f}%" if total > 0 else "0%"
+def _compute_stats_v2(wide_rows: list[dict], rule_sets: list, rule_name_map: dict) -> dict:
+    """v2.0 统计概览计算。"""
+    total = len(wide_rows)
+    violation_rows = [r for r in wide_rows if r["summary"]]
+    pass_rows = [r for r in wide_rows if not r["summary"]]
 
-    rules_hit = {}
-    rule_names = {r.rule_id: r.name for r in rule_package.rules}
-    for r in qc_results:
-        for v in r.get("violations", []):
-            rid = v.get("rule_id", "")
-            rules_hit[rid] = rules_hit.get(rid, 0) + 1
+    # 规则集统计
+    rule_set_stats = {}
+    for rs in rule_sets:
+        rs_rules = [r.rule_id for r in rs.rules]
+        total_checks = total * len(rs_rules)
+        violations = sum(
+            1 for row in wide_rows
+            for rid in rs_rules
+            if row["rules"].get(rid, {}).get("result") == "违规"
+        )
+        rule_set_stats[rs.name] = {
+            "total_checks": total_checks,
+            "violations": violations,
+            "rate": f"{violations / total_checks * 100:.1f}%" if total_checks else "0%",
+        }
+
+    # 规则统计
+    rule_stats = {}
+    for row in wide_rows:
+        for rid, rr in row["rules"].items():
+            if rid not in rule_stats:
+                rule_stats[rid] = {"pass": 0, "violation": 0}
+            if rr["result"] == "违规":
+                rule_stats[rid]["violation"] += 1
+            else:
+                rule_stats[rid]["pass"] += 1
+    for rid, s in rule_stats.items():
+        s["pass_rate"] = f"{s['pass'] / total * 100:.1f}%"
+        s["violation_rate"] = f"{s['violation'] / total * 100:.1f}%"
+
+    # 问题分布
+    problem_distribution = []
+    for rid, s in rule_stats.items():
+        if s["violation"] > 0:
+            problem_distribution.append({
+                "rule_id": rid,
+                "rule_name": rule_name_map.get(rid, rid),
+                "count": s["violation"],
+                "ratio": f"{s['violation'] / len(violation_rows) * 100:.1f}%" if violation_rows else "0%",
+            })
+    problem_distribution.sort(key=lambda x: x["count"], reverse=True)
 
     return {
         "total": total,
-        "pass": pass_count,
-        "violation_rate": violation_rate,
-        "rules_hit": rules_hit,
-        "rule_names": rule_names,
+        "pass_count": len(pass_rows),
+        "violation_count": len(violation_rows),
+        "violation_rate": f"{len(violation_rows) / total * 100:.1f}%" if total else "0%",
+        "rule_set_stats": rule_set_stats,
+        "rule_stats": rule_stats,
+        "problem_distribution": problem_distribution,
+        "rule_name_map": rule_name_map,
     }
