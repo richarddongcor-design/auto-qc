@@ -5,7 +5,6 @@ from pathlib import Path
 import pytest
 from auto_qc.domain.rules import parse_rules_file, validate_rule_package
 from auto_qc.domain.data_loader import load_conversations, save_batches
-from auto_qc.domain.prompts import build_qc_prompt
 from auto_qc.framework.validator import validate_batches, validate_worker_output, validate_merge_results
 from auto_qc.framework.worker import extract_json
 from auto_qc.framework.coordinator import Coordinator
@@ -74,20 +73,19 @@ class TestEndToEndDataPipeline:
             assert has_unfinished(tmpdir)
 
     def test_prompt_building_with_rules(self):
-        """测试 prompt 能正确组装规则和对话"""
-        from auto_qc.domain.schemas import Batch, Conversation, Rule, RulePackage
+        """测试单规则 prompt 能正确组装规则和对话"""
+        from auto_qc.domain.schemas import Batch, Conversation, Rule
+        from auto_qc.domain.prompts import build_single_rule_prompt
 
         batch = Batch(batch_id=1, conversations=[
             Conversation(id="1", time="2024-01-01", intent="A", conversation="你好"),
         ])
-        pkg = RulePackage(rules=[
-            Rule(rule_id="R01", name="测试", severity="高",
-                 description="测试描述", detection_logic="测试逻辑"),
-        ])
-        prompt = build_qc_prompt(batch, pkg)
+        rule = Rule(rule_id="R01", name="测试", severity="高",
+                    description="测试描述", detection_logic="测试逻辑")
+        prompt = build_single_rule_prompt(batch, rule)
         assert "R01" in prompt
         assert "你好" in prompt
-        assert "batch_id" in prompt.lower() or "batch" in prompt.lower()
+        assert "batch_id" in prompt.lower()
 
     def test_worker_output_validation_chain(self):
         """测试 Worker 输出校验的完整链路"""
