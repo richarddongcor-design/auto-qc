@@ -3,6 +3,7 @@ import copy
 import json
 import random
 from auto_qc.domain.schemas import CrossValidationResult
+from auto_qc.framework.worker import extract_json
 
 
 def fixed_sample(
@@ -245,7 +246,8 @@ async def adjudicate(
 
     prompt = _build_adjudication_prompt(disputes, rule_id, original, recheck, conv_text_map)
     raw = await call_llm_fn(prompt)
-    data = json.loads(raw)
+    json_text = extract_json(raw)
+    data = json.loads(json_text)
     rulings = {r["id"]: r["violates"] for r in data.get("rulings", [])}
 
     def _check(entries: list[dict], cid: str) -> bool:
