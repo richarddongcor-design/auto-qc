@@ -1,107 +1,140 @@
-"""质检报告 Excel 生成"""
+"""质检报告 Excel 生成（v2.0 宽表模式）"""
 from pathlib import Path
 import openpyxl
+from openpyxl.utils import get_column_letter
 from openpyxl.styles import Font, PatternFill, Alignment
-
 
 HEADER_FONT = Font(name="Microsoft YaHei", bold=True, size=11, color="FFFFFF")
 HEADER_FILL = PatternFill(start_color="4472C4", end_color="4472C4", fill_type="solid")
-SEVERITY_FILLS = {
-    "高": PatternFill(start_color="FF6B6B", end_color="FF6B6B", fill_type="solid"),
-    "中": PatternFill(start_color="FFD93D", end_color="FFD93D", fill_type="solid"),
-    "低": PatternFill(start_color="6BCB77", end_color="6BCB77", fill_type="solid"),
-}
+PASS_FILL = PatternFill(start_color="E8F5E9", end_color="E8F5E9", fill_type="solid")
+VIOLATION_FILL = PatternFill(start_color="FFEBEE", end_color="FFEBEE", fill_type="solid")
 
 
 def _style_header(cell):
     cell.font = HEADER_FONT
     cell.fill = HEADER_FILL
-    cell.alignment = Alignment(horizontal="center", vertical="center")
+    cell.alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
 
 
-def write_report(
-    output_path: str,
-    qc_results: list[dict],
-    stats: dict,
-) -> None:
-    """生成 2-Sheet 质检报告 Excel。"""
+def write_report(output_path: str, wide_rows: list[dict], stats: dict) -> None:
+    """生成宽表质检报告 Excel。"""
     wb = openpyxl.Workbook()
 
-    # Sheet 1: 合规检测
-    ws_qc = wb.active
-    ws_qc.title = "合规检测"
-    ws_qc.sheet_properties.tabColor = "4472C4"
-
-    headers = ["id", "时间", "意向结果", "违规规则", "问题类型", "危害程度", "证据片段", "改进建议"]
-    for col, h in enumerate(headers, 1):
-        _style_header(ws_qc.cell(1, col, h))
-
-    row_num = 2
-    for record in qc_results:
-        violations = record.get("violations", [])
-        if not violations:
-            ws_qc.cell(row_num, 1, record.get("id", ""))
-            ws_qc.cell(row_num, 2, record.get("time", ""))
-            ws_qc.cell(row_num, 3, record.get("intent", ""))
-            ws_qc.cell(row_num, 4, "通过")
-            row_num += 1
-        else:
-            for v in violations:
-                ws_qc.cell(row_num, 1, record.get("id", ""))
-                ws_qc.cell(row_num, 2, record.get("time", ""))
-                ws_qc.cell(row_num, 3, record.get("intent", ""))
-                ws_qc.cell(row_num, 4, v.get("rule_id", ""))
-                ws_qc.cell(row_num, 5, v.get("rule_name", ""))
-                ws_qc.cell(row_num, 6, v.get("severity", ""))
-                ws_qc.cell(row_num, 7, v.get("evidence", ""))
-                ws_qc.cell(row_num, 8, v.get("suggestion", ""))
-                severity = v.get("severity", "")
-                if severity in SEVERITY_FILLS:
-                    ws_qc.cell(row_num, 6).fill = SEVERITY_FILLS[severity]
-                row_num += 1
-
-    # Sheet 2: 统计概览
-    ws_stats = wb.create_sheet("统计概览")
-    ws_stats.sheet_properties.tabColor = "FFD93D"
-
-    ws_stats.cell(1, 1, "指标")
-    ws_stats.cell(1, 2, "数值")
-    _style_header(ws_stats.cell(1, 1))
-    _style_header(ws_stats.cell(1, 2))
-
-    row_num = 2
-    for key, label in [("total", "总对话数"), ("pass", "通过数"), ("violation_rate", "违规率")]:
-        if key in stats:
-            ws_stats.cell(row_num, 1, label)
-            ws_stats.cell(row_num, 2, stats[key])
-            row_num += 1
-
-    row_num += 1
-    rule_header = ["规则ID", "规则名称", "命中次数", "占比"]
-    for col, h in enumerate(rule_header, 1):
-        _style_header(ws_stats.cell(row_num, col, h))
-    row_num += 1
-
-    rules_hit = stats.get("rules_hit", {})
-    rule_names = stats.get("rule_names", {})
-    total_violations = sum(rules_hit.values()) if rules_hit else 0
-
-    for rule_id in sorted(rules_hit.keys()):
-        count = rules_hit[rule_id]
-        pct = f"{count / total_violations * 100:.1f}%" if total_violations > 0 else "0.0%"
-        ws_stats.cell(row_num, 1, rule_id)
-        ws_stats.cell(row_num, 2, rule_names.get(rule_id, ""))
-        ws_stats.cell(row_num, 3, count)
-        ws_stats.cell(row_num, 4, pct)
-        row_num += 1
-
-    ws_stats.cell(row_num, 1, "合计")
-    ws_stats.cell(row_num, 3, total_violations)
-    ws_stats.cell(row_num, 4, "100.0%")
+    _write_detail_sheet(wb, wide_rows)
+    _write_stats_sheet(wb, stats)
 
     Path(output_path).parent.mkdir(parents=True, exist_ok=True)
     wb.save(output_path)
     wb.close()
+
+
+def _write_detail_sheet(wb, wide_rows: list[dict]) -> None:
+    """Sheet 1: 打标明细（宽表）。"""
+    ws = wb.active
+    ws.title = "打标明细"
+    ws.sheet_properties.tabColor = "4472C4"
+
+    if not wide_rows:
+        ws.cell(1, 1, "无数据")
+        return
+
+    rule_ids = list(wide_rows[0]["rules"].keys())
+    rule_names = {rid: wide_rows[0]["rules"][rid].get("rule_name", rid) for rid in rule_ids}
+
+    headers = ["id", "时间", "意向结果"] + [f"{rid}: {rule_names[rid]}" for rid in rule_ids] + ["打标详情"]
+    for col, h in enumerate(headers, 1):
+        _style_header(ws.cell(1, col, h))
+
+    for row_idx, row in enumerate(wide_rows, 2):
+        ws.cell(row_idx, 1, row["id"])
+        ws.cell(row_idx, 2, row.get("time", ""))
+        ws.cell(row_idx, 3, row.get("intent", ""))
+
+        for col_idx, rid in enumerate(rule_ids, 4):
+            rr = row["rules"].get(rid, {})
+            result = rr.get("result", "通过")
+            cell = ws.cell(row_idx, col_idx, result)
+            cell.fill = VIOLATION_FILL if result == "违规" else PASS_FILL
+
+        summary_col = 4 + len(rule_ids)
+        ws.cell(row_idx, summary_col, row.get("summary", ""))
+
+    ws.column_dimensions["A"].width = 12
+    ws.column_dimensions["B"].width = 16
+    ws.column_dimensions["C"].width = 10
+    for col_idx in range(4, 4 + len(rule_ids)):
+        ws.column_dimensions[get_column_letter(col_idx)].width = 14
+    ws.column_dimensions[get_column_letter(4 + len(rule_ids))].width = 60
+
+
+def _write_stats_sheet(wb, stats: dict) -> None:
+    """Sheet 2: 统计概览。"""
+    ws = wb.create_sheet("统计概览")
+    ws.sheet_properties.tabColor = "FFD93D"
+
+    row = 1
+
+    # 总体概览
+    ws.cell(row, 1, "【总体概览】").font = Font(bold=True, size=13)
+    row += 1
+    for label, key in [("总对话数", "total"), ("违规对话数", "violation_count"),
+                        ("通过对话数", "pass_count"), ("总体违规率", "violation_rate")]:
+        ws.cell(row, 1, label)
+        ws.cell(row, 2, stats.get(key, 0))
+        row += 1
+    row += 1
+
+    # 按规则集统计
+    ws.cell(row, 1, "【按规则集统计】").font = Font(bold=True, size=13)
+    row += 1
+    for col, h in enumerate(["规则集", "总检查次数", "违规次数", "违规率"], 1):
+        _style_header(ws.cell(row, col, h))
+    row += 1
+    for rs_name, rs_stat in stats.get("rule_set_stats", {}).items():
+        ws.cell(row, 1, rs_name)
+        ws.cell(row, 2, rs_stat.get("total_checks", 0))
+        ws.cell(row, 3, rs_stat.get("violations", 0))
+        ws.cell(row, 4, rs_stat.get("rate", "0%"))
+        row += 1
+    row += 1
+
+    # 按规则统计
+    ws.cell(row, 1, "【按规则统计】").font = Font(bold=True, size=13)
+    row += 1
+    for col, h in enumerate(["规则ID", "规则名称", "规则集", "通过数", "违规数", "通过率", "违规率"], 1):
+        _style_header(ws.cell(row, col, h))
+    row += 1
+    rule_name_map = stats.get("rule_name_map", {})
+    for rid in sorted(stats.get("rule_stats", {}).keys()):
+        s = stats["rule_stats"][rid]
+        rs_name = rid.split("_")[0] if "_" in rid else ""
+        ws.cell(row, 1, rid)
+        ws.cell(row, 2, rule_name_map.get(rid, rid))
+        ws.cell(row, 3, rs_name)
+        ws.cell(row, 4, s["pass"])
+        ws.cell(row, 5, s["violation"])
+        ws.cell(row, 6, s.get("pass_rate", ""))
+        ws.cell(row, 7, s.get("violation_rate", ""))
+        row += 1
+    row += 1
+
+    # 问题分布
+    ws.cell(row, 1, "【有违规case中的问题分布】").font = Font(bold=True, size=13)
+    row += 1
+    ws.cell(row, 1, f"（在 {stats.get('violation_count', 0)} 个至少有一条违规的对话中）")
+    row += 1
+    for col, h in enumerate(["问题类型", "出现次数", "占违规case比例"], 1):
+        _style_header(ws.cell(row, col, h))
+    row += 1
+    for pd in stats.get("problem_distribution", []):
+        ws.cell(row, 1, f"{pd['rule_id']}: {pd['rule_name']}")
+        ws.cell(row, 2, pd["count"])
+        ws.cell(row, 3, pd["ratio"])
+        row += 1
+
+    ws.column_dimensions["A"].width = 30
+    for c in ["B", "C", "D", "E", "F", "G"]:
+        ws.column_dimensions[c].width = 12
 
 
 def verify_report_exists(output_path: str) -> bool:
