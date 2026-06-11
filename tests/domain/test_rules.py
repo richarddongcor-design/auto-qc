@@ -82,3 +82,35 @@ def test_validate_missing_fields():
     ])
     errors = validate_rule_package(pkg)
     assert len(errors) == 3  # name empty + description empty + detection_logic empty
+
+
+def test_load_rule_sets_by_name():
+    """按名称加载规则集，ID 自动重编码。"""
+    from auto_qc.domain.rules import load_rule_sets
+    rule_sets = load_rule_sets(["auto-pi"])
+    assert len(rule_sets) == 1
+    rs = rule_sets[0]
+    assert rs.name == "auto-pi"
+    assert len(rs.rules) >= 1
+    # ID 应已被重编码
+    assert rs.rules[0].rule_id.startswith("auto-pi_")
+
+
+def test_load_rule_sets_multiple():
+    """加载多个规则集，ID 应无冲突。"""
+    from auto_qc.domain.rules import load_rule_sets
+    rule_sets = load_rule_sets(["auto-pi", "project-standards"])
+    assert len(rule_sets) == 2
+    ids = []
+    for rs in rule_sets:
+        for r in rs.rules:
+            ids.append(r.rule_id)
+    assert len(ids) == len(set(ids)), "跨规则集 ID 应无重复"
+
+
+def test_load_rule_sets_not_found():
+    """不存在的规则集应抛出 FileNotFoundError。"""
+    from auto_qc.domain.rules import load_rule_sets
+    import pytest
+    with pytest.raises(FileNotFoundError):
+        load_rule_sets(["nonexistent"])

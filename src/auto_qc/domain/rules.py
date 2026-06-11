@@ -3,7 +3,7 @@ import hashlib
 import json
 import re
 from pathlib import Path
-from auto_qc.domain.schemas import Rule, RulePackage
+from auto_qc.domain.schemas import Rule, RulePackage, RuleSet
 
 _SEVERITY_MAP = {"高": "高", "中": "中", "低": "低", "HIGH": "高", "MEDIUM": "中", "LOW": "低"}
 
@@ -205,3 +205,49 @@ def load_or_parse_rules(
         ]}, source_hash)
 
     return pkg
+
+
+# ── 规则集加载 ────────────────────────────────────────────
+
+
+def load_rule_sets(
+    rule_set_names: list[str],
+    rules_dir: str | None = None,
+) -> list[RuleSet]:
+    """
+    从 rules/ 目录加载指定的规则集。
+
+    规则集文件命名规则: {name}.json
+    ID 自动重编码为 {name}_{原ID}（如 auto-pi_R01）避免跨规则集冲突。
+    """
+    if rules_dir is None:
+        rules_dir = str(Path(__file__).resolve().parent.parent.parent.parent / "rules")
+
+    result = []
+    for name in rule_set_names:
+        file_path = Path(rules_dir) / f"{name}.json"
+        if not file_path.exists():
+            raise FileNotFoundError(f"规则集文件不存在: {file_path}")
+
+        data = json.loads(file_path.read_text(encoding="utf-8"))
+        rules = []
+        for r in data.get("rules", []):
+            original_id = r.get("rule_id", "")
+            rule = Rule(
+                rule_id=f"{name}_{original_id}",  # 重编码
+                name=r.get("name", ""),
+                severity=r.get("severity", ""),
+                description=r.get("description", ""),
+                detection_logic=r.get("detection_logic", ""),
+                examples=r.get("examples", []),
+            )
+            rules.append(rule)
+
+        result.append(RuleSet(
+            name=data.get("name", name),
+            display_name=data.get("display_name", name),
+            description=data.get("description", ""),
+            rules=rules,
+        ))
+
+    return result
