@@ -2,7 +2,7 @@ import json
 import pytest
 from auto_qc.framework.validator import (
     ValidationError, validate_rule_package, validate_batches,
-    validate_worker_output, validate_merge_results,
+    validate_worker_output, validate_merge_results, validate_single_rule_output,
 )
 from auto_qc.domain.schemas import RulePackage, Rule, Batch, Conversation
 
@@ -111,3 +111,78 @@ class TestValidateMergeResults:
     def test_count_mismatch(self):
         with pytest.raises(ValidationError, match="总数不匹配"):
             validate_merge_results([{"id": "1"}], 3)
+
+
+class TestValidateSingleRuleOutput:
+    def test_valid_output(self):
+        raw = json.dumps({
+            "batch_id": 1,
+            "rule_id": "auto-pi_R01",
+            "results": [
+                {"id": "001", "violates": True, "evidence": "用户: X | AI: Y", "reasoning": "违规"},
+                {"id": "002", "violates": False, "evidence": "", "reasoning": ""},
+            ],
+        })
+        data = validate_single_rule_output(raw, 2, "auto-pi_R01", {"001", "002"})
+        assert data["rule_id"] == "auto-pi_R01"
+        assert len(data["results"]) == 2
+
+    def test_invalid_json_raises(self):
+        with pytest.raises(ValidationError, match="JSON"):
+            validate_single_rule_output("not json", 1, "R01", {"001"})
+
+    def test_rule_id_mismatch_raises(self):
+        raw = json.dumps({
+            "batch_id": 1, "rule_id": "wrong",
+            "results": [{"id": "001", "violates": False, "evidence": "", "reasoning": ""}],
+        })
+        with pytest.raises(ValidationError, match="rule_id"):
+            validate_single_rule_output(raw, 1, "expected", {"001"})
+
+    def test_count_mismatch_raises(self):
+        raw = json.dumps({
+            "batch_id": 1, "rule_id": "R01",
+            "results": [{"id": "001", "violates": False, "evidence": "", "reasoning": ""}],
+        })
+        with pytest.raises(ValidationError, match="数量不匹配"):
+            validate_single_rule_output(raw, 3, "R01", {"001"})
+
+    def test_missing_evidence_raises(self):
+        raw = json.dumps({
+            "batch_id": 1, "rule_id": "R01",
+            "results": [
+                {"id": "001", "violates": True, "evidence": "", "reasoning": ""},
+            ],
+        })
+        with pytest.raises(ValidationError, match="evidence"):
+            validate_single_rule_output(raw, 1, "R01", {"001"})
+
+    def test_missing_reasoning_raises(self):
+        raw = json.dumps({
+            "batch_id": 1, "rule_id": "R01",
+            "results": [
+                {"id": "001", "violates": True, "evidence": "证据", "reasoning": ""},
+            ],
+        })
+        with pytest.raises(ValidationError, match="reasoning"):
+            validate_single_rule_output(raw, 1, "R01", {"001"})
+
+    def test_invalid_violates_raises(self):
+        raw = json.dumps({
+            "batch_id": 1, "rule_id": "R01",
+            "results": [
+                {"id": "001", "violates": "yes", "evidence": "", "reasoning": ""},
+            ],
+        })
+        with pytest.raises(ValidationError, match="violates"):
+            validate_single_rule_output(raw, 1, "R01", {"001"})
+
+    def test_unexpected_id_raises(self):
+        raw = json.dumps({
+            "batch_id": 1, "rule_id": "R01",
+            "results": [
+                {"id": "999", "violates": False, "evidence": "", "reasoning": ""},
+            ],
+        })
+        with pytest.raises(ValidationError, match="999"):
+            validate_single_rule_output(raw, 1, "R01", {"001"})

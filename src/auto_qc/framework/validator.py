@@ -117,3 +117,63 @@ def validate_merge_results(
         raise ValidationError(
             f"合并结果总数不匹配: 期望 {expected_total} 条，实际 {len(results)} 条"
         )
+
+
+def validate_single_rule_output(
+    raw_json: str,
+    batch_size: int,
+    expected_rule_id: str,
+    expected_conv_ids: set[str],
+) -> dict:
+    """
+    校验单规则 LLM 调用的返回结果。
+
+    校验项：
+    1. JSON 合法
+    2. rule_id 匹配
+    3. results 数量 == batch_size
+    4. 每条结果有 id 且属于 expected_conv_ids
+    5. 每条结果有 violates (true/false)
+    6. violates=true 时 evidence 和 reasoning 非空
+
+    所有校验项失败均触发整批重试（抛出 ValidationError）。
+    """
+    try:
+        data = json.loads(raw_json)
+    except json.JSONDecodeError as e:
+        raise ValidationError(f"单规则输出 JSON 解析失败: {e}")
+
+    actual_rule_id = data.get("rule_id", "")
+    if actual_rule_id != expected_rule_id:
+        raise ValidationError(
+            f"rule_id 不匹配: 期望 {expected_rule_id}，实际 {actual_rule_id}"
+        )
+
+    results = data.get("results", [])
+    if len(results) != batch_size:
+        raise ValidationError(
+            f"结果数量不匹配: 期望 {batch_size} 条，实际 {len(results)} 条"
+        )
+
+    seen_ids = set()
+    for r in results:
+        rid = r.get("id", "")
+        if not rid:
+            raise ValidationError("存在空 ID 的结果")
+        if rid in seen_ids:
+            raise ValidationError(f"存在重复 ID: {rid}")
+        if rid not in expected_conv_ids:
+            raise ValidationError(f"ID {rid} 不在期望的对话 ID 集合中")
+        seen_ids.add(rid)
+
+        violates = r.get("violates")
+        if violates not in (True, False):
+            raise ValidationError(f"ID {rid}: violates 值无效 ({violates})")
+
+        if violates:
+            if not r.get("evidence", "").strip():
+                raise ValidationError(f"ID {rid}: violates=true 但 evidence 为空")
+            if not r.get("reasoning", "").strip():
+                raise ValidationError(f"ID {rid}: violates=true 但 reasoning 为空")
+
+    return data
