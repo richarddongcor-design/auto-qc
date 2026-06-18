@@ -9,14 +9,13 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
     * { font-family: 'Inter', -apple-system, 'PingFang SC', sans-serif; }
-    body { background: #fafafa; }
-    .nav-item { @apply text-sm text-gray-400 hover:text-gray-900 transition-colors px-1 py-0.5; }
-    .nav-item.active { @apply text-gray-900 font-medium; }
-    .card { @apply bg-white rounded-xl border border-gray-100 shadow-sm; }
-    .btn-primary { @apply inline-flex items-center justify-center px-6 py-2.5 bg-gray-900 hover:bg-gray-700 text-white text-sm font-medium rounded-lg transition-all cursor-pointer shadow-sm hover:shadow-md active:scale-[0.98] border border-gray-800 hover:border-gray-600; }
-    .btn-secondary { @apply px-5 py-2 border border-gray-200 hover:border-gray-400 hover:text-gray-800 text-gray-500 text-sm font-medium rounded-lg transition-all cursor-pointer; }
-    .btn-danger { @apply px-5 py-2 bg-red-50 hover:bg-red-100 text-red-600 text-sm font-medium rounded-lg transition-all cursor-pointer border border-red-200; }
-    input, select, textarea { @apply w-full px-4 py-2.5 bg-white border border-gray-200 rounded-lg text-sm outline-none focus:border-gray-400 focus:ring-1 focus:ring-gray-200 transition-all; }
+    body { background: #fcfaf7; }
+    .nav-item { @apply text-sm text-gray-400 hover:text-amber-700 transition-colors px-1 py-0.5; }
+    .nav-item.active { @apply text-amber-700 font-medium; }
+    .card { @apply bg-white rounded-xl border border-amber-100/40 shadow-sm; }
+    .btn-primary { @apply inline-flex items-center justify-center px-6 py-2.5 bg-amber-600 hover:bg-amber-500 text-white text-sm font-semibold rounded-lg transition-all cursor-pointer shadow-sm hover:shadow-md active:scale-[0.98] border border-amber-500; }
+    .btn-secondary { @apply px-5 py-2 border border-amber-200 hover:border-amber-400 hover:text-amber-700 text-gray-500 text-sm font-medium rounded-lg transition-all cursor-pointer; }
+    input, select, textarea { @apply w-full px-4 py-2.5 bg-white border border-amber-200/60 rounded-lg text-sm outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-100 transition-all; }
     label { @apply text-xs font-medium text-gray-500 block; }
   </style>
 </head>
@@ -26,8 +25,8 @@
   <div class="flex items-center justify-between mb-10">
     <div class="flex items-center gap-8">
       <a href="/" class="flex items-center gap-2.5 no-underline">
-        <div class="w-7 h-7 rounded-lg bg-gray-900 flex items-center justify-center text-white text-xs font-bold">Q</div>
-        <span class="font-semibold text-sm text-gray-900">Auto-QC</span>
+        <div class="w-7 h-7 rounded-lg bg-amber-600 flex items-center justify-center text-white text-xs font-bold">Q</div>
+        <span class="font-semibold text-sm text-amber-900">Auto-QC</span>
       </a>
       <nav class="flex items-center gap-6">
         <a href="/qc" class="nav-item {% if active_tab == 'qc' %}active{% endif %}">质检</a>
