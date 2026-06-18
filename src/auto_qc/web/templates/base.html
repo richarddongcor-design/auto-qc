@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Auto-QC{% endblock %}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+    * { font-family: 'Inter', -apple-system, 'PingFang SC', sans-serif; }
+    body { background: #fafafa; }
+    .nav-item { @apply text-sm text-gray-400 hover:text-gray-900 transition-colors px-1 py-0.5; }
+    .nav-item.active { @apply text-gray-900 font-medium; }
+    .card { @apply bg-white rounded-xl border border-gray-100 shadow-sm; }
+    .btn-primary { @apply px-5 py-2 bg-gray-900 hover:bg-gray-800 text-white text-sm font-medium rounded-lg transition-all cursor-pointer; }
+    .btn-secondary { @apply px-5 py-2 border border-gray-200 hover:border-gray-300 text-gray-600 text-sm font-medium rounded-lg transition-all cursor-pointer; }
+    input, select, textarea { @apply w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm outline-none focus:border-gray-400 focus:bg-white transition-all; }
+    label { @apply text-xs font-medium text-gray-500 mb-1.5 block; }
+  </style>
+</head>
+<body>
+<div class="max-w-5xl mx-auto px-8 py-8">
+  <!-- Header -->
+  <div class="flex items-center justify-between mb-10">
+    <div class="flex items-center gap-8">
+      <a href="/" class="flex items-center gap-2.5 no-underline">
+        <div class="w-7 h-7 rounded-lg bg-gray-900 flex items-center justify-center text-white text-xs font-bold">Q</div>
+        <span class="font-semibold text-sm text-gray-900">Auto-QC</span>
+      </a>
+      <nav class="flex items-center gap-6">
+        <a href="/qc" class="nav-item {% if active_tab == 'qc' %}active{% endif %}">质检</a>
+        <a href="/pi" class="nav-item {% if active_tab == 'pi' %}active{% endif %}">问题挖掘</a>
+        <a href="/config" class="nav-item {% if active_tab == 'config' %}active{% endif %}">配置</a>
+      </nav>
+    </div>
+    <div id="llm-status" class="flex items-center gap-2 text-xs text-gray-400">
+      <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+      <span id="model-name">就绪</span>
+    </div>
+  </div>
+  {% block content %}{% endblock %}
+</div>
+</body>
+</html>

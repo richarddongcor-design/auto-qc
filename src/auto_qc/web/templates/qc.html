@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}质检 — Auto-QC{% endblock %}
+{% block content %}
+<!-- 上传+配置区 -->
+<div class="card p-6 mb-4">
+  <form hx-post="/qc/start" hx-target="#result-area" hx-swap="innerHTML"
+        enctype="multipart/form-data" class="space-y-5">
+    <div class="flex items-start gap-6">
+      <div class="flex-1">
+        <label>数据文件</label>
+        <div class="border-2 border-dashed border-gray-200 rounded-xl p-6 text-center hover:border-gray-300 cursor-pointer transition-colors"
+             onclick="document.getElementById('file-input').click()">
+          <div class="text-gray-400 text-sm mb-1">点击上传或拖拽 Excel 文件</div>
+          <div class="text-xs text-gray-300">.xlsx</div>
+        </div>
+        <input id="file-input" type="file" name="file" accept=".xlsx" class="hidden" required>
+      </div>
+      <div class="flex-1 space-y-3">
+        <div>
+          <label>规则集</label>
+          <select name="rule_sets">
+            <option value="pi-rules">pi-rules（6 条规则）</option>
+            <option value="intention-recruit-tree">intention-recruit-tree（4 条规则）</option>
+          </select>
+        </div>
+        <div class="flex gap-2">
+          <div class="flex-1">
+            <label>模型</label>
+            <select name="model">
+              <option>deepseek-v4-flash</option>
+              <option>deepseek-v4-pro</option>
+            </select>
+          </div>
+          <div class="flex-1">
+            <label>并发数</label>
+            <input type="number" name="concurrency" value="50">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex justify-end pt-4 border-t border-gray-50">
+      <button type="submit" class="btn-primary">开始质检</button>
+    </div>
+  </form>
+</div>
+
+<!-- 结果区域（HTMX 填充） -->
+<div id="result-area"></div>
+
+<!-- 历史记录 -->
+<div class="card p-6">
+  <div class="flex items-center justify-between mb-4">
+    <span class="text-sm font-medium">历史记录</span>
+  </div>
+  <div id="history-list" hx-get="/qc/history" hx-trigger="load" hx-swap="innerHTML">
+    <div class="text-sm text-gray-400 py-4 text-center">加载中...</div>
+  </div>
+</div>
+{% endblock %}

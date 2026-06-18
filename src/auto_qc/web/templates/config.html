@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}配置 — Auto-QC{% endblock %}
+{% block content %}
+<!-- LLM 配置 -->
+<div class="card p-6 mb-6">
+  <div class="flex items-center justify-between mb-6">
+    <span class="text-sm font-medium">LLM 配置</span>
+    <button type="submit" form="llm-form" class="btn-primary">保存</button>
+  </div>
+  <form id="llm-form" method="post" action="/config/save-llm" class="grid grid-cols-2 gap-5">
+    <div>
+      <label for="base_url">接口地址</label>
+      <input id="base_url" name="base_url" value="{{ config.LLM_BASE_URL }}">
+    </div>
+    <div>
+      <label for="api_key">API Key</label>
+      <input id="api_key" name="api_key" type="password" value="{{ config.LLM_API_KEY }}" placeholder="输入新 Key 以更新">
+    </div>
+    <div>
+      <label for="model">模型</label>
+      <input id="model" name="model" value="{{ config.LLM_MODEL }}">
+    </div>
+    <div>
+      <label>当前 Key 状态</label>
+      <div class="px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-500">
+        {{ config.LLM_API_KEY }}
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- 规则管理（占位 — Task 7 实现编辑功能） -->
+<div class="card p-6">
+  <div class="flex items-center justify-between mb-4">
+    <span class="text-sm font-medium">规则管理</span>
+  </div>
+  <div class="text-sm text-gray-400 py-8 text-center border-2 border-dashed border-gray-100 rounded-xl">
+    规则编辑功能将在后续版本中上线
+  </div>
+</div>
+{% endblock %}
