@@ -14,7 +14,7 @@
     </div>
     <div>
       <label for="api_key">API Key</label>
-      <input id="api_key" name="api_key" type="password" value="{{ config.LLM_API_KEY }}" placeholder="输入新 Key 以更新">
+      <input id="api_key" name="api_key" type="password" value="" placeholder="输入新 Key 以更新（留空不修改）">
     </div>
     <div>
       <label for="model">模型</label>
@@ -22,8 +22,8 @@
     </div>
     <div>
       <label>当前 Key 状态</label>
-      <div class="px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-500">
-        {{ config.LLM_API_KEY }}
+      <div class="px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm {{ 'text-emerald-600' if config.LLM_API_KEY != '****' else 'text-gray-400' }}">
+        {% if config.LLM_API_KEY != '****' %}已设置{% else %}未配置{% endif %}
       </div>
     </div>
   </form>
