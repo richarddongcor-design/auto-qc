@@ -2,7 +2,7 @@ import pytest
 import tempfile
 from pathlib import Path
 import json
-from auto_qc.domain.report import write_report, verify_report_exists
+from auto_qc.qc.domain.report import write_report, verify_report_exists
 
 
 def _make_sample_inputs():

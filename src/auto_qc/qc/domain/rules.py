@@ -3,7 +3,7 @@ import hashlib
 import json
 import re
 from pathlib import Path
-from auto_qc.domain.schemas import Rule, RulePackage, RuleSet
+from auto_qc.qc.domain.schemas import Rule, RulePackage, RuleSet
 
 _SEVERITY_MAP = {"高": "高", "中": "中", "低": "低", "HIGH": "高", "MEDIUM": "中", "LOW": "低"}
 
@@ -221,7 +221,7 @@ def load_rule_sets(
     ID 自动重编码为 {name}_{原ID}（如 auto-pi_R01）避免跨规则集冲突。
     """
     if rules_dir is None:
-        rules_dir = str(Path(__file__).resolve().parent.parent.parent.parent / "rules")
+        rules_dir = str(Path(__file__).resolve().parent.parent.parent.parent.parent / "rules")
 
     result = []
     for name in rule_set_names:

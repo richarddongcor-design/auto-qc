@@ -3,19 +3,19 @@ import asyncio
 import json
 from pathlib import Path
 
-from auto_qc.domain.rules import load_rule_sets, validate_rule_sets
-from auto_qc.domain.data_loader import load_conversations, save_batches
-from auto_qc.domain.prompts import build_single_rule_prompt
-from auto_qc.domain.report import write_report, verify_report_exists
-from auto_qc.domain.merger import merge_to_wide_rows
+from auto_qc.qc.domain.rules import load_rule_sets, validate_rule_sets
+from auto_qc.qc.domain.data_loader import load_conversations, save_batches
+from auto_qc.qc.domain.prompts import build_single_rule_prompt
+from auto_qc.qc.domain.report import write_report, verify_report_exists
+from auto_qc.qc.domain.merger import merge_to_wide_rows
 
-from auto_qc.framework.validator import (
+from auto_qc.qc.framework.validator import (
     validate_batches,
     validate_single_rule_output,
 )
-from auto_qc.framework.worker import call_llm_with_retry, extract_json, reset_token_stats, get_token_stats
-from auto_qc.framework.progress import create_progress, load_progress, save_progress
-from auto_qc.framework.coordinator import Coordinator
+from auto_qc.qc.framework.worker import call_llm_with_retry, extract_json, reset_token_stats, get_token_stats
+from auto_qc.qc.framework.progress import create_progress, load_progress, save_progress
+from auto_qc.qc.framework.coordinator import Coordinator
 
 
 async def run_qc(
@@ -32,7 +32,7 @@ async def run_qc(
 
     # ─── Step 1: 环境检查 ───
     print("[Step 1] 环境检查...")
-    from auto_qc.domain.report import HEADER_FONT
+    from auto_qc.qc.domain.report import HEADER_FONT
     print("  [OK] 依赖就绪")
     if not Path(data_path).exists():
         raise FileNotFoundError(f"数据文件不存在: {data_path}")

@@ -1,4 +1,4 @@
-from auto_qc.framework.cross_validator import fixed_sample, compare_results, _build_adjudication_prompt
+from auto_qc.qc.framework.cross_validator import fixed_sample, compare_results, _build_adjudication_prompt
 
 
 def test_fixed_sample():
@@ -46,7 +46,7 @@ def _make_adjudication_mock(decisions: dict[str, bool]):
 @pytest.mark.anyio
 async def test_adjudicate_no_disagreement():
     """当所有争议都裁决与 original 一致时，qc_results 不变。"""
-    from auto_qc.framework.cross_validator import adjudicate
+    from auto_qc.qc.framework.cross_validator import adjudicate
     original = [
         {"id": "1", "violations": [{"rule_id": "R01"}]},
         {"id": "2", "violations": []},
@@ -70,7 +70,7 @@ async def test_adjudicate_no_disagreement():
 @pytest.mark.anyio
 async def test_adjudicate_fixes_disagreement():
     """当第三次裁决与 original 不一致时，应修正 qc_results。"""
-    from auto_qc.framework.cross_validator import adjudicate
+    from auto_qc.qc.framework.cross_validator import adjudicate
     original = [
         {"id": "1", "violations": [{"rule_id": "R01"}]},
         {"id": "2", "violations": []},

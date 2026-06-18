@@ -1,7 +1,7 @@
 """通用契约校验——每个步骤的输入输出校验"""
 import json
 from typing import Optional
-from auto_qc.domain.schemas import WorkerOutput, RulePackage, Batch
+from auto_qc.qc.domain.schemas import WorkerOutput, RulePackage, Batch
 
 
 class ValidationError(Exception):
@@ -13,7 +13,7 @@ class ValidationError(Exception):
 
 def validate_rule_package(pkg: RulePackage) -> None:
     """校验规则包：ID 唯一、severity 合法、必填字段完整。"""
-    from auto_qc.domain.rules import validate_rule_package as _validate
+    from auto_qc.qc.domain.rules import validate_rule_package as _validate
     errors = _validate(pkg)
     if errors:
         raise ValidationError("规则校验失败:\n" + "\n".join(f"  - {e}" for e in errors))

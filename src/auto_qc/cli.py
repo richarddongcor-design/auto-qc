@@ -27,7 +27,7 @@ def main():
     work_dir = args.work_dir or f"output/{timestamp}_{run_name}"
     output_path = args.output or f"{work_dir}/质检报告_{timestamp}.xlsx"
 
-    from auto_qc.framework.orchestrator import run_qc
+    from auto_qc.qc.framework.orchestrator import run_qc
     asyncio.run(run_qc(
         data_path=args.data,
         rule_set_names=rule_set_names,

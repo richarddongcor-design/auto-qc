@@ -1,6 +1,6 @@
 import tempfile
-from auto_qc.framework.coordinator import Coordinator
-from auto_qc.framework.progress import create_progress
+from auto_qc.qc.framework.coordinator import Coordinator
+from auto_qc.qc.framework.progress import create_progress
 
 
 def test_get_next_empty_when_all_done():

@@ -2,8 +2,8 @@
 import copy
 import json
 import random
-from auto_qc.domain.schemas import CrossValidationResult
-from auto_qc.framework.worker import extract_json
+from auto_qc.qc.domain.schemas import CrossValidationResult
+from auto_qc.qc.framework.worker import extract_json
 
 
 def fixed_sample(

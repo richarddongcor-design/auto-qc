@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 from typing import Optional
 import openpyxl
-from auto_qc.domain.schemas import Conversation, Batch
+from auto_qc.qc.domain.schemas import Conversation, Batch
 
 
 COLUMN_PATTERNS = {
