@@ -41,4 +41,14 @@
 
 <!-- 结果区域（HTMX 填充） -->
 <div id="result-area"></div>
+
+<!-- 历史记录 -->
+<div class="card p-6">
+  <div class="flex items-center justify-between mb-4">
+    <span class="text-sm font-medium">历史记录</span>
+  </div>
+  <div id="history-list" hx-get="/pi/history" hx-trigger="load" hx-swap="innerHTML">
+    <div class="text-sm text-gray-400 py-4 text-center">加载中...</div>
+  </div>
+</div>
 {% endblock %}

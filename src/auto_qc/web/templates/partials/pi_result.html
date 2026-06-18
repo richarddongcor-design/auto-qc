@@ -1,0 +1,38 @@
+<div class="card p-6 mb-4">
+  <div class="flex items-center justify-between mb-5">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium bg-emerald-50 text-emerald-600">已完成</span>
+      <span class="text-sm font-medium text-gray-900">{{ summary.data_file }}</span>
+    </div>
+  </div>
+  <div class="grid grid-cols-3 gap-6 mb-5">
+    <div>
+      <div class="text-2xl font-semibold text-gray-900">{{ summary.domain }}</div>
+      <div class="text-xs text-gray-400 mt-0.5">领域</div>
+    </div>
+    <div>
+      <div class="text-2xl font-semibold text-gray-900">{{ summary.run_id[:12] if summary.run_id else "—" }}...</div>
+      <div class="text-xs text-gray-400 mt-0.5">运行 ID</div>
+    </div>
+    <div>
+      <div class="text-2xl font-semibold text-emerald-500">{{ summary.status }}</div>
+      <div class="text-xs text-gray-400 mt-0.5">状态</div>
+    </div>
+  </div>
+  {% if summary.results %}
+  <div class="border-t border-gray-50 pt-4">
+    <div class="text-xs font-medium text-gray-500 mb-3">各阶段结果</div>
+    <div class="space-y-2">
+      {% for key, phase in summary.results.items() %}
+      <div class="flex items-center gap-3 text-sm">
+        <span class="w-2 h-2 rounded-full {% if phase.success %}bg-emerald-400{% else %}bg-red-400{% endif %}"></span>
+        <span class="text-gray-700">{{ phase.name }}</span>
+        <span class="text-xs {% if phase.success %}text-emerald-500{% else %}text-red-500{% endif %}">
+          {{ "成功" if phase.success else "失败" }}
+        </span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+</div>

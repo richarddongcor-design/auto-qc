@@ -1,0 +1,29 @@
+<div class="card p-6 mb-4">
+  <div class="flex items-center justify-between mb-5">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium bg-emerald-50 text-emerald-600">已完成</span>
+      <span class="text-sm font-medium text-gray-900">{{ summary.data_file.split('/')[-1] or summary.data_file }}</span>
+    </div>
+    <div class="flex items-center gap-3">
+      <a href="/qc/download/{{ task_id }}" class="btn-secondary text-xs px-3 py-1.5 no-underline">下载报告</a>
+    </div>
+  </div>
+  <div class="grid grid-cols-4 gap-6">
+    <div>
+      <div class="text-2xl font-semibold text-gray-900">{{ summary.total_conversations }}</div>
+      <div class="text-xs text-gray-400 mt-0.5">总对话数</div>
+    </div>
+    <div>
+      <div class="text-2xl font-semibold text-red-500">{{ summary.violation_rate }}</div>
+      <div class="text-xs text-gray-400 mt-0.5">违规率</div>
+    </div>
+    <div>
+      <div class="text-2xl font-semibold text-gray-900">{{ "%.1f"|format(summary.token_usage.total_tokens / 1000) }}K</div>
+      <div class="text-xs text-gray-400 mt-0.5">总 tokens</div>
+    </div>
+    <div>
+      <div class="text-2xl font-semibold text-gray-900">{{ summary.total_checks }}</div>
+      <div class="text-xs text-gray-400 mt-0.5">总检查次数</div>
+    </div>
+  </div>
+</div>
