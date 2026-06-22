@@ -1,71 +1,55 @@
 {% extends "base.html" %}
 {% block title %}质检 — Auto-QC{% endblock %}
 {% block content %}
-<!-- 上传+配置区 -->
+
+<!-- 第 1 行：规则选择 -->
 <div class="card p-6 mb-4">
-  <form hx-post="/qc/start" hx-target="#result-area" hx-swap="innerHTML"
-        enctype="multipart/form-data" class="space-y-5">
-    <div class="flex items-start gap-6">
-      <div class="flex-1">
-        <label>数据文件</label>
-        <div id="dropzone"
-             class="border-2 border-dashed border-gray-200 rounded-xl p-6 text-center hover:border-amber-300 cursor-pointer transition-colors"
-             onclick="document.getElementById('file-input').click()">
-          <div id="dropzone-text" class="text-gray-400 text-sm mb-1">点击上传或拖拽 Excel 文件</div>
-          <div id="dropzone-hint" class="text-xs text-gray-300">.xlsx</div>
-        </div>
-        <input id="file-input" type="file" name="file" accept=".xlsx" class="hidden" required
-               onchange="handleFileSelect(this)">
+  <div class="flex items-center gap-4">
+    <label class="text-sm font-medium text-gray-500 whitespace-nowrap">质检规则</label>
+    <select name="rule_sets" form="qc-form" class="max-w-xs">
+      <option value="pi-rules">pi-rules（6 条规则）</option>
+      <option value="intention-recruit-tree">intention-recruit-tree（4 条规则）</option>
+    </select>
+  </div>
+</div>
+
+<!-- 第 2 行：文件选择 + 开始按钮 -->
+<div class="card p-6 mb-4">
+  <form id="qc-form" hx-post="/qc/start" hx-target="#result-area" hx-swap="innerHTML"
+        enctype="multipart/form-data" class="flex items-center gap-6">
+    <div class="flex-1">
+      <label class="text-sm font-medium text-gray-500 block mb-2">待质检文件</label>
+      <div id="dropzone"
+           class="border-2 border-dashed border-gray-200 rounded-xl p-6 text-center hover:border-amber-300 cursor-pointer transition-colors"
+           onclick="document.getElementById('file-input').click()">
+        <div id="dropzone-text" class="text-gray-400 text-sm mb-1">点击上传或拖拽 Excel 文件</div>
+        <div id="dropzone-hint" class="text-xs text-gray-300">.xlsx</div>
       </div>
-<script>
-function handleFileSelect(input) {
-  if (input.files && input.files[0]) {
-    document.getElementById('dropzone-text').textContent = '已选择: ' + input.files[0].name;
-    document.getElementById('dropzone-hint').textContent = '✓ 文件就绪';
-    document.getElementById('dropzone').className = 'border-2 border-amber-300 bg-amber-50/30 rounded-xl p-6 text-center cursor-pointer transition-colors';
-  }
-}
-// 拖拽支持
-const dz = document.getElementById('dropzone');
-dz.addEventListener('dragover', function(e) {
-  e.preventDefault();
-  this.className = 'border-2 border-amber-400 bg-amber-50/50 rounded-xl p-6 text-center cursor-pointer transition-colors';
-});
-dz.addEventListener('dragleave', function(e) {
-  e.preventDefault();
-  if (!document.getElementById('file-input').files[0]) {
-    this.className = 'border-2 border-dashed border-gray-200 rounded-xl p-6 text-center hover:border-amber-300 cursor-pointer transition-colors';
-  }
-});
-dz.addEventListener('drop', function(e) {
-  e.preventDefault();
-  const file = e.dataTransfer.files[0];
-  if (file) {
-    document.getElementById('file-input').files = e.dataTransfer.files;
-    handleFileSelect(document.getElementById('file-input'));
-  }
-});
-</script>
-      <div class="flex-1 space-y-2">
-        <div class="space-y-2">
-          <label>规则集</label>
-          <select name="rule_sets">
-            <option value="pi-rules">pi-rules（6 条规则）</option>
-            <option value="intention-recruit-tree">intention-recruit-tree（4 条规则）</option>
-          </select>
-        </div>
-      </div>
+      <input id="file-input" type="file" name="file" accept=".xlsx" class="hidden" required
+             onchange="handleFileSelect(this)">
     </div>
-    <div class="flex justify-end pt-4 border-t border-gray-50">
-      <button type="submit" class="btn-primary px-8 font-semibold tracking-wide">开始质检</button>
-    </div>
+    <button type="submit" class="btn-primary px-10 py-4 text-base font-semibold tracking-wide self-end shrink-0">开始质检</button>
   </form>
 </div>
 
-<!-- 结果区域（HTMX 填充） -->
+<script>
+function handleFileSelect(input) {
+  if (input.files && input.files[0]) {
+    document.getElementById('dropzone-text').textContent = input.files[0].name;
+    document.getElementById('dropzone-hint').textContent = '✓ 已就绪';
+    document.getElementById('dropzone').className = 'border-2 border-amber-300 bg-amber-50/30 rounded-xl p-6 text-center cursor-pointer transition-colors';
+  }
+}
+const dz = document.getElementById('dropzone');
+dz.addEventListener('dragover', function(e) { e.preventDefault(); this.className = 'border-2 border-amber-400 bg-amber-50/50 rounded-xl p-6 text-center cursor-pointer transition-colors'; });
+dz.addEventListener('dragleave', function(e) { e.preventDefault(); if (!document.getElementById('file-input').files[0]) { this.className = 'border-2 border-dashed border-gray-200 rounded-xl p-6 text-center hover:border-amber-300 cursor-pointer transition-colors'; } });
+dz.addEventListener('drop', function(e) { e.preventDefault(); var f = e.dataTransfer.files[0]; if (f) { document.getElementById('file-input').files = e.dataTransfer.files; handleFileSelect(document.getElementById('file-input')); } });
+</script>
+
+<!-- 第 3 行：运行状态 -->
 <div id="result-area"></div>
 
-<!-- 历史记录 -->
+<!-- 第 4 行：历史记录 -->
 <div class="card p-6">
   <div class="flex items-center justify-between mb-4">
     <span class="text-sm font-medium">历史记录</span>

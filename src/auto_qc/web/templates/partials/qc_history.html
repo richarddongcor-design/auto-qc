@@ -4,11 +4,12 @@
   <div class="flex items-center justify-between py-3">
     <div class="flex items-center gap-3 min-w-0">
       <span class="text-sm text-gray-900 truncate">{{ run.data_file.split('/')[-1] or run.data_file }}</span>
-      <span class="text-xs text-gray-300 flex-shrink-0">{{ run.id }}</span>
+      <span class="text-xs text-gray-300 flex-shrink-0">{{ run.id[:8] }}</span>
     </div>
     <div class="flex items-center gap-4 flex-shrink-0 ml-4">
       <span class="text-xs text-gray-400">{{ run.total }} 条</span>
       <span class="text-xs font-medium text-gray-900">{{ run.violation_rate }}</span>
+      <a href="/qc/download/{{ run.id }}" class="text-xs text-amber-600 hover:text-amber-700 font-medium no-underline">下载</a>
     </div>
   </div>
   {% endfor %}
