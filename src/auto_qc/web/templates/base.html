@@ -10,11 +10,6 @@
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
     * { font-family: 'Inter', -apple-system, 'PingFang SC', sans-serif; }
     body { background: #fcfaf7; }
-    .nav-item { @apply text-sm text-gray-400 hover:text-amber-700 transition-colors px-3 py-1.5 relative rounded-lg hover:bg-amber-50/60; }
-    .nav-item::after { content: ''; position: absolute; bottom: 2px; left: 0.75rem; width: 0; height: 2px; background: #d97706; transition: width 0.25s ease; border-radius: 1px; }
-    .nav-item:hover::after { width: calc(100% - 1.5rem); }
-    .nav-item.active { @apply text-amber-700 font-medium bg-amber-50/80; }
-    .nav-item.active::after { width: calc(100% - 1.5rem); }
     .card { @apply bg-white rounded-xl border border-amber-100/40 shadow-sm; }
     .btn-primary { @apply inline-flex items-center justify-center px-6 py-2.5 bg-amber-600 hover:bg-amber-500 text-white text-sm font-semibold rounded-lg transition-all cursor-pointer shadow-sm hover:shadow-md active:scale-[0.98] border border-amber-500; }
     .btn-secondary { @apply px-5 py-2 border border-amber-200 hover:border-amber-400 hover:text-amber-700 text-gray-500 text-sm font-medium rounded-lg transition-all cursor-pointer; }
@@ -30,10 +25,10 @@
       <a href="/" class="flex items-center gap-2.5 no-underline">
         <div class="w-7 h-7 rounded-lg bg-amber-600 flex items-center justify-center text-white text-xs font-bold">Q</div>
       </a>
-      <nav class="flex items-center gap-1 bg-amber-50/40 rounded-xl px-2 py-1">
-        <a href="/qc" class="nav-item {% if active_tab == 'qc' %}active{% endif %}">质检</a>
-        <a href="/pi" class="nav-item {% if active_tab == 'pi' %}active{% endif %}">问题挖掘</a>
-        <a href="/config" class="nav-item {% if active_tab == 'config' %}active{% endif %}">配置</a>
+      <nav class="flex items-center gap-2">
+        <a href="/qc" class="text-sm text-gray-400 hover:text-gray-700 transition-colors duration-150 px-4 py-2 rounded-lg {% if active_tab == 'qc' %}text-white font-medium bg-amber-600 shadow-sm{% endif %}">质检</a>
+        <a href="/pi" class="text-sm text-gray-400 hover:text-gray-700 transition-colors duration-150 px-4 py-2 rounded-lg {% if active_tab == 'pi' %}text-white font-medium bg-amber-600 shadow-sm{% endif %}">问题挖掘</a>
+        <a href="/config" class="text-sm text-gray-400 hover:text-gray-700 transition-colors duration-150 px-4 py-2 rounded-lg {% if active_tab == 'config' %}text-white font-medium bg-amber-600 shadow-sm{% endif %}">配置</a>
       </nav>
     </div>
     <div id="llm-status" class="flex items-center gap-2 text-xs text-gray-400">

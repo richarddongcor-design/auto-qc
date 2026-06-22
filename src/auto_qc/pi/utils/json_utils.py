@@ -118,11 +118,19 @@ def heal_json(text: str) -> Any | None:
     except (json.JSONDecodeError, ValueError):
         pass
 
-    # 4. 最后尝试 json_repair 库
+    # 4. 最后尝试 json_repair 库（直接修复原文本）
     try:
         from json_repair import repair_json
         repaired = repair_json(text)
         return extract_json_from_text(repaired)
+    except Exception:
+        pass
+
+    # 5. 终极方案：直接 json_repair + json.loads（跳过 extract_json 的 bracket 查找）
+    try:
+        from json_repair import repair_json
+        repaired = repair_json(text)
+        return json.loads(repaired)
     except Exception:
         pass
 

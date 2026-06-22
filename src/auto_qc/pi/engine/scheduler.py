@@ -109,10 +109,9 @@ class Scheduler:
             try:
                 kwargs = dict(
                     model=self.config.model or "deepseek-chat",
-                    max_tokens=8192,
+                    max_tokens=16384,
                     messages=messages,
                     timeout=self.config.timeout,
-                    response_format={"type": "json_object"},
                 )
                 if temperature is not None:
                     kwargs["temperature"] = temperature
