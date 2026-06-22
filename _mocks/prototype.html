@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auto-QC</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+  * { font-family: 'Inter', -apple-system, 'PingFang SC', sans-serif; }
+  body { background: #fafafa; }
+  .nav-item { @apply text-sm text-gray-400 hover:text-gray-900 transition-colors cursor-pointer px-1 py-0.5; }
+  .nav-item.active { @apply text-gray-900 font-medium; }
+  .card { @apply bg-white rounded-xl border border-gray-100 shadow-sm; }
+  .btn-primary { @apply px-5 py-2 bg-gray-900 hover:bg-gray-800 text-white text-sm font-medium rounded-lg transition-all; }
+  .btn-secondary { @apply px-5 py-2 border border-gray-200 hover:border-gray-300 text-gray-600 hover:text-gray-900 text-sm font-medium rounded-lg transition-all; }
+  .tag { @apply inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium; }
+  .tag-qc { @apply tag bg-blue-50 text-blue-600; }
+  .tag-pi { @apply tag bg-amber-50 text-amber-600; }
+  .stat { @apply text-2xl font-semibold text-gray-900; }
+  .stat-label { @apply text-xs text-gray-400 mt-0.5; }
+  input, select, textarea { @apply w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm outline-none focus:border-gray-400 focus:bg-white transition-all; }
+  textarea { @apply resize-y min-h-[80px]; }
+  label { @apply text-xs font-medium text-gray-500 mb-1.5 block; }
+  .section-title { @apply text-xs font-medium text-gray-400 uppercase tracking-wider mb-4; }
+</style>
+</head>
+<body>
+
+<div class="max-w-5xl mx-auto px-8 py-8">
+
+  <!-- Header -->
+  <div class="flex items-center justify-between mb-10">
+    <div class="flex items-center gap-8">
+      <div class="flex items-center gap-2.5">
+        <div class="w-7 h-7 rounded-lg bg-gray-900 flex items-center justify-center text-white text-xs font-bold">Q</div>
+        <span class="font-semibold text-sm">Auto-QC</span>
+      </div>
+      <nav class="flex items-center gap-6">
+        <span class="nav-item">质检</span>
+        <span class="nav-item">问题挖掘</span>
+        <span class="nav-item active">配置</span>
+      </nav>
+    </div>
+    <div class="flex items-center gap-2 text-xs text-gray-400">
+      <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+      deepseek-v4-flash
+    </div>
+  </div>
+
+  <!-- Page: Settings -->
+  <div>
+
+    <!-- LLM Config -->
+    <div class="card p-6 mb-4">
+      <div class="section-title">LLM 配置</div>
+      <div class="grid grid-cols-2 gap-x-6 gap-y-4">
+        <div>
+          <label>接口地址</label>
+          <input value="https://api.deepseek.com" placeholder="https://api.deepseek.com">
+        </div>
+        <div>
+          <label>API Key</label>
+          <input type="password" value="sk-c3749d9486614820a6dcda807c66647e" placeholder="sk-...">
+        </div>
+        <div>
+          <label>模型</label>
+          <select>
+            <option>deepseek-v4-flash</option>
+            <option>deepseek-v4-pro</option>
+          </select>
+        </div>
+        <div>
+          <label>并发数</label>
+          <input type="number" value="50" placeholder="50">
+        </div>
+      </div>
+      <div class="flex justify-end mt-5 pt-4 border-t border-gray-50">
+        <button class="btn-primary">保存</button>
+      </div>
+    </div>
+
+    <!-- Rule Sets List -->
+    <div class="card p-6 mb-4">
+      <div class="flex items-center justify-between mb-4">
+        <div class="section-title mb-0">规则管理</div>
+        <button class="btn-secondary text-xs px-3 py-1.5">+ 新建规则集</button>
+      </div>
+
+      <!-- Rule set card -->
+      <div class="border border-gray-100 rounded-xl mb-4">
+        <div class="flex items-center justify-between px-5 py-3.5 bg-gray-50/50 rounded-t-xl border-b border-gray-100">
+          <div class="flex items-center gap-3">
+            <span class="text-sm font-medium">pi-rules</span>
+            <span class="text-xs text-gray-400">6 条规则</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button class="btn-secondary text-xs px-2.5 py-1">编辑名称</button>
+            <button class="btn-secondary text-xs px-2.5 py-1 text-red-500 border-red-100 hover:bg-red-50">删除</button>
+          </div>
+        </div>
+
+        <!-- Rules inside the set -->
+        <div class="divide-y divide-gray-50">
+          <!-- R01 -->
+          <div class="px-5 py-4">
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-3">
+                <span class="text-xs font-mono text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded">R01</span>
+                <span class="text-sm font-medium">用户明确拒绝后仍推进流程</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <button class="text-xs text-gray-400 hover:text-gray-600 transition-colors">收起</button>
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-x-6 gap-y-3">
+              <div class="col-span-2">
+                <label>描述</label>
+                <textarea rows="2">当用户明确表达拒绝、不考虑或不需要时，AI未能及时停止并礼貌结束对话，而是继续介绍岗位信息、追问或尝试推进流程。</textarea>
+              </div>
+              <div class="col-span-2">
+                <label>检测逻辑</label>
+                <textarea rows="3">1. 检测用户轮次中是否包含明确拒绝关键词。2. 若用户拒绝后AI仍继续推进则判定违规。3. 需排除AI礼貌结束的情况。</textarea>
+              </div>
+              <div>
+                <label>严重程度</label>
+                <select>
+                  <option>高</option>
+                  <option selected>中</option>
+                  <option>低</option>
+                </select>
+              </div>
+              <div>
+                <label>启用</label>
+                <div class="flex items-center h-[42px]">
+                  <label class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" checked class="sr-only peer">
+                    <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-gray-900"></div>
+                    <span class="ms-2 text-xs text-gray-400">已启用</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- R02 -->
+          <div class="px-5 py-4">
+            <div class="flex items-center justify-between mb-0">
+              <div class="flex items-center gap-3">
+                <span class="text-xs font-mono text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded">R02</span>
+                <span class="text-sm font-medium">重复相同话术</span>
+              </div>
+              <button class="text-xs text-gray-400 hover:text-gray-600 transition-colors">展开</button>
+            </div>
+            <div class="flex gap-4 mt-2 text-xs text-gray-400">
+              <span>严重程度: 中</span>
+              <span>已启用</span>
+            </div>
+          </div>
+
+          <!-- R03 -->
+          <div class="px-5 py-4">
+            <div class="flex items-center justify-between mb-0">
+              <div class="flex items-center gap-3">
+                <span class="text-xs font-mono text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded">R03</span>
+                <span class="text-sm font-medium">开场结束不规范</span>
+              </div>
+              <button class="text-xs text-gray-400 hover:text-gray-600 transition-colors">展开</button>
+            </div>
+            <div class="flex gap-4 mt-2 text-xs text-gray-400">
+              <span>严重程度: 高</span>
+              <span>已启用</span>
+            </div>
+          </div>
+
+          <!-- R04 -->
+          <div class="px-5 py-4">
+            <div class="flex items-center justify-between mb-0">
+              <div class="flex items-center gap-3">
+                <span class="text-xs font-mono text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded">R04</span>
+                <span class="text-sm font-medium">用户犹豫时AI急于推进</span>
+              </div>
+              <button class="text-xs text-gray-400 hover:text-gray-600 transition-colors">展开</button>
+            </div>
+            <div class="flex gap-4 mt-2 text-xs text-gray-400">
+              <span>严重程度: 中</span>
+              <span>已启用</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Another rule set -->
+      <div class="border border-gray-100 rounded-xl">
+        <div class="flex items-center justify-between px-5 py-3.5 bg-gray-50/50 rounded-t-xl border-b border-gray-100">
+          <div class="flex items-center gap-3">
+            <span class="text-sm font-medium">intention-recruit-tree</span>
+            <span class="text-xs text-gray-400">4 条规则</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button class="btn-secondary text-xs px-2.5 py-1">编辑名称</button>
+            <button class="btn-secondary text-xs px-2.5 py-1 text-red-500 border-red-100 hover:bg-red-50">删除</button>
+          </div>
+        </div>
+        <div class="divide-y divide-gray-50">
+          <div class="px-5 py-4">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <span class="text-xs font-mono text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded">R01</span>
+                <span class="text-sm">流程重复/过多</span>
+              </div>
+              <span class="text-xs text-gray-400">展开 →</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

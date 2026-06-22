@@ -1,0 +1,18 @@
+{% if runs %}
+<div class="divide-y divide-gray-50">
+  {% for run in runs %}
+  <div class="flex items-center justify-between py-3">
+    <div class="flex items-center gap-3 min-w-0">
+      <span class="text-sm text-gray-900 truncate">{{ run.data_file.split('/')[-1] or run.data_file }}</span>
+      <span class="text-xs text-gray-300 flex-shrink-0">{{ run.id }}</span>
+    </div>
+    <div class="flex items-center gap-4 flex-shrink-0 ml-4">
+      <span class="text-xs text-gray-400">{{ run.total }} 条</span>
+      <span class="text-xs font-medium text-gray-900">{{ run.violation_rate }}</span>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<div class="text-sm text-gray-400 py-4 text-center">暂无历史记录</div>
+{% endif %}

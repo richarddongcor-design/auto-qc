@@ -3,13 +3,13 @@ import json
 import tempfile
 from pathlib import Path
 import pytest
-from auto_qc.domain.rules import parse_rules_file, validate_rule_package
-from auto_qc.domain.data_loader import load_conversations, save_batches
-from auto_qc.framework.validator import validate_batches, validate_worker_output, validate_merge_results
-from auto_qc.framework.worker import extract_json
-from auto_qc.framework.coordinator import Coordinator
-from auto_qc.framework.progress import create_progress, has_unfinished
-from auto_qc.framework.cross_validator import fixed_sample, compare_results
+from auto_qc.qc.domain.rules import parse_rules_file, validate_rule_package
+from auto_qc.qc.domain.data_loader import load_conversations, save_batches
+from auto_qc.qc.framework.validator import validate_batches, validate_worker_output, validate_merge_results
+from auto_qc.qc.framework.worker import extract_json
+from auto_qc.qc.framework.coordinator import Coordinator
+from auto_qc.qc.framework.progress import create_progress, has_unfinished
+from auto_qc.qc.framework.cross_validator import fixed_sample, compare_results
 
 
 class TestEndToEndDataPipeline:
@@ -74,8 +74,8 @@ class TestEndToEndDataPipeline:
 
     def test_prompt_building_with_rules(self):
         """测试单规则 prompt 能正确组装规则和对话"""
-        from auto_qc.domain.schemas import Batch, Conversation, Rule
-        from auto_qc.domain.prompts import build_single_rule_prompt
+        from auto_qc.qc.domain.schemas import Batch, Conversation, Rule
+        from auto_qc.qc.domain.prompts import build_single_rule_prompt
 
         batch = Batch(batch_id=1, conversations=[
             Conversation(id="1", time="2024-01-01", intent="A", conversation="你好"),
