@@ -191,3 +191,13 @@ async def pi_history(request: Request):
         "partials/pi_history.html",
         {"request": request, "runs": runs},
     )
+
+
+@router.post("/history/delete/{task_id}")
+async def pi_history_delete(task_id: str):
+    """删除问题挖掘历史记录。"""
+    import shutil
+    save_dir = Path("output") / task_id
+    if save_dir.exists():
+        shutil.rmtree(save_dir)
+    return HTMLResponse("")

@@ -13,6 +13,7 @@
       <span class="text-xs text-gray-400">{{ run.total }} 条</span>
       <span class="text-xs font-medium text-gray-900">{{ run.violation_rate }}</span>
       <a href="/qc/download/{{ run.id }}" class="text-xs text-amber-600 hover:text-amber-700 font-medium no-underline">下载</a>
+      <button onclick="if(confirm('确认删除？')){fetch('/qc/history/delete/{{ run.id }}',{method:'POST'}).then(function(){location.reload()});}" class="text-xs text-gray-300 hover:text-red-500 transition-colors cursor-pointer bg-transparent border-none p-0">✕</button>
     </div>
   </div>
   {% endfor %}

@@ -161,6 +161,16 @@ async def qc_history(request: Request):
     )
 
 
+@router.post("/history/delete/{task_id}")
+async def qc_history_delete(task_id: str):
+    """删除质检历史记录。"""
+    import shutil
+    save_dir = Path("output") / task_id
+    if save_dir.exists():
+        shutil.rmtree(save_dir)
+    return HTMLResponse("")
+
+
 @router.get("/logs/{task_id}")
 async def qc_logs(request: Request, task_id: str):
     """返回运行日志的 HTML 片段（终端风格）。"""
