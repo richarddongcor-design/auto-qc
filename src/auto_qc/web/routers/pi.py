@@ -145,6 +145,29 @@ async def pi_result(request: Request, task_id: str):
     )
 
 
+@router.get("/download/{task_id}")
+async def pi_download(task_id: str):
+    """下载问题挖掘报告。"""
+    from fastapi.responses import FileResponse, HTMLResponse
+    save_dir = Path("output") / task_id
+    # 查找最早生成的 run 子目录下的报告文件
+    subdirs = sorted([d for d in save_dir.iterdir() if d.is_dir() and d.name[:4].isdigit()], reverse=True)
+    for sd in subdirs:
+        for fname in ["rules_summary.md", "rules.md", "report.md"]:
+            fp = sd / fname
+            if fp.exists():
+                return FileResponse(str(fp), filename=fname, media_type="text/markdown")
+    # 兜底：整个目录打包
+    import tarfile, io
+    buf = io.BytesIO()
+    with tarfile.open(fileobj=buf, mode="w:gz") as tar:
+        tar.add(str(save_dir), arcname=task_id)
+    buf.seek(0)
+    from fastapi.responses import Response
+    return Response(content=buf.getvalue(), media_type="application/gzip",
+                    headers={"Content-Disposition": f"attachment; filename={task_id}.tar.gz"})
+
+
 @router.get("/logs/{task_id}")
 async def pi_logs(request: Request, task_id: str):
     """返回运行日志的 HTML 片段（终端风格）。"""

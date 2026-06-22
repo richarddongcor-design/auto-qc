@@ -3,17 +3,18 @@
   {% for run in runs %}
   <div class="flex items-center justify-between py-3">
     <div class="flex items-center gap-3 min-w-0">
-      <span class="text-sm text-gray-900 truncate">{{ run.data_file }}</span>
-      <span class="text-xs text-gray-300 flex-shrink-0">{{ run.domain }}</span>
+      <span class="text-sm text-gray-900 truncate">{{ run.data_file.split('/')[-1] or run.data_file }}</span>
+      <span class="text-xs text-gray-300 flex-shrink-0">{{ run.id[:8] }}</span>
     </div>
     <div class="flex items-center gap-4 flex-shrink-0 ml-4">
-      <span class="text-xs {% if run.status == 'completed' %}text-emerald-500{% else %}text-red-500{% endif %}">
-        {{ "成功" if run.status == "completed" else "失败" }}
+      <span class="text-xs {{ 'text-emerald-500' if run.status == 'completed' else 'text-red-500' }}">
+        {% if run.status == "completed" %}成功{% else %}失败{% endif %}
       </span>
+      <a href="/pi/download/{{ run.id }}" class="text-xs text-amber-600 hover:text-amber-700 font-medium no-underline">下载</a>
     </div>
   </div>
   {% endfor %}
 </div>
 {% else %}
-<div class="text-sm text-gray-400 py-4 text-center">暂无历史记录</div>
+<div class="text-sm text-gray-400 py-6 text-center">暂无历史记录</div>
 {% endif %}

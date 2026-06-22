@@ -26,6 +26,7 @@ def get_recent_qc_runs(limit: int = 10) -> list[dict]:
                     "data_file": summary.get("data_file", ""),
                     "violation_rate": summary.get("violation_rate", ""),
                     "total": summary.get("total_conversations", 0),
+                    "status": summary.get("status", "completed"),
                 })
             except (json.JSONDecodeError, OSError):
                 continue
