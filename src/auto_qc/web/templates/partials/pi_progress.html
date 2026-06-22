@@ -5,8 +5,10 @@
   {% if not task or task.status == "running" %}
   <div class="card py-14 mb-5 flex flex-col items-center justify-center gap-5">
     <span class="inline-flex items-center px-3 py-1 rounded-md text-sm font-medium bg-amber-50 text-amber-600">挖掘中</span>
-    <div class="w-48 h-1.5 bg-gray-100 rounded-full overflow-hidden">
-      <div class="h-full bg-amber-500 rounded-full animate-pulse" style="width: 45%"></div>
+    <div class="relative w-16 h-16">
+      <div class="absolute inset-0 rounded-full border-4 border-amber-100"></div>
+      <div class="absolute inset-0 rounded-full border-4 border-transparent border-t-amber-500 animate-spin" style="animation-duration: 1.2s"></div>
+      <div class="absolute inset-0 rounded-full border-4 border-transparent border-b-amber-300 animate-spin" style="animation-duration: 0.8s; animation-direction: reverse;"></div>
     </div>
     <div class="text-xs text-gray-400">正在运行，请稍候...</div>
   </div>
