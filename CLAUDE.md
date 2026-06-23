@@ -5,14 +5,14 @@
 ## 快速开始
 
 ```bash
-uv run auto-qc web                                    # 启动 Web UI
-uv run auto-qc qc run --data data.xlsx --rule-sets pi-rules   # CLI 质检
-uv run auto-qc qc history                             # 查看质检历史
-uv run auto-qc qc download <id>                       # 下载质检报告
-uv run auto-qc pi run --data data.xlsx                # CLI 问题挖掘
-uv run auto-qc pi history                             # 查看挖掘历史
-uv run auto-qc config show                            # 查看 LLM 配置
-uv run auto-qc config set --model xxx                 # 修改 LLM 配置
+uv run auto-qc-tool web                                    # 启动 Web UI
+uv run auto-qc-tool qc run --data data.xlsx --rule-sets pi-rules   # CLI 质检
+uv run auto-qc-tool qc history                             # 查看质检历史
+uv run auto-qc-tool qc download <id>                       # 下载质检报告
+uv run auto-qc-tool pi run --data data.xlsx                # CLI 问题挖掘
+uv run auto-qc-tool pi history                             # 查看挖掘历史
+uv run auto-qc-tool config show                            # 查看 LLM 配置
+uv run auto-qc-tool config set --model xxx                 # 修改 LLM 配置
 uv run pytest tests/ -x -q                            # 跑测试
 ```
 

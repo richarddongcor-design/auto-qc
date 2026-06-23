@@ -9,16 +9,16 @@ AI 对话质量检测与问题挖掘工具。Web 和 CLI 功能完全同步。
 
 ## 前置条件
 
-- 项目目录：`C:\Users\dongyi\myprojects\auto-qc`
-- 运行方式：`uv run auto-qc` 或 `uv run auto-qc-tool`
-- `.env` 文件已包含 API 配置
+- 项目根目录执行命令
+- 运行方式：`uv run auto-qc`（兼容旧名）或 `uv run auto-qc-tool`
+- `.env` 文件已包含 LLM 配置
 
 ## 命令参考
 
 ### `qc run` — 运行质检
 
 ```
-uv run auto-qc qc run --data <path> --rule-sets <name>
+uv run auto-qc-tool qc run --data <path> --rule-sets <name>
 ```
 
 | 参数 | 必填 | 说明 |
@@ -31,21 +31,21 @@ uv run auto-qc qc run --data <path> --rule-sets <name>
 ### `qc history` — 查看/删除质检历史
 
 ```
-uv run auto-qc qc history                 # 列出最近 10 条
-uv run auto-qc qc history --limit 20      # 指定条数
-uv run auto-qc qc history --delete <id>   # 删除指定记录
+uv run auto-qc-tool qc history                 # 列出最近 10 条
+uv run auto-qc-tool qc history --limit 20      # 指定条数
+uv run auto-qc-tool qc history --delete <id>   # 删除指定记录
 ```
 
 ### `qc download <id>` — 下载质检报告
 
 ```
-uv run auto-qc qc download <id> -o ./reports
+uv run auto-qc-tool qc download <id> -o ./reports
 ```
 
 ### `pi run` — 运行问题挖掘
 
 ```
-uv run auto-qc pi run --data <path>
+uv run auto-qc-tool pi run --data <path>
 ```
 
 ### `pi history` — 查看/删除挖掘历史
