@@ -3,7 +3,7 @@ from pathlib import Path
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
-from auto_qc.web.routers import qc, pi, config
+from auto_qc.web.routers import qc, pi, config, downloads
 
 
 def create_app() -> FastAPI:
@@ -16,6 +16,7 @@ def create_app() -> FastAPI:
     app.include_router(qc.router, prefix="/qc", tags=["qc"])
     app.include_router(pi.router, prefix="/pi", tags=["pi"])
     app.include_router(config.router, prefix="/config", tags=["config"])
+    app.include_router(downloads.router, prefix="/history", tags=["history"])
 
     @app.get("/")
     async def root():

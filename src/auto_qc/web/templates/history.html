@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}历史 — Auto-QC{% endblock %}
+{% block content %}
+
+<div class="card p-8">
+  <div class="flex items-center justify-between mb-6">
+    <div class="flex items-center gap-3">
+      <div class="flex items-center gap-1 text-sm font-medium text-gray-700">
+        <span>运行历史</span>
+        <span class="text-xs text-gray-400 font-normal ml-1">质检 + 问题挖掘</span>
+      </div>
+    </div>
+    <!-- 类型筛选 -->
+    <div class="flex items-center gap-1 bg-gray-50 rounded-lg p-1" id="history-filters">
+      <button hx-get="/history/list?type=all" hx-target="#history-content" hx-swap="innerHTML"
+              class="px-3 py-1.5 text-xs font-medium rounded-md transition-all cursor-pointer bg-white text-gray-700 shadow-sm border border-gray-100"
+              onclick="document.querySelectorAll('#history-filters button').forEach(b=>b.classList.remove('bg-white','shadow-sm','border','border-gray-100')); this.classList.add('bg-white','shadow-sm','border','border-gray-100');">
+        全部
+      </button>
+      <button hx-get="/history/list?type=qc" hx-target="#history-content" hx-swap="innerHTML"
+              class="px-3 py-1.5 text-xs font-medium rounded-md transition-all cursor-pointer text-gray-400 hover:text-gray-600"
+              onclick="document.querySelectorAll('#history-filters button').forEach(b=>b.classList.remove('bg-white','shadow-sm','border','border-gray-100')); this.classList.add('bg-white','shadow-sm','border','border-gray-100');">
+        质检
+      </button>
+      <button hx-get="/history/list?type=pi" hx-target="#history-content" hx-swap="innerHTML"
+              class="px-3 py-1.5 text-xs font-medium rounded-md transition-all cursor-pointer text-gray-400 hover:text-gray-600"
+              onclick="document.querySelectorAll('#history-filters button').forEach(b=>b.classList.remove('bg-white','shadow-sm','border','border-gray-100')); this.classList.add('bg-white','shadow-sm','border','border-gray-100');">
+        问题挖掘
+      </button>
+    </div>
+  </div>
+  <div id="history-content" hx-get="/history/list?type=all" hx-trigger="load" hx-swap="innerHTML">
+    <div class="text-sm text-gray-400 py-8 text-center">加载中...</div>
+  </div>
+</div>
+
+{% endblock %}

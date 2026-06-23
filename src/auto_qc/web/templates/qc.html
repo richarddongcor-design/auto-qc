@@ -43,11 +43,4 @@ dz.addEventListener('drop', function(e){e.preventDefault();var f=e.dataTransfer.
 </script>
 
 <div id="result-area"></div>
-
-<div class="card p-8">
-  <div class="text-xs font-medium text-gray-500 mb-4 uppercase tracking-wider">历史记录</div>
-  <div id="history-list" hx-get="/qc/history" hx-trigger="load" hx-swap="innerHTML">
-    <div class="text-sm text-gray-400 py-6 text-center">加载中...</div>
-  </div>
-</div>
 {% endblock %}
