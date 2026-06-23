@@ -2,7 +2,7 @@
 import json
 import re
 from pathlib import Path
-from auto_qc.qc.domain.schemas import RulePackage, Batch, Rule
+from auto_qc.qc.rules.schemas import RulePackage, Batch, Rule
 
 _TEMPLATES_DIR = Path(__file__).resolve().parent.parent.parent.parent.parent / "templates"
 

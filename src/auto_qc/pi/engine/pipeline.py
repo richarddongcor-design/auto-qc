@@ -13,7 +13,7 @@ from datetime import datetime
 from pathlib import Path
 
 from auto_qc.pi.agents.config import HarnessConfig
-from auto_qc.pi.core.domain_loader import load_domain
+from auto_qc.pi.data.domain_loader import load_domain
 from auto_qc.pi.utils.excel_parser import split_into_chunks, generate_phase1_report
 from auto_qc.pi.utils.report_generator import generate_rules_md, generate_rules_summary
 from auto_qc.pi.engine.scheduler import Scheduler

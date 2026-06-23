@@ -84,7 +84,7 @@ class DomainPlugin(ABC):
         子类可覆盖此方法实现自定义加载逻辑。
         默认使用 FilePromptLoader 从 domains/<name>/prompts/ 读取 .md 文件。
         """
-        from auto_qc.pi.core.prompt_loader import FilePromptLoader
+        from auto_qc.pi.data.prompt_loader import FilePromptLoader
 
         loader = FilePromptLoader(domain=self.name)
         return loader.to_domain_prompts()

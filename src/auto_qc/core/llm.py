@@ -2,22 +2,22 @@
 
 包含：
 - TokenStats：Token 用量统计（全局 + 实例级）
-- extract_json / extract_json_str：增强版 JSON 提取（合并 QC + PI 两种实现）
-- call_llm / call_llm_with_retry：QC 兼容的简易调用
 - LlmConfig：统一 LLM 配置
 - LlmClient：统一 LLM 客户端（支持 system/user prompt、温度、API 级重试、Token 统计）
+- call_llm / call_llm_with_retry：QC 兼容的简易调用
+
+JSON 提取 / 修复移至 core.json_tools — 见 extract_json / extract_json_str。
 """
 import os
-import json
 import asyncio
-import re
 import logging
 from dataclasses import dataclass
 from typing import Any
 
 import httpx
 from openai import AsyncOpenAI, APIStatusError, APITimeoutError, APIConnectionError
-from json_repair import repair_json
+
+from auto_qc.core.json_tools import extract_json, extract_json_str
 
 logger = logging.getLogger(__name__)
 
@@ -123,125 +123,10 @@ def _build_client(
 
 
 # ═══════════════════════════════════════════════════════════
-# JSON 提取（合并 QC + PI 两种实现）
-# ═══════════════════════════════════════════════════════════
-
-def _find_first_json(text: str, open_ch: str, close_ch: str) -> Any | None:
-    """通过括号匹配提取第一个完整 JSON 结构。"""
-    count = 0
-    start = None
-    for i, ch in enumerate(text):
-        if ch == open_ch:
-            if count == 0:
-                start = i
-            count += 1
-        elif ch == close_ch:
-            count -= 1
-            if count == 0 and start is not None:
-                try:
-                    obj = json.loads(text[start:i + 1])
-                    if isinstance(obj, dict):
-                        # dict 包裹格式：返回内部第一个非空数组
-                        for v in obj.values():
-                            if isinstance(v, list) and len(v) > 0:
-                                return v
-                    return obj
-                except json.JSONDecodeError:
-                    pass
-    return None
-
-
-def _heal_json(text: str) -> Any | None:
-    """自修复常见 JSON 格式错误后尝试解析（不包含 repair_json —— 已在 extract_json 中先尝试过）。"""
-    # 1. 修复尾逗号后尝试
-    cleaned = re.sub(r",\s*([}\]])", r"\1", text)
-    if cleaned != text:
-        try:
-            return json.loads(cleaned)
-        except json.JSONDecodeError:
-            pass
-
-    # 2. 替换单引号为双引号后尝试
-    try:
-        sq_fixed = re.sub(r"(?<!\\)'", '"', text)
-        return json.loads(sq_fixed)
-    except json.JSONDecodeError:
-        pass
-
-    # 3. 修复未加引号的键名后尝试（含中文字段名）
-    try:
-        uq_fixed = re.sub(
-            r'(?<=[{,])\s*([a-zA-Z_一-鿿][a-zA-Z0-9_一-鿿]*)\s*(?=\s*:)',
-            r'"\1"',
-            text,
-        )
-        return json.loads(uq_fixed)
-    except json.JSONDecodeError:
-        pass
-
-    return None
-
-
-def extract_json(text: str) -> Any:
-    """从 LLM 输出文本中提取并解析 JSON，返回 Python 对象。
-
-    策略顺序（先整体修复、再局部匹配）：
-    1. 直接解析
-    2. Markdown 代码块提取
-    3. json_repair 整体修复（处理尾逗号、单引号等）
-    4. 找第一个 JSON 对象 `{...}`（含 dict → array 解包）
-    5. 找第一个 JSON 数组 `[...]`
-    6. 逐级自修复（尾逗号、单引号、未引号键名）
-    """
-    text = text.strip()
-
-    # 1. 直接解析
-    try:
-        return json.loads(text)
-    except json.JSONDecodeError:
-        pass
-
-    # 2. Markdown 代码块
-    match = re.search(r'```(?:json)?\s*([\s\S]*?)\s*```', text)
-    if match:
-        try:
-            return json.loads(match.group(1).strip())
-        except json.JSONDecodeError:
-            pass
-
-    # 3. json_repair 整体修复（在 bracket 匹配之前，防止内部空数组/对象被误提取）
-    try:
-        return json.loads(repair_json(text))
-    except Exception:
-        pass
-
-    # 4. 找第一个完整 JSON 对象（含 dict → array 解包）
-    result = _find_first_json(text, '{', '}')
-    if result is not None:
-        return result
-
-    # 5. 找第一个完整 JSON 数组
-    result = _find_first_json(text, '[', ']')
-    if result is not None:
-        return result
-
-    # 6. 逐级自修复（尾逗号 → 单引号 → 未引号键名）
-    result = _heal_json(text)
-    if result is not None:
-        return result
-
-    preview = text[:500] + ("..." if len(text) > 500 else "")
-    raise ValueError(f"无法从 LLM 响应中提取有效 JSON:\n{preview}")
-
-
-def extract_json_str(text: str) -> str:
-    """从 LLM 输出中提取 JSON 并序列化为字符串（兼容 QC 旧接口）。"""
-    result = extract_json(text)
-    return json.dumps(result, ensure_ascii=False)
-
-
-# ═══════════════════════════════════════════════════════════
 # 兼容接口（QC 侧使用）
+#
+# JSON 提取/修复见 core.json_tools:
+#   from auto_qc.core.json_tools import extract_json, extract_json_str
 # ═══════════════════════════════════════════════════════════
 
 async def call_llm(prompt: str, max_tokens: int = 8000) -> str:

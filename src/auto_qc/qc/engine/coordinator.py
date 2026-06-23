@@ -1,6 +1,6 @@
 """并发控制——原子化状态管理，硬限制最大并发数"""
-from auto_qc.qc.domain.schemas import Progress
-from auto_qc.qc.framework.progress import load_progress, save_progress
+from auto_qc.qc.rules.schemas import Progress
+from auto_qc.qc.engine.progress import load_progress, save_progress
 
 MAX_CONCURRENCY = 50
 

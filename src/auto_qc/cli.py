@@ -92,7 +92,7 @@ def _run_qc(args):
     from auto_qc.core.config import load_env_config
     load_env_config()
     try:
-        from auto_qc.qc.framework.orchestrator import run_qc
+        from auto_qc.qc.engine.orchestrator import run_qc
     except ImportError as e:
         print(f"错误: 无法导入质检模块 — {e}")
         sys.exit(1)

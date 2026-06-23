@@ -3,7 +3,7 @@ import hashlib
 import json
 import re
 from pathlib import Path
-from auto_qc.qc.domain.schemas import Rule, RulePackage, RuleSet
+from auto_qc.qc.rules.schemas import Rule, RulePackage, RuleSet
 
 _SEVERITY_MAP = {"高": "高", "中": "中", "低": "低", "HIGH": "高", "MEDIUM": "中", "LOW": "低"}
 

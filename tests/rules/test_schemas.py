@@ -1,5 +1,5 @@
 import pytest
-from auto_qc.qc.domain.schemas import (
+from auto_qc.qc.rules.schemas import (
     Violation, ResultItem, WorkerOutput, Rule, RulePackage,
     Conversation, Batch, CrossValidationResult, Progress,
 )

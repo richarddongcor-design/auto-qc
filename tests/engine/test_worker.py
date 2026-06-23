@@ -1,6 +1,6 @@
 import json
 import pytest
-from auto_qc.qc.framework.worker import extract_json, extract_json_str
+from auto_qc.qc.engine.worker import extract_json, extract_json_str
 
 
 def test_extract_valid_json():

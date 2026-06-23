@@ -1,10 +1,10 @@
 import json
 import pytest
-from auto_qc.qc.framework.validator import (
+from auto_qc.qc.engine.validator import (
     ValidationError, validate_rule_package, validate_batches,
     validate_worker_output, validate_merge_results, validate_single_rule_output,
 )
-from auto_qc.qc.domain.schemas import RulePackage, Rule, Batch, Conversation
+from auto_qc.qc.rules.schemas import RulePackage, Rule, Batch, Conversation
 
 
 class TestValidateRulePackage:

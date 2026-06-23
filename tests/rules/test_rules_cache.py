@@ -3,8 +3,8 @@ import hashlib
 import json
 from pathlib import Path
 import tempfile
-from auto_qc.qc.domain.rules import load_or_parse_rules, _hash_file
-from auto_qc.qc.domain.schemas import RulePackage
+from auto_qc.qc.rules.rules import load_or_parse_rules, _hash_file
+from auto_qc.qc.rules.schemas import RulePackage
 
 
 def test_hash_file_consistent():

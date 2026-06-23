@@ -1,6 +1,6 @@
 import pytest
-from auto_qc.qc.domain.rules import parse_rules_markdown, parse_rules_file, validate_rule_package
-from auto_qc.qc.domain.schemas import RulePackage
+from auto_qc.qc.rules.rules import parse_rules_markdown, parse_rules_file, validate_rule_package
+from auto_qc.qc.rules.schemas import RulePackage
 
 
 def test_parse_single_rule():
@@ -57,7 +57,7 @@ def test_validate_empty_package():
 
 
 def test_validate_duplicate_ids():
-    from auto_qc.qc.domain.schemas import Rule
+    from auto_qc.qc.rules.schemas import Rule
     pkg = RulePackage(rules=[
         Rule(rule_id="R01", name="规则一", severity="高", description="d", detection_logic="l"),
         Rule(rule_id="R01", name="规则二", severity="中", description="d", detection_logic="l"),
@@ -67,7 +67,7 @@ def test_validate_duplicate_ids():
 
 
 def test_validate_invalid_severity():
-    from auto_qc.qc.domain.schemas import Rule
+    from auto_qc.qc.rules.schemas import Rule
     pkg = RulePackage(rules=[
         Rule(rule_id="R01", name="x", severity="CRITICAL", description="d", detection_logic="l"),
     ])
@@ -76,7 +76,7 @@ def test_validate_invalid_severity():
 
 
 def test_validate_missing_fields():
-    from auto_qc.qc.domain.schemas import Rule
+    from auto_qc.qc.rules.schemas import Rule
     pkg = RulePackage(rules=[
         Rule(rule_id="R01", name="", severity="高", description="", detection_logic=""),
     ])
@@ -86,7 +86,7 @@ def test_validate_missing_fields():
 
 def test_load_rule_sets_by_name(tmp_path):
     """按名称加载规则集，ID 自动重编码。"""
-    from auto_qc.qc.domain.rules import load_rule_sets
+    from auto_qc.qc.rules.rules import load_rule_sets
     import json
     # Create a test JSON file
     rules_dir = str(tmp_path)
@@ -114,7 +114,7 @@ def test_load_rule_sets_by_name(tmp_path):
 
 def test_load_rule_sets_multiple(tmp_path):
     """加载多个规则集，ID 应无冲突。"""
-    from auto_qc.qc.domain.rules import load_rule_sets
+    from auto_qc.qc.rules.rules import load_rule_sets
     import json
     rules_dir = str(tmp_path)
 
@@ -152,7 +152,7 @@ def test_load_rule_sets_multiple(tmp_path):
 
 def test_load_rule_sets_not_found():
     """不存在的规则集应抛出 FileNotFoundError。"""
-    from auto_qc.qc.domain.rules import load_rule_sets
+    from auto_qc.qc.rules.rules import load_rule_sets
     import pytest
     with pytest.raises(FileNotFoundError):
         load_rule_sets(["nonexistent"])

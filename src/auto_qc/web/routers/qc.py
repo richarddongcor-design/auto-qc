@@ -87,7 +87,7 @@ async def start_qc(
 
             load_env_config()
 
-            from auto_qc.qc.framework.orchestrator import run_qc
+            from auto_qc.qc.engine.orchestrator import run_qc
 
             await run_qc(
                 data_path=str(file_path),

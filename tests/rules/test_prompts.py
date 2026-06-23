@@ -1,7 +1,7 @@
 """Prompt 模板组装测试"""
 import pytest
-from auto_qc.qc.domain.prompts import build_single_rule_prompt
-from auto_qc.qc.domain.schemas import Rule, Batch, Conversation
+from auto_qc.qc.rules.prompts import build_single_rule_prompt
+from auto_qc.qc.rules.schemas import Rule, Batch, Conversation
 
 
 def test_build_single_rule_prompt():

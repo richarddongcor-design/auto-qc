@@ -2,7 +2,7 @@
 import json
 from pathlib import Path
 import openpyxl
-from auto_qc.qc.domain.schemas import Conversation, Batch
+from auto_qc.qc.rules.schemas import Conversation, Batch
 
 
 COLUMN_PATTERNS = {

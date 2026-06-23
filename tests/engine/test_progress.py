@@ -1,9 +1,9 @@
 import tempfile
 from pathlib import Path
-from auto_qc.qc.framework.progress import (
+from auto_qc.qc.engine.progress import (
     create_progress, load_progress, save_progress, has_unfinished, reset_running_batches,
 )
-from auto_qc.qc.domain.schemas import Progress
+from auto_qc.qc.rules.schemas import Progress
 
 
 def test_create_and_load():

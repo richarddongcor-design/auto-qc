@@ -2,7 +2,7 @@
 import json
 from datetime import datetime
 from pathlib import Path
-from auto_qc.qc.domain.schemas import Progress
+from auto_qc.qc.rules.schemas import Progress
 
 
 def create_progress(work_dir: str, total_batches: int, phase: str = "qc") -> Progress:

@@ -2,10 +2,10 @@ import json
 import tempfile
 from pathlib import Path
 import pytest
-from auto_qc.qc.domain.data_loader import (
+from auto_qc.qc.rules.loader import (
     _match_columns, _preprocess_conversation, save_batches, load_conversations,
 )
-from auto_qc.qc.domain.schemas import Batch, Conversation
+from auto_qc.qc.rules.schemas import Batch, Conversation
 
 
 def test_match_columns_exact():
