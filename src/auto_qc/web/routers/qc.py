@@ -13,6 +13,29 @@ from auto_qc.web.templates import templates
 
 router = APIRouter()
 
+# 规则集目录
+_RULES_DIR = Path(__file__).resolve().parent.parent.parent.parent.parent / "rules"
+
+
+def _load_rule_set_options() -> list[dict]:
+    """读取 rules/ 目录下的规则集列表。"""
+    if not _RULES_DIR.exists():
+        return []
+    result = []
+    for f in sorted(_RULES_DIR.glob("*.json")):
+        try:
+            import json as _json
+            data = _json.loads(f.read_text(encoding="utf-8"))
+            result.append({
+                "name": data.get("name", f.stem),
+                "display_name": data.get("display_name", f.stem),
+                "rule_count": len(data.get("rules", [])),
+            })
+        except Exception:
+            continue
+    return result
+
+
 # 运行中的任务状态（内存，单用户场景够用）
 _running_tasks: dict = {}
 
@@ -51,10 +74,11 @@ def _read_log(save_dir: Path, max_lines: int = 100) -> list[str]:
 
 @router.get("/", response_class=HTMLResponse)
 async def qc_page(request: Request):
+    rule_sets = _load_rule_set_options()
     return templates.TemplateResponse(
         request,
         "qc.html",
-        {"request": request, "active_tab": "qc"},
+        {"request": request, "active_tab": "qc", "rule_sets": rule_sets},
     )
 
 

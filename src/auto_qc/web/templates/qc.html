@@ -7,9 +7,10 @@
         enctype="multipart/form-data">
     <div class="mb-6">
       <label class="text-xs font-medium text-gray-500 mb-2 block">质检规则</label>
-      <select name="rule_sets" class="max-w-xs">
-        <option value="pi-rules">pi-rules（6 条规则）</option>
-        <option value="intention-recruit-tree">intention-recruit-tree（4 条规则）</option>
+      <select name="rule_sets" class="max-w-xs" id="rule-sets-select">
+        {% for rs in rule_sets %}
+        <option value="{{ rs.name }}">{{ rs.display_name }}（{{ rs.rule_count }} 条规则）</option>
+        {% endfor %}
       </select>
     </div>
     <div class="flex items-end gap-5">

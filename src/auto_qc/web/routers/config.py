@@ -48,6 +48,26 @@ async def save_llm_config(request: Request):
 # ─── 规则集管理 ────────────────────────────────────────────
 
 
+@router.get("/rule-sets/options", response_class=HTMLResponse)
+async def rule_set_options():
+    """返回规则集选项 HTML（供 QC/PI 页面下拉框使用）。"""
+    if not RULES_DIR.exists():
+        return HTMLResponse("")
+
+    opts = []
+    for f in sorted(RULES_DIR.glob("*.json")):
+        try:
+            data = json.loads(f.read_text(encoding="utf-8"))
+            name = data.get("name", f.stem)
+            display = data.get("display_name", f.stem)
+            count = len(data.get("rules", []))
+            opts.append(f'<option value="{name}">{display}（{count} 条规则）</option>')
+        except (json.JSONDecodeError, OSError):
+            continue
+
+    return HTMLResponse("\n".join(opts))
+
+
 @router.get("/rule-sets", response_class=HTMLResponse)
 async def list_rule_sets(request: Request):
     """列出所有规则集。"""
