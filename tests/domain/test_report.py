@@ -81,8 +81,8 @@ def test_report_wide_table_headers():
         write_report(output, wide_rows, stats)
         wb = openpyxl.load_workbook(output)
         ws = wb["打标明细"]
-        assert ws.max_column == 7  # id | 时间 | 意向 | 3规则列 | 打标详情
-        summary_cell = ws.cell(2, 7).value
+        assert ws.max_column == 6  # id | 时间 | 3规则列 | 打标详情
+        summary_cell = ws.cell(2, 6).value
         assert "答非所问" in summary_cell
 
 
@@ -94,9 +94,9 @@ def test_report_shows_violation_in_cell():
         write_report(output, wide_rows, stats)
         wb = openpyxl.load_workbook(output)
         ws = wb["打标明细"]
-        # Row 2: 001 should have "违规" in column 4 (auto-pi_R01)
-        assert ws.cell(2, 4).value == "违规"
-        # Row 2: 001 should have "通过" in column 5 (auto-pi_R02)
-        assert ws.cell(2, 5).value == "通过"
-        # Row 3: 002 should have "通过" in column 4
-        assert ws.cell(3, 4).value == "通过"
+        # Row 2: 001 should have "违规" in column 3 (auto-pi_R01)
+        assert ws.cell(2, 3).value == "违规"
+        # Row 2: 001 should have "通过" in column 4 (auto-pi_R02)
+        assert ws.cell(2, 4).value == "通过"
+        # Row 3: 002 should have "通过" in column 3
+        assert ws.cell(3, 3).value == "通过"

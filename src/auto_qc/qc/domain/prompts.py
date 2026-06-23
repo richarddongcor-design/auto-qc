@@ -23,7 +23,7 @@ def build_qc_prompt(batch: Batch, rule_package: RulePackage) -> str:
     template = _load_template("worker-prompt.md")
 
     conversations_json = json.dumps(
-        [{"id": c.id, "time": c.time, "intent": c.intent, "conversation": c.conversation}
+        [{"id": c.id, "time": c.time, "conversation": c.conversation}
          for c in batch.conversations],
         ensure_ascii=False,
         indent=2,
@@ -105,7 +105,7 @@ def build_single_rule_prompt(batch: Batch, rule: Rule) -> str:
     template = _load_template("worker-prompt.md")
 
     conversations_json = json.dumps(
-        [{"id": c.id, "time": c.time, "intent": c.intent,
+        [{"id": c.id, "time": c.time,
           "conversation": clean_conversation_text(c.conversation)}
          for c in batch.conversations],
         ensure_ascii=False,

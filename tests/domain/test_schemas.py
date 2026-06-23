@@ -58,8 +58,8 @@ class TestRulePackage:
 class TestBatch:
     def test_ids_and_size(self):
         convs = [
-            Conversation(id="1", time="", intent="", conversation=""),
-            Conversation(id="2", time="", intent="", conversation=""),
+            Conversation(id="1", time="",  conversation=""),
+            Conversation(id="2", time="",  conversation=""),
         ]
         batch = Batch(batch_id=1, conversations=convs)
         assert batch.ids == ["1", "2"]

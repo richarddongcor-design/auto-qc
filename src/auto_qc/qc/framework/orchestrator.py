@@ -63,7 +63,7 @@ async def run_qc(
     all_convs = []
     for b in batches:
         for c in b.conversations:
-            all_convs.append({"id": c.id, "time": c.time, "intent": c.intent})
+            all_convs.append({"id": c.id, "time": c.time})
 
     save_batches(batches, work_dir)
 

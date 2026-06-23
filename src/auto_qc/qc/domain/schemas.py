@@ -104,7 +104,6 @@ class Conversation:
     """预处理后的单条对话"""
     id: str
     time: str
-    intent: str
     conversation: str      # 已预处理为可读格式
 
 

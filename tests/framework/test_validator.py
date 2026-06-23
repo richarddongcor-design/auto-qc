@@ -29,7 +29,7 @@ class TestValidateBatches:
 
     def test_valid_batches(self):
         batches = [Batch(batch_id=1, conversations=[
-            Conversation(id="1", time="", intent="", conversation=""),
+            Conversation(id="1", time="",  conversation=""),
         ])]
         validate_batches(batches)  # 不抛异常
 

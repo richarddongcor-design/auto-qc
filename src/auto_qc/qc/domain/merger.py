@@ -47,7 +47,6 @@ def merge_to_wide_rows(
         wide_rows.append({
             "id": cid,
             "time": conv.get("time", ""),
-            "intent": conv.get("intent", ""),
             "rules": rules_result,
             "summary": summary,
         })

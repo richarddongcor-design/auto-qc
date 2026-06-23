@@ -40,8 +40,8 @@ def test_preprocess_conversation():
 def test_save_and_load_batches():
     batches = [
         Batch(batch_id=1, conversations=[
-            Conversation(id="1", time="2024-01-01", intent="A", conversation="hi"),
-            Conversation(id="2", time="2024-01-02", intent="B", conversation="bye"),
+            Conversation(id="1", time="2024-01-01", conversation="hi"),
+            Conversation(id="2", time="2024-01-02", conversation="bye"),
         ]),
     ]
     with tempfile.TemporaryDirectory() as tmpdir:

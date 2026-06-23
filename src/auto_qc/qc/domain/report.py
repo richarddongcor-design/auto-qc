@@ -41,30 +41,28 @@ def _write_detail_sheet(wb, wide_rows: list[dict]) -> None:
     rule_ids = list(wide_rows[0]["rules"].keys())
     rule_names = {rid: wide_rows[0]["rules"][rid].get("rule_name", rid) for rid in rule_ids}
 
-    headers = ["id", "时间", "意向结果"] + [f"{rid}: {rule_names[rid]}" for rid in rule_ids] + ["打标详情"]
+    headers = ["id", "时间"] + [f"{rid}: {rule_names[rid]}" for rid in rule_ids] + ["打标详情"]
     for col, h in enumerate(headers, 1):
         _style_header(ws.cell(1, col, h))
 
     for row_idx, row in enumerate(wide_rows, 2):
         ws.cell(row_idx, 1, row["id"])
         ws.cell(row_idx, 2, row.get("time", ""))
-        ws.cell(row_idx, 3, row.get("intent", ""))
 
-        for col_idx, rid in enumerate(rule_ids, 4):
+        for col_idx, rid in enumerate(rule_ids, 3):
             rr = row["rules"].get(rid, {})
             result = rr.get("result", "通过")
             cell = ws.cell(row_idx, col_idx, result)
             cell.fill = VIOLATION_FILL if result == "违规" else PASS_FILL
 
-        summary_col = 4 + len(rule_ids)
+        summary_col = 3 + len(rule_ids)
         ws.cell(row_idx, summary_col, row.get("summary", ""))
 
     ws.column_dimensions["A"].width = 12
     ws.column_dimensions["B"].width = 16
-    ws.column_dimensions["C"].width = 10
-    for col_idx in range(4, 4 + len(rule_ids)):
+    for col_idx in range(3, 3 + len(rule_ids)):
         ws.column_dimensions[get_column_letter(col_idx)].width = 14
-    ws.column_dimensions[get_column_letter(4 + len(rule_ids))].width = 60
+    ws.column_dimensions[get_column_letter(3 + len(rule_ids))].width = 60
 
 
 def _write_stats_sheet(wb, stats: dict) -> None:

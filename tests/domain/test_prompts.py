@@ -9,8 +9,8 @@ def test_build_single_rule_prompt():
     rule = Rule(rule_id="R01", name="测试规则", severity="高",
                 description="测试描述", detection_logic="测试逻辑")
     batch = Batch(batch_id=1, conversations=[
-        Conversation(id="001", time="", intent="", conversation="对话1"),
-        Conversation(id="002", time="", intent="", conversation="对话2"),
+        Conversation(id="001", time="",  conversation="对话1"),
+        Conversation(id="002", time="",  conversation="对话2"),
     ])
     prompt = build_single_rule_prompt(batch, rule)
     assert "R01" in prompt
@@ -26,7 +26,7 @@ def test_build_single_rule_prompt_contains_rule_id():
     rule = Rule(rule_id="auto-pi_R01", name="答非所问", severity="高",
                 description="AI 回答与问题无关", detection_logic="检查")
     batch = Batch(batch_id=1, conversations=[
-        Conversation(id="001", time="", intent="", conversation="test"),
+        Conversation(id="001", time="",  conversation="test"),
     ])
     prompt = build_single_rule_prompt(batch, rule)
     assert "auto-pi_R01" in prompt
@@ -38,7 +38,7 @@ def test_build_single_rule_prompt_only_one_rule():
     rule = Rule(rule_id="R01", name="测试规则", severity="高",
                 description="描述", detection_logic="逻辑")
     batch = Batch(batch_id=1, conversations=[
-        Conversation(id="001", time="", intent="", conversation="test"),
+        Conversation(id="001", time="",  conversation="test"),
     ])
     prompt = build_single_rule_prompt(batch, rule)
     # 规则定义是 JSON 对象（单规则），不是数组格式

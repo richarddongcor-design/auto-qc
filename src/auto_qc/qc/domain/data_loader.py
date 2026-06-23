@@ -1,7 +1,6 @@
 """Excel 读取、列匹配、对话预处理、批次拆分"""
 import json
 from pathlib import Path
-from typing import Optional
 import openpyxl
 from auto_qc.qc.domain.schemas import Conversation, Batch
 
@@ -10,7 +9,6 @@ COLUMN_PATTERNS = {
     "id_col": ["id", "通话ID", "call_id", "callId", "通话id"],
     "time_col": ["时间", "通话时间", "call_time", "callTime", "通话日期"],
     "conv_col": ["对话", "对话文本", "conversation", "conv", "通话内容", "对话内容"],
-    "intent_col": ["意向", "意向结果", "intent_result", "intentResult", "结果"],
 }
 
 
@@ -65,7 +63,6 @@ def _preprocess_raw(conv_raw: str) -> str:
 def load_conversations(
     data_path: str,
     batch_size: int = 100,
-    exclude_intent: Optional[str] = None,
 ) -> list[Batch]:
     """
     读取 Excel，预处理对话，按 batch_size 拆分为 Batch 列表。
@@ -80,16 +77,10 @@ def load_conversations(
     id_idx = headers.index(col_map["id_col"])
     time_idx = headers.index(col_map["time_col"])
     conv_idx = headers.index(col_map["conv_col"])
-    intent_idx = headers.index(col_map["intent_col"])
 
     conversations = []
     for row in rows_iter:
         if row[id_idx] is None:
-            continue
-
-        intent = str(row[intent_idx]).strip() if row[intent_idx] else ""
-
-        if exclude_intent and intent == exclude_intent:
             continue
 
         try:
@@ -100,7 +91,6 @@ def load_conversations(
         conversations.append(Conversation(
             id=str(row[id_idx]),
             time=str(row[time_idx]).strip() if row[time_idx] else "",
-            intent=intent,
             conversation=conv_text,
         ))
 
@@ -128,7 +118,7 @@ def save_batches(batches: list[Batch], output_dir: str) -> None:
             "total": batch.size,
             "ids": batch.ids,
             "conversations": [
-                {"id": c.id, "time": c.time, "intent": c.intent, "conversation": c.conversation}
+                {"id": c.id, "time": c.time, "conversation": c.conversation}
                 for c in batch.conversations
             ],
         }

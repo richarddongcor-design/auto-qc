@@ -78,7 +78,7 @@ class TestEndToEndDataPipeline:
         from auto_qc.qc.domain.prompts import build_single_rule_prompt
 
         batch = Batch(batch_id=1, conversations=[
-            Conversation(id="1", time="2024-01-01", intent="A", conversation="你好"),
+            Conversation(id="1", time="2024-01-01", conversation="你好"),
         ])
         rule = Rule(rule_id="R01", name="测试", severity="高",
                     description="测试描述", detection_logic="测试逻辑")
