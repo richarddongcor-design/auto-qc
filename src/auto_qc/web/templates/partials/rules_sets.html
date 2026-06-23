@@ -1,17 +1,113 @@
 <div class="space-y-2">
+  <!-- 新建按钮 -->
+  <button onclick="showNewRuleSetDialog()"
+          class="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg border-2 border-dashed border-gray-200 text-sm text-gray-400 hover:text-amber-600 hover:border-amber-300 transition-all cursor-pointer mb-3">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+    新建规则集
+  </button>
+
   {% for rs in rule_sets %}
-  <div class="flex items-center justify-between px-4 py-3 rounded-lg border border-gray-100 hover:border-amber-200 hover:bg-amber-50/20 transition-all cursor-pointer"
-       onclick="document.getElementById('rule-editor').innerHTML='<div class=\'text-sm text-gray-400 py-6 text-center\'>加载中...</div>'"
-       hx-get="/config/rule-sets/{{ rs.name }}"
-       hx-target="#rule-editor"
-       hx-swap="innerHTML">
-    <div class="flex items-center gap-3 min-w-0">
+  <div class="group flex items-center justify-between px-4 py-3 rounded-lg border border-gray-100 hover:border-amber-200 hover:bg-amber-50/20 transition-all">
+    <!-- 主标题：点击展开编辑 -->
+    <div class="flex items-center gap-3 min-w-0 flex-1 cursor-pointer"
+         onclick="closeEditor(); document.getElementById('rule-editor').innerHTML='<div class=\'text-sm text-gray-400 py-6 text-center\'>加载中...</div>'"
+         hx-get="/config/rule-sets/{{ rs.name }}"
+         hx-target="#rule-editor"
+         hx-swap="innerHTML">
       <span class="text-sm font-medium text-gray-900">{{ rs.display_name }}</span>
       <span class="text-xs text-gray-400">{{ rs.rule_count }} 条规则</span>
     </div>
-    <svg class="w-4 h-4 text-gray-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+    <!-- 操作按钮 -->
+    <div class="flex items-center gap-1 shrink-0 ml-3 opacity-0 group-hover:opacity-100 transition-opacity">
+      <button onclick="event.stopPropagation(); copyRuleSet('{{ rs.name }}')"
+              title="复制"
+              class="p-1.5 text-xs text-gray-300 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-all cursor-pointer bg-transparent border-none">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+      </button>
+      <a href="/config/rule-sets/{{ rs.name }}/export"
+         title="导出"
+         class="p-1.5 text-xs text-gray-300 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-all no-underline">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+      </a>
+      <button onclick="event.stopPropagation(); if(confirm('确认删除规则集「{{ rs.display_name }}」？')){fetch('/config/rule-sets/{{ rs.name }}/delete',{method:'POST'}).then(function(){location.reload()})}"
+              title="删除"
+              class="p-1.5 text-xs text-gray-300 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all cursor-pointer bg-transparent border-none">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+      </button>
+    </div>
   </div>
   {% else %}
   <div class="text-sm text-gray-400 py-6 text-center">暂无规则集</div>
   {% endfor %}
 </div>
+
+<!-- 新建对话框 -->
+<div id="new-rule-dialog" class="hidden fixed inset-0 bg-black/20 flex items-center justify-center z-50" onclick="if(event.target===this)hideNewRuleSetDialog()">
+  <div class="bg-white rounded-xl shadow-xl p-6 w-full max-w-md mx-4" onclick="event.stopPropagation()">
+    <div class="text-sm font-medium text-gray-900 mb-4">新建规则集</div>
+    <form id="new-rule-form" hx-post="/config/rule-sets/create" hx-target="#new-rule-status" hx-swap="innerHTML"
+          class="space-y-4" onsubmit="event.preventDefault();">
+      <div class="space-y-1.5">
+        <label class="text-xs font-medium text-gray-500">标识（文件名）</label>
+        <input name="name" required pattern="[a-zA-Z0-9_-]+"
+               placeholder="my-rules"
+               class="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg text-sm outline-none focus:border-amber-400">
+        <div class="text-xs text-gray-400">只支持字母、数字、下划线、中划线</div>
+      </div>
+      <div class="space-y-1.5">
+        <label class="text-xs font-medium text-gray-500">显示名称</label>
+        <input name="display_name" required placeholder="我的规则集"
+               class="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg text-sm outline-none focus:border-amber-400">
+      </div>
+      <div class="space-y-1.5">
+        <label class="text-xs font-medium text-gray-500">描述（可选）</label>
+        <textarea name="description" rows="2" placeholder="规则集用途说明"
+                  class="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg text-sm outline-none focus:border-amber-400"></textarea>
+      </div>
+      <div id="new-rule-status"></div>
+      <div class="flex items-center justify-end gap-3">
+        <button type="button" onclick="hideNewRuleSetDialog()"
+                class="px-4 py-2 text-sm text-gray-500 hover:text-gray-700 transition-all cursor-pointer bg-transparent border-none">取消</button>
+        <button type="button" onclick="submitNewRuleSet()"
+                class="px-4 py-2 text-sm text-white bg-amber-600 hover:bg-amber-500 rounded-lg transition-all cursor-pointer shadow-sm">创建</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+function showNewRuleSetDialog() {
+  document.getElementById('new-rule-dialog').classList.remove('hidden');
+}
+function hideNewRuleSetDialog() {
+  document.getElementById('new-rule-dialog').classList.add('hidden');
+}
+function submitNewRuleSet() {
+  var form = document.getElementById('new-rule-form');
+  var data = new FormData(form);
+  fetch('/config/rule-sets/create', {method:'POST', body:data})
+    .then(function(r){return r.text()})
+    .then(function(msg){
+      document.getElementById('new-rule-status').innerHTML = msg;
+      if (msg.includes('已创建')) {
+        setTimeout(function(){ location.reload(); }, 800);
+      }
+    });
+}
+function copyRuleSet(name) {
+  var target = prompt('输入新规则集名称：', name + '-copy');
+  if (!target) return;
+  var data = new FormData();
+  data.append('target', target);
+  fetch('/config/rule-sets/' + name + '/copy', {method:'POST', body:data})
+    .then(function(r){return r.text()})
+    .then(function(msg){
+      if (msg.includes('已复制')) { location.reload(); }
+      else { alert(msg.replace(/<[^>]*>/g, '')); }
+    });
+}
+function closeEditor() {
+  var editor = document.getElementById('rule-editor');
+  if (editor) editor.innerHTML = '';
+}
+</script>

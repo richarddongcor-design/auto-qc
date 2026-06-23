@@ -51,7 +51,7 @@ def main():
     pi_dl.add_argument("--output", "-o", help="保存路径（默认当前目录）")
 
     # --- config 子命令 ---
-    cfg_parser = subparsers.add_parser("config", help="查看/修改 LLM 配置")
+    cfg_parser = subparsers.add_parser("config", help="查看/修改 LLM 配置和规则集")
     cfg_sub = cfg_parser.add_subparsers(dest="config_action", required=True)
 
     cfg_show = cfg_sub.add_parser("show", help="查看当前配置")
@@ -59,6 +59,30 @@ def main():
     cfg_set.add_argument("--base-url", help="API 接口地址")
     cfg_set.add_argument("--api-key", help="API Key")
     cfg_set.add_argument("--model", help="模型名称")
+
+    # config rule-sets 子命令
+    cfg_rs = cfg_sub.add_parser("rule-sets", help="管理规则集")
+    cfg_rs_sub = cfg_rs.add_subparsers(dest="rule_sets_action", required=True)
+
+    rs_list = cfg_rs_sub.add_parser("list", help="列出所有规则集")
+    rs_show = cfg_rs_sub.add_parser("show", help="查看规则集详情")
+    rs_show.add_argument("name", help="规则集名称")
+
+    rs_create = cfg_rs_sub.add_parser("create", help="新建规则集")
+    rs_create.add_argument("name", help="规则集标识（文件名）")
+    rs_create.add_argument("--display-name", required=True, help="显示名称")
+    rs_create.add_argument("--description", default="", help="描述")
+
+    rs_delete = cfg_rs_sub.add_parser("delete", help="删除规则集")
+    rs_delete.add_argument("name", help="规则集名称")
+
+    rs_copy = cfg_rs_sub.add_parser("copy", help="复制规则集")
+    rs_copy.add_argument("source", help="源名称")
+    rs_copy.add_argument("target", help="目标名称")
+
+    rs_export = cfg_rs_sub.add_parser("export", help="导出规则集为 JSON")
+    rs_export.add_argument("name", help="规则集名称")
+    rs_export.add_argument("--output", "-o", help="输出路径（默认终端显示）")
 
     # --- web 子命令 ---
     web_parser = subparsers.add_parser("web", help="启动 Web 服务")
@@ -236,6 +260,10 @@ def _pi_download(args):
 
 # ── Config ──────────────────────────────────────────────────────────────────
 
+def _get_rules_dir() -> Path:
+    return Path(__file__).resolve().parent.parent.parent / "rules"
+
+
 def _handle_config(args):
     from auto_qc.core.config import load_env_config, save_env_config, mask_api_key
 
@@ -252,6 +280,95 @@ def _handle_config(args):
         model = args.model or cfg["LLM_MODEL"]
         save_env_config(base_url=base_url, api_key=api_key, model=model)
         print("配置已更新")
+
+    elif args.config_action == "rule-sets":
+        _handle_rule_sets(args)
+
+
+def _handle_rule_sets(args):
+    import json
+    import shutil
+
+    rules_dir = _get_rules_dir()
+    action = args.rule_sets_action
+
+    if action == "list":
+        if not rules_dir.exists():
+            print("暂无规则集")
+            return
+        for f in sorted(rules_dir.glob("*.json")):
+            try:
+                data = json.loads(f.read_text(encoding="utf-8"))
+                print(f"  {data.get('name', f.stem):<20} {data.get('display_name', ''):<20} {len(data.get('rules', []))} 条规则")
+            except Exception:
+                print(f"  {f.stem:<20} (解析失败)")
+
+    elif action == "show":
+        file_path = rules_dir / f"{args.name}.json"
+        if not file_path.exists():
+            print(f"错误: 规则集 '{args.name}' 不存在")
+            sys.exit(1)
+        data = json.loads(file_path.read_text(encoding="utf-8"))
+        print(f"名称: {data.get('display_name', args.name)}")
+        print(f"描述: {data.get('description', '')}")
+        print(f"规则: {len(data.get('rules', []))} 条\n")
+        for r in data.get("rules", []):
+            print(f"  {r['rule_id']}: {r['name']}")
+            print(f"    描述: {r['description'][:60]}...")
+            print(f"    逻辑: {r['detection_logic'][:60]}...")
+            print()
+
+    elif action == "create":
+        file_path = rules_dir / f"{args.name}.json"
+        if file_path.exists():
+            print(f"错误: 规则集 '{args.name}' 已存在")
+            sys.exit(1)
+        rules_dir.mkdir(parents=True, exist_ok=True)
+        data = {
+            "name": args.name,
+            "display_name": args.display_name,
+            "description": args.description,
+            "rules": [{
+                "rule_id": "R01",
+                "name": "示例规则",
+                "description": "请编辑规则描述",
+                "detection_logic": "请编辑检测逻辑",
+            }],
+        }
+        file_path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+        print(f"规则集 '{args.display_name}' 已创建")
+
+    elif action == "delete":
+        file_path = rules_dir / f"{args.name}.json"
+        if not file_path.exists():
+            print(f"错误: 规则集 '{args.name}' 不存在")
+            sys.exit(1)
+        file_path.unlink()
+        print(f"规则集 '{args.name}' 已删除")
+
+    elif action == "copy":
+        src = rules_dir / f"{args.source}.json"
+        dst = rules_dir / f"{args.target}.json"
+        if not src.exists():
+            print(f"错误: 规则集 '{args.source}' 不存在")
+            sys.exit(1)
+        if dst.exists():
+            print(f"错误: 目标 '{args.target}' 已存在")
+            sys.exit(1)
+        shutil.copy2(str(src), str(dst))
+        print(f"规则集 '{args.source}' 已复制为 '{args.target}'")
+
+    elif action == "export":
+        file_path = rules_dir / f"{args.name}.json"
+        if not file_path.exists():
+            print(f"错误: 规则集 '{args.name}' 不存在")
+            sys.exit(1)
+        if args.output:
+            import shutil as sh
+            sh.copy2(str(file_path), args.output)
+            print(f"已导出至: {args.output}")
+        else:
+            print(file_path.read_text(encoding="utf-8"))
 
 # ── Web ─────────────────────────────────────────────────────────────────────
 
