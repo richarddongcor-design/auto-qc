@@ -246,8 +246,7 @@ async def adjudicate(
 
     prompt = _build_adjudication_prompt(disputes, rule_id, original, recheck, conv_text_map)
     raw = await call_llm_fn(prompt)
-    json_text = extract_json(raw)
-    data = json.loads(json_text)
+    data = extract_json(raw)
     rulings = {r["id"]: r["violates"] for r in data.get("rulings", [])}
 
     def _check(entries: list[dict], cid: str) -> bool:

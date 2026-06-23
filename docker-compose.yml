@@ -1,0 +1,13 @@
+services:
+  auto-qc-tool:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      # 配置文件（只读挂载）
+      - ./.env:/app/.env:ro
+      # 运行输出持久化
+      - ./output:/app/output
+    environment:
+      - TZ=Asia/Shanghai
+    restart: unless-stopped

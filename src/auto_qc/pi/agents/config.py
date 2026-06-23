@@ -9,36 +9,14 @@ try:
 except ImportError:
     yaml = None
 
+from auto_qc.core.llm import LlmConfig
+
 
 @dataclass
 class DataConfig:
     input_path: str = "data/input.xlsx"
     chunk_size: int = 0  # 0 = 自动计算
     domain: str = "recruitment"  # 领域名称，切换场景时修改此值
-
-
-@dataclass
-class LlmConfig:
-    """LLM API 配置。空字段自动从 .env 文件读取，无需手动配置。"""
-    api_key: str = ""
-    model: str = ""
-    base_url: str = ""
-    max_retries: int = 3
-    retry_delay: int = 10                # 秒
-    timeout: int = 300                   # 秒
-    concurrency: int = 10                # 最大并发数
-
-    def __post_init__(self):
-        """config.yaml 中未填写的字段，从 .env 文件自动补充。"""
-        from dotenv import load_dotenv
-        import os
-        load_dotenv()
-        if not self.api_key:
-            self.api_key = os.getenv("LLM_API_KEY", "")
-        if not self.base_url:
-            self.base_url = os.getenv("LLM_BASE_URL", "")
-        if not self.model:
-            self.model = os.getenv("LLM_MODEL", "")
 
 
 @dataclass

@@ -76,6 +76,20 @@ async def start_pi(
         except Exception as e:
             _running_tasks[task_id]["status"] = "failed"
             _running_tasks[task_id]["error"] = str(e)
+            # 写入 summary.json 使失败记录出现在历史中
+            try:
+                summary_data = {
+                    "data_file": file.filename or "data.xlsx",
+                    "domain": domain,
+                    "status": "failed",
+                    "error": str(e),
+                }
+                (save_dir / "summary.json").write_text(
+                    json.dumps(summary_data, ensure_ascii=False, indent=2),
+                    encoding="utf-8",
+                )
+            except Exception:
+                pass
 
     asyncio.create_task(run())
 
@@ -88,6 +102,8 @@ async def start_pi(
 
 def _read_pi_log(save_dir: Path, max_lines: int = 100) -> list[str]:
     """读取 PI 运行日志的最新 max_lines 行。"""
+    if not save_dir.exists():
+        return []
     # PI 在 save_dir 下会按 run_id 创建子目录
     subdirs = sorted([d for d in save_dir.iterdir() if d.is_dir() and d.name[:4].isdigit()], reverse=True)
     if subdirs:
@@ -150,6 +166,8 @@ async def pi_download(task_id: str):
     """下载问题挖掘报告。"""
     from fastapi.responses import FileResponse, HTMLResponse
     save_dir = Path("output") / task_id
+    if not save_dir.exists():
+        return HTMLResponse("<div class='text-sm text-red-500'>结果文件不存在</div>")
     # 查找最早生成的 run 子目录下的报告文件
     subdirs = sorted([d for d in save_dir.iterdir() if d.is_dir() and d.name[:4].isdigit()], reverse=True)
     for sd in subdirs:

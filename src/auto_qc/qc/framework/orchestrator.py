@@ -13,7 +13,7 @@ from auto_qc.qc.framework.validator import (
     validate_batches,
     validate_single_rule_output,
 )
-from auto_qc.qc.framework.worker import call_llm_with_retry, extract_json, reset_token_stats, get_token_stats
+from auto_qc.qc.framework.worker import call_llm_with_retry, extract_json_str, reset_token_stats, get_token_stats
 from auto_qc.qc.framework.progress import create_progress, load_progress, save_progress
 from auto_qc.qc.framework.coordinator import Coordinator
 
@@ -89,7 +89,7 @@ async def run_qc(
                     try:
                         prompt = build_single_rule_prompt(batch, rule)
                         raw = await call_llm_with_retry(prompt)
-                        json_text = extract_json(raw)
+                        json_text = extract_json_str(raw)
                         data = validate_single_rule_output(
                             json_text, batch.size, rule.rule_id, batch_conv_ids[batch.batch_id],
                         )

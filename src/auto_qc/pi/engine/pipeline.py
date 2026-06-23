@@ -841,6 +841,10 @@ def main():
     parser.add_argument("--output", type=str, default=None, help="输出目录（覆盖默认 pi/output/）")
     args = parser.parse_args()
 
+    # 确保 .env → 进程环境变量已加载（供 LlmConfig 使用）
+    from auto_qc.core.config import load_env_config
+    load_env_config()
+
     base_dir = get_base_dir()
     config_path = args.config or str(base_dir / "agents" / "config.yaml")
     config = HarnessConfig.from_yaml(config_path)
