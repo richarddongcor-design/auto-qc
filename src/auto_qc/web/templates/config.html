@@ -1,51 +1,52 @@
 {% extends "base.html" %}
 {% block title %}配置 — Auto-QC{% endblock %}
 {% block content %}
+
 {% if saved %}
-<div class="mb-4 px-4 py-3 bg-amber-50 border border-amber-200 rounded-lg text-sm text-amber-700 flex items-center gap-2">
+<div class="alert-success">
   <span>✓</span> 配置已保存
 </div>
 {% endif %}
+
 <!-- LLM 配置 -->
-<div class="card p-6 mb-6">
-  <div class="flex items-center justify-between mb-7">
-    <span class="text-sm font-medium">LLM 配置</span>
-    <button type="submit" form="llm-form" class="btn-primary px-6 font-semibold tracking-wide">保存</button>
+<div class="card mb-5">
+  <div class="section-title">
+    <span>LLM 配置</span>
+    <button type="submit" form="llm-form" class="btn-save">保存</button>
   </div>
-  <form id="llm-form" method="post" action="/config/save-llm" class="space-y-5">
-    <div class="grid grid-cols-2 gap-x-8 gap-y-6">
-      <div class="space-y-2">
-        <label for="base_url" class="text-xs font-medium text-gray-500">接口地址</label>
-        <input id="base_url" name="base_url" value="{{ config.LLM_BASE_URL }}" class="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-lg text-sm outline-none focus:border-gray-400 focus:ring-1 focus:ring-gray-200 transition-all">
+  <form id="llm-form" method="post" action="/config/save-llm">
+    <div class="form-grid">
+      <div class="form-group">
+        <label class="field-label" for="base_url">接口地址</label>
+        <input id="base_url" name="base_url" value="{{ config.LLM_BASE_URL }}" class="input">
       </div>
-      <div class="space-y-2">
-        <div class="flex items-center justify-between">
-          <label for="api_key" class="text-xs font-medium text-gray-500">API Key</label>
-          <span class="flex items-center gap-1.5 text-xs {{ 'text-emerald-600' if config.LLM_API_KEY != '****' else 'text-gray-400' }}">
-            <span class="w-1.5 h-1.5 rounded-full {{ 'bg-emerald-500' if config.LLM_API_KEY != '****' else 'bg-gray-300' }}"></span>
+      <div class="form-group">
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <label class="field-label" for="api_key" style="margin-bottom:0;">API Key</label>
+          <span class="key-status {% if config.LLM_API_KEY != '****' %}key-status--set{% else %}key-status--unset{% endif %}">
+            <span class="key-dot {% if config.LLM_API_KEY != '****' %}key-dot--set{% else %}key-dot--unset{% endif %}"></span>
             {% if config.LLM_API_KEY != '****' %}已设置{% else %}未配置{% endif %}
           </span>
         </div>
-        <input id="api_key" name="api_key" type="password" value="{{ config.LLM_API_KEY }}" placeholder="输入新 Key 以更新" class="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-lg text-sm outline-none focus:border-gray-400 focus:ring-1 focus:ring-gray-200 transition-all">
+        <input id="api_key" name="api_key" type="password" value="{{ config.LLM_API_KEY }}" placeholder="输入新 Key 以更新" class="input" style="margin-top:6px;">
       </div>
-      <div class="space-y-2">
-        <label for="model" class="text-xs font-medium text-gray-500">模型</label>
-        <input id="model" name="model" value="{{ config.LLM_MODEL }}" placeholder="deepseek-v4-flash" class="w-full px-4 py-2.5 bg-white border border-gray-300 rounded-lg text-sm outline-none focus:border-gray-400 focus:ring-1 focus:ring-gray-200 transition-all placeholder-gray-400">
+      <div class="form-group">
+        <label class="field-label" for="model">模型</label>
+        <input id="model" name="model" value="{{ config.LLM_MODEL }}" placeholder="deepseek-v4-flash" class="input">
       </div>
     </div>
   </form>
 </div>
 
 <!-- 规则管理 -->
-<div class="card p-6" x-data="{ activeSet: null }">
-  <div class="flex items-center justify-between mb-5">
-    <span class="text-sm font-medium">规则管理</span>
+<div class="card">
+  <div class="section-title mb-4">
+    <span>规则管理</span>
   </div>
-  <!-- 规则集列表 -->
   <div id="rule-sets-list" hx-get="/config/rule-sets" hx-trigger="load" hx-swap="innerHTML">
-    <div class="text-sm text-gray-400 py-6 text-center">加载规则集...</div>
+    <div class="empty-state">加载规则集...</div>
   </div>
-  <!-- 编辑器容器 -->
   <div id="rule-editor" class="mt-4"></div>
 </div>
+
 {% endblock %}

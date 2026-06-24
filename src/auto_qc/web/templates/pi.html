@@ -2,46 +2,65 @@
 {% block title %}问题挖掘 — Auto-QC{% endblock %}
 {% block content %}
 
-<div class="card p-8 mb-5">
+<div class="card">
   <form id="pi-form" hx-post="/pi/start" hx-target="#result-area" hx-swap="innerHTML"
         enctype="multipart/form-data">
-    <div class="mb-6">
-      <label class="text-xs font-medium text-gray-500 mb-2 block">领域</label>
-      <select name="domain" class="max-w-xs">
-        <option value="recruitment">招聘外呼</option>
-      </select>
-    </div>
-    <div class="flex items-end gap-5">
-      <div class="flex-1">
-        <label class="text-xs font-medium text-gray-500 mb-2 block">待挖掘文件</label>
-        <div id="pi-dropzone"
-             class="border-2 border-dashed border-gray-200 rounded-xl py-5 px-6 text-center hover:border-amber-300 cursor-pointer transition-colors"
-             onclick="document.getElementById('pi-file-input').click()">
-          <div id="pi-dropzone-text" class="text-gray-400 text-sm">点击上传或拖拽 Excel 文件</div>
-          <div id="pi-dropzone-hint" class="text-xs text-gray-300 mt-1">.xlsx</div>
+
+    <div class="toolbar">
+
+      <!-- 领域 -->
+      <div class="field field--sm">
+        <span class="field-label">领域</span>
+        <div class="custom-select">
+          <select name="domain" style="position:absolute;opacity:0;pointer-events:none;width:0;height:0;">
+            <option value="recruitment">招聘外呼</option>
+          </select>
+          <div class="custom-select__trigger">
+            <span class="custom-select__value">招聘外呼</span>
+            <svg class="custom-select__arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </div>
+          <div class="custom-select__list">
+            <div class="custom-select__option selected" data-value="recruitment">招聘外呼</div>
+          </div>
         </div>
-        <input id="pi-file-input" type="file" name="file" accept=".xlsx" class="hidden" required onchange="piHandleFile(this)">
       </div>
-      <button type="submit" class="px-12 py-3 bg-amber-600 hover:bg-amber-500 active:bg-amber-700 text-white text-base font-semibold rounded-xl transition-all cursor-pointer shadow-sm hover:shadow-md active:scale-[0.97] border border-amber-500 shrink-0">开始挖掘</button>
+
+      <!-- 文件 -->
+      <div class="field field--md">
+        <span class="field-label">待挖掘文件</span>
+        <div class="file-row">
+          <button type="button" class="btn-file" onclick="document.getElementById('pi-file-input').click()">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+            选择文件
+          </button>
+          <span class="file-name" id="pi-file-label">未选择文件</span>
+          <input id="pi-file-input" type="file" name="file" accept=".xlsx" style="display:none" required onchange="piHandleFile(this)">
+        </div>
+      </div>
+
+      <!-- 提交 -->
+      <button type="submit" class="btn-go">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        开始挖掘
+      </button>
+
     </div>
+
   </form>
 </div>
 
 <script>
 function piHandleFile(input) {
+  var label = document.getElementById('pi-file-label');
   if (input.files && input.files[0]) {
-    document.getElementById('pi-dropzone-text').textContent = input.files[0].name;
-    document.getElementById('pi-dropzone-hint').textContent = '✓ 已就绪';
-    document.getElementById('pi-dropzone').className = 'border-2 border-amber-300 bg-amber-50/30 rounded-xl py-5 px-6 text-center cursor-pointer transition-colors';
+    label.textContent = input.files[0].name;
+    label.classList.add('has-file');
+  } else {
+    label.textContent = '未选择文件';
+    label.classList.remove('has-file');
   }
 }
-(function() {
-  var dz = document.getElementById('pi-dropzone'); if(!dz)return;
-  dz.addEventListener('dragover',function(e){e.preventDefault();this.className='border-2 border-amber-400 bg-amber-50/50 rounded-xl py-5 px-6 text-center cursor-pointer transition-colors';});
-  dz.addEventListener('dragleave',function(e){e.preventDefault();if(!document.getElementById('pi-file-input').files[0]){this.className='border-2 border-dashed border-gray-200 rounded-xl py-5 px-6 text-center hover:border-amber-300 cursor-pointer transition-colors';}});
-  dz.addEventListener('drop',function(e){e.preventDefault();var f=e.dataTransfer.files[0];if(f){document.getElementById('pi-file-input').files=e.dataTransfer.files;piHandleFile(document.getElementById('pi-file-input'));}});
-})();
 </script>
 
-<div id="result-area"></div>
+<div class="result-area" id="result-area"></div>
 {% endblock %}
