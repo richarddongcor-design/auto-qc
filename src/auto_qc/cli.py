@@ -94,6 +94,12 @@ def main():
     web_parser.add_argument("--host", default="127.0.0.1", help="监听地址")
     web_parser.add_argument("--port", type=int, default=8000, help="监听端口")
 
+    # --- tools 子命令 ---
+    tools_parser = subparsers.add_parser("tools", help="工具命令")
+    tools_sub = tools_parser.add_subparsers(dest="tools_action", required=True)
+    tpl_dl = tools_sub.add_parser("template", help="下载数据模板")
+    tpl_dl.add_argument("--output", "-o", default="数据模板.xlsx", help="保存路径")
+
     args = parser.parse_args()
 
     if args.command == "qc":
@@ -104,6 +110,8 @@ def main():
         _run_web(args)
     elif args.command == "config":
         _handle_config(args)
+    elif args.command == "tools":
+        _handle_tools(args)
 
 
 # ── QC ──────────────────────────────────────────────────────────────────────
@@ -411,6 +419,16 @@ def _handle_rule_sets(args):
         }
         out.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
         print(f"已导入 {len(rules)} 条规则 → {args.name}")
+
+# ── Tools ────────────────────────────────────────────────────────────────────
+
+def _handle_tools(args):
+    if args.tools_action == "template":
+        from auto_qc.core.data_converter import generate_template
+        output = Path(args.output)
+        generate_template(str(output))
+        print(f"模板已保存至: {output}")
+
 
 # ── Web ─────────────────────────────────────────────────────────────────────
 
