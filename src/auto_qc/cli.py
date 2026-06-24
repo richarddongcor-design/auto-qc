@@ -84,6 +84,11 @@ def main():
     rs_export.add_argument("name", help="规则集名称")
     rs_export.add_argument("--output", "-o", help="输出路径（默认终端显示）")
 
+    rs_import = cfg_rs_sub.add_parser("import", help="从 Markdown 文件导入规则集")
+    rs_import.add_argument("name", help="规则集标识")
+    rs_import.add_argument("file", help="Markdown 文件路径")
+    rs_import.add_argument("--display-name", required=True, help="显示名称")
+
     # --- web 子命令 ---
     web_parser = subparsers.add_parser("web", help="启动 Web 服务")
     web_parser.add_argument("--host", default="127.0.0.1", help="监听地址")
@@ -369,6 +374,43 @@ def _handle_rule_sets(args):
             print(f"已导出至: {args.output}")
         else:
             print(file_path.read_text(encoding="utf-8"))
+
+    elif action == "import":
+        from auto_qc.qc.rules.rules import parse_rules_markdown
+
+        file_path = Path(args.file)
+        if not file_path.exists():
+            print(f"错误: 文件 '{args.file}' 不存在")
+            sys.exit(1)
+        content = file_path.read_text(encoding="utf-8")
+        parsed = parse_rules_markdown(content)
+        if not parsed:
+            print("错误: 未解析到任何规则")
+            sys.exit(1)
+
+        rules = []
+        for i, r in enumerate(parsed):
+            rules.append({
+                "rule_id": f"R{i+1:02d}",
+                "name": r.name,
+                "description": r.description,
+                "detection_logic": r.detection_logic,
+                "severity": r.severity,
+                "examples": r.examples,
+            })
+        out = rules_dir / f"{args.name}.json"
+        if out.exists():
+            print(f"错误: 规则集 '{args.name}' 已存在")
+            sys.exit(1)
+        rules_dir.mkdir(parents=True, exist_ok=True)
+        data = {
+            "name": args.name,
+            "display_name": args.display_name,
+            "description": f"从 {file_path.name} 导入",
+            "rules": rules,
+        }
+        out.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+        print(f"已导入 {len(rules)} 条规则 → {args.name}")
 
 # ── Web ─────────────────────────────────────────────────────────────────────
 

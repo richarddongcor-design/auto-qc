@@ -3,7 +3,7 @@ import json
 import shutil
 from pathlib import Path
 
-from fastapi import APIRouter, Request, Form
+from fastapi import APIRouter, Request, Form, UploadFile
 from fastapi.responses import HTMLResponse, RedirectResponse, FileResponse
 from auto_qc.web.templates import templates
 from auto_qc.core.config import load_env_config, save_env_config, mask_api_key
@@ -200,3 +200,43 @@ async def export_rule_set(name: str):
         filename=f"{name}.json",
         media_type="application/json",
     )
+
+
+@router.post("/rule-sets/import")
+async def import_rule_set(
+    name: str = Form(...),
+    display_name: str = Form(...),
+    file: UploadFile = Form(...),
+):
+    """从 Markdown 文件导入规则集。"""
+    from auto_qc.qc.rules.rules import parse_rules_markdown
+
+    content = (await file.read()).decode("utf-8")
+    try:
+        parsed = parse_rules_markdown(content)
+    except Exception as e:
+        return HTMLResponse(f"<div class='text-sm text-red-500'>解析失败: {e}</div>")
+
+    if not parsed:
+        return HTMLResponse("<div class='text-sm text-red-500'>未解析到任何规则，检查 markdown 格式</div>")
+
+    rules_json = []
+    for i, r in enumerate(parsed):
+        rules_json.append({
+            "rule_id": f"R{i+1:02d}",
+            "name": r.name,
+            "description": r.description,
+            "detection_logic": r.detection_logic,
+            "severity": r.severity,
+            "examples": r.examples,
+        })
+
+    data = {
+        "name": name,
+        "display_name": display_name,
+        "description": f"从 {file.filename or 'markdown'} 导入",
+        "rules": rules_json,
+    }
+    file_path = RULES_DIR / f"{name}.json"
+    file_path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+    return HTMLResponse(f"<div class='text-sm text-emerald-600 px-4 py-3 bg-emerald-50 border border-emerald-200 rounded-lg'>✅ 已导入 {len(rules_json)} 条规则</div>")
