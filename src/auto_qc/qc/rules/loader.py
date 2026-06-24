@@ -3,6 +3,7 @@ import json
 from pathlib import Path
 import openpyxl
 from auto_qc.qc.rules.schemas import Conversation, Batch
+from auto_qc.core.data_converter import smart_preprocess
 
 
 COLUMN_PATTERNS = {
@@ -32,32 +33,9 @@ def _match_columns(headers: list[str]) -> dict[str, str]:
     return result
 
 
-def _preprocess_conversation(conv_json: list[dict]) -> str:
-    """将 TTS/ASR JSON 转为可读文本。"""
-    lines = []
-    for turn in conv_json:
-        tts = turn.get("ttsResult", "").strip()
-        asr = turn.get("asrResult", "").strip()
-        if tts:
-            lines.append(f"AI: {tts}")
-        if asr:
-            lines.append(f"用户: {asr}")
-    return "\n".join(lines)
-
-
 def _preprocess_raw(conv_raw: str) -> str:
-    """处理原始单元格数据（可能双重编码的 JSON）。"""
-    text = str(conv_raw)
-    if text.startswith('"['):
-        try:
-            text = json.loads(text)
-        except json.JSONDecodeError:
-            pass
-    if isinstance(text, str):
-        data = json.loads(text)
-    else:
-        data = text
-    return _preprocess_conversation(data)
+    """处理原始单元格数据 — 委托给 core.data_converter 做智能检测。"""
+    return smart_preprocess(conv_raw)
 
 
 def load_conversations(

@@ -3,8 +3,9 @@ import tempfile
 from pathlib import Path
 import pytest
 from auto_qc.qc.rules.loader import (
-    _match_columns, _preprocess_conversation, save_batches, load_conversations,
+    _match_columns, save_batches, load_conversations,
 )
+from auto_qc.core.data_converter import smart_preprocess
 from auto_qc.qc.rules.schemas import Batch, Conversation
 
 
@@ -26,12 +27,15 @@ def test_match_columns_missing_raises():
         _match_columns(["仅有时间", "仅有对话"])
 
 
-def test_preprocess_conversation():
+def test_smart_preprocess():
+    import json
+
     data = [
         {"ttsResult": "你好", "asrResult": "喂"},
         {"ttsResult": "请问是张三吗", "asrResult": ""},
     ]
-    result = _preprocess_conversation(data)
+    json_str = json.dumps(data, ensure_ascii=False)
+    result = smart_preprocess(json_str)
     assert "AI: 你好" in result
     assert "用户: 喂" in result
     assert "AI: 请问是张三吗" in result
